@@ -1,0 +1,5 @@
+/tmp
+/bin
+*.class
+*.log
+/classes/
