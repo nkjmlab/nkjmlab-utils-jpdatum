@@ -1,4 +1,4 @@
-package org.nkjmlab.latlngxy.util;
+package org.nkjmlab.gis.jpr.latlngxy.util;
 
 /**
  *

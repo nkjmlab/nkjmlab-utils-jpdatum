@@ -1,4 +1,4 @@
-package org.nkjmlab.latlngxy;
+package org.nkjmlab.gis.jpr.latlngxy;
 
 /***
  * @author Yuu NAKAJIMA
@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nkjmlab.latlngxy.util.LatLngUtils;
+import org.nkjmlab.gis.jpr.latlngxy.util.LatLngUtils;
 
 public class LatLngUtilsTest {
 

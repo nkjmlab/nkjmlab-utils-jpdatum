@@ -1,4 +1,4 @@
-package org.nkjmlab.latlngxy.numerical;
+package org.nkjmlab.gis.jpr.latlngxy.numerical;
 
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
