@@ -17,7 +17,7 @@ import org.nkjmlab.latlngxy.numerical.XY2LatLng;
  *
  */
 
-public class XYConvTest {
+public class XY2LatLngTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -38,10 +38,10 @@ public class XYConvTest {
 			LatLng origin = JapanPlaneRectangular.getOrigin(zoneId);
 			LatLng latLng = XY2LatLng.toLatLng(new XY(x, y, zoneId));
 
-			assertEquals(origin.getLat(), latLng.getLat(), 0.1);
-			assertEquals(origin.getLat(), latLng.getLat(), 0.1);
 			System.out.println("Origin: " + origin);
 			System.out.println("Calced: " + latLng);
+			assertEquals(origin.getLat(), latLng.getLat(), 0.1);
+			assertEquals(origin.getLat(), latLng.getLat(), 0.1);
 		}
 
 	}
