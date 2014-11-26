@@ -13,7 +13,7 @@ import org.nkjmlab.gis.jpr.latlngxy.numerical.LatLng2XY;
 import org.nkjmlab.gis.jpr.latlngxy.util.LatLngUtils;
 
 /**
- * 旧日本測地系(Tokyo Datum：2002年3月末までの日本の公式測地系) に基づく緯度経度を日本平面直角座標系(Japan Plane
+ * 旧日本測地系(Tokyo Datum：2002年3月末までの日本の公式測地系．Bessel楕円体) に基づく緯度経度を日本平面直角座標系(Japan Plane
  * Rectangular) に基づくXY座標に変換するテスト．
  *
  *

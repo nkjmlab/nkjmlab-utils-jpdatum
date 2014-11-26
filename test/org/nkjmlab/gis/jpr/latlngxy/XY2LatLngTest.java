@@ -11,7 +11,7 @@ import org.nkjmlab.gis.jpr.latlngxy.numerical.XY2LatLng;
 
 /**
  * 日本平面直角座標系 (Japan Plane Rectangular) に基づくXY座標 から 旧日本測地系 (Tokyo
- * Datum：2002年3月末までの日本の公式測地系) に基づく緯度経度 に変換するテスト．
+ * Datum：2002年3月末までの日本の公式測地系．Bessel楕円体) に基づく緯度経度 に変換するテスト．
  *
  * @author Yuu NAKAJIMA
  *
