@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.jpr.latlngxy.numerical;
+package org.nkjmlab.gis.datum.jprect.numerical;
 
 /**
  *

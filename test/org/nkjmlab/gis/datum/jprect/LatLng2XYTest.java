@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.jpr.latlngxy;
+package org.nkjmlab.gis.datum.jprect;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,10 +7,10 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nkjmlab.gis.jpr.latlngxy.common.LatLng;
-import org.nkjmlab.gis.jpr.latlngxy.common.XY;
-import org.nkjmlab.gis.jpr.latlngxy.numerical.LatLng2XY;
-import org.nkjmlab.gis.util.Deg2Dms;
+import org.nkjmlab.gis.datum.jprect.common.LatLng;
+import org.nkjmlab.gis.datum.jprect.common.XY;
+import org.nkjmlab.gis.datum.jprect.numerical.LatLng2XY;
+import org.nkjmlab.gis.datum.util.Deg2Dms;
 
 /**
  * 旧日本測地系(Tokyo Datum：2002年3月末までの日本の公式測地系．Bessel楕円体) に基づく緯度経度を日本平面直角座標系(Japan Plane

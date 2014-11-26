@@ -1,13 +1,13 @@
-package org.nkjmlab.gis.jpr.latlngxy;
+package org.nkjmlab.gis.datum.jprect;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nkjmlab.gis.jpr.latlngxy.common.JapanPlaneRectangular;
-import org.nkjmlab.gis.jpr.latlngxy.common.LatLng;
-import org.nkjmlab.gis.jpr.latlngxy.common.XY;
-import org.nkjmlab.gis.jpr.latlngxy.numerical.XY2LatLng;
+import org.nkjmlab.gis.datum.jprect.common.JapanPlaneRectangular;
+import org.nkjmlab.gis.datum.jprect.common.LatLng;
+import org.nkjmlab.gis.datum.jprect.common.XY;
+import org.nkjmlab.gis.datum.jprect.numerical.XY2LatLng;
 
 /**
  * 日本平面直角座標系 (Japan Plane Rectangular) に基づくXY座標 から 旧日本測地系 (Tokyo

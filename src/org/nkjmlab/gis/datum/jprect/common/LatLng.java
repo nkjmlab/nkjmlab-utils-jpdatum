@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.jpr.latlngxy.common;
+package org.nkjmlab.gis.datum.jprect.common;
 
 import java.security.InvalidParameterException;
 
@@ -7,7 +7,7 @@ import java.security.InvalidParameterException;
  * @author Yuu NAKAJIMA
  *
  */
-public class LatLng extends org.nkjmlab.gis.common.LatLng {
+public class LatLng extends org.nkjmlab.gis.datum.common.LatLng {
 
 	private int zoneId;
 

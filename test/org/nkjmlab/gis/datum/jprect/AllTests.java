@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.jpr.latlngxy;
+package org.nkjmlab.gis.datum.jprect;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

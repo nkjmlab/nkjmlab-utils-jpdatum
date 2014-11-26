@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.util;
+package org.nkjmlab.gis.datum.util;
 
 /**
  *

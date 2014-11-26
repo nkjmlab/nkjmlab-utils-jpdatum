@@ -1,7 +1,7 @@
-package org.nkjmlab.gis.util;
+package org.nkjmlab.gis.datum.util;
 
-import org.nkjmlab.gis.common.LatLngTD;
-import org.nkjmlab.gis.common.LatLngWGS;
+import org.nkjmlab.gis.datum.common.LatLngTD;
+import org.nkjmlab.gis.datum.common.LatLngWGS;
 
 
 /***

@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.jpr.latlngxy.common;
+package org.nkjmlab.gis.datum.jprect.common;
 
 import java.security.InvalidParameterException;
 

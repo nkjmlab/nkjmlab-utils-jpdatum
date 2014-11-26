@@ -1,8 +1,8 @@
-package org.nkjmlab.gis.jpr.latlngxy.numerical;
+package org.nkjmlab.gis.datum.jprect.numerical;
 
-import org.nkjmlab.gis.jpr.latlngxy.common.JapanPlaneRectangular;
-import org.nkjmlab.gis.jpr.latlngxy.common.LatLng;
-import org.nkjmlab.gis.jpr.latlngxy.common.XY;
+import org.nkjmlab.gis.datum.jprect.common.JapanPlaneRectangular;
+import org.nkjmlab.gis.datum.jprect.common.LatLng;
+import org.nkjmlab.gis.datum.jprect.common.XY;
 
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
