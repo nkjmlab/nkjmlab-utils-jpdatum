@@ -3,7 +3,7 @@ package org.nkjmlab.gis.jpr.latlngxy.numerical;
 import org.nkjmlab.gis.jpr.latlngxy.common.JapanPlaneRectangular;
 import org.nkjmlab.gis.jpr.latlngxy.common.LatLng;
 import org.nkjmlab.gis.jpr.latlngxy.common.XY;
-import org.nkjmlab.gis.jpr.latlngxy.util.LatLngUtils;
+import org.nkjmlab.gis.util.Deg2Dms;
 
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
@@ -28,13 +28,13 @@ public class XY2LatLng {
 
 	public static double toLat(double x, double y, int zoneId) {
 		LatLng origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return LatLngUtils.degToDms(toLatitude(x, y, origin.getLat(),
+		return Deg2Dms.toDms(toLatitude(x, y, origin.getLat(),
 				origin.getLng()));
 	}
 
 	public static double toLng(double x, double y, int zoneId) {
 		LatLng origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return LatLngUtils.degToDms(toLongitude(x, y, origin.getLat(),
+		return Deg2Dms.toDms(toLongitude(x, y, origin.getLat(),
 				origin.getLng()));
 	}
 

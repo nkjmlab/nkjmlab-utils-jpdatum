@@ -3,11 +3,12 @@ package org.nkjmlab.gis.jpr.latlngxy;
 /***
  * @author Yuu NAKAJIMA
  */
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nkjmlab.gis.jpr.latlngxy.util.LatLngUtils;
+import org.nkjmlab.gis.util.Deg2Dms;
+import org.nkjmlab.gis.util.Dms2Deg;
 
 public class LatLngUtilsTest {
 
@@ -23,11 +24,11 @@ public class LatLngUtilsTest {
 	}
 
 	private void testDmsDeg(double dms, double deg) {
-		System.out.println(LatLngUtils.degToDms(deg));
-		System.out.println(LatLngUtils.dmsToDeg(dms));
+		System.out.println(Deg2Dms.toDms(deg));
+		System.out.println(Dms2Deg.toDeg(dms));
 
-		assertEquals(dms, LatLngUtils.degToDms(deg), 0.01);
-		assertEquals(deg, LatLngUtils.dmsToDeg(dms), 0.01);
+		assertEquals(dms, Deg2Dms.toDms(deg), 0.01);
+		assertEquals(deg, Dms2Deg.toDeg(dms), 0.01);
 
 	}
 }

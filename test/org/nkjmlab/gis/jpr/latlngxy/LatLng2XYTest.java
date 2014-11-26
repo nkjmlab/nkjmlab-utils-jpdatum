@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.nkjmlab.gis.jpr.latlngxy.common.LatLng;
 import org.nkjmlab.gis.jpr.latlngxy.common.XY;
 import org.nkjmlab.gis.jpr.latlngxy.numerical.LatLng2XY;
-import org.nkjmlab.gis.jpr.latlngxy.util.LatLngUtils;
+import org.nkjmlab.gis.util.Deg2Dms;
 
 /**
  * 旧日本測地系(Tokyo Datum：2002年3月末までの日本の公式測地系．Bessel楕円体) に基づく緯度経度を日本平面直角座標系(Japan Plane
@@ -46,8 +46,8 @@ public class LatLng2XYTest {
 		qas.put(new LatLng(36.061358925, 140.051627815, 9), new XY(11542.461,
 				22913.506, 9));
 		// スカイツリー
-		qas.put(new LatLng(LatLngUtils.degToDms(35.71004), LatLngUtils
-				.degToDms(139.81070), 9), new XY(-32166.024, -2047.700, 9));
+		qas.put(new LatLng(Deg2Dms.toDms(35.71004), Deg2Dms
+				.toDms(139.81070), 9), new XY(-32166.024, -2047.700, 9));
 
 		for (LatLng query : qas.keySet()) {
 			XY expected = qas.get(query);

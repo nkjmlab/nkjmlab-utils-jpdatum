@@ -7,15 +7,19 @@ import java.security.InvalidParameterException;
  * @author Yuu NAKAJIMA
  *
  */
-public class LatLng {
+public class LatLng extends org.nkjmlab.gis.common.LatLng {
 
-	private double lat;
-	private double lng;
 	private int zoneId;
 
+	/**
+	 * @param lat
+	 *            度分秒(dms: ddd.mmsss)表記
+	 * @param lng
+	 *            度分秒(dms: ddd.mmsss)表記
+	 */
+
 	public LatLng(double lat, double lng, int zoneId) {
-		this.lat = lat;
-		this.lng = lng;
+		super(lat, lng);
 		this.zoneId = zoneId;
 
 		if (zoneId <= 0 || 20 <= zoneId) {
@@ -27,22 +31,14 @@ public class LatLng {
 
 	}
 
-	public double getLat() {
-		return lat;
-	}
-
-	public double getLng() {
-		return lng;
-	}
-
 	public int getZoneId() {
 		return zoneId;
 	}
 
 	@Override
 	public String toString() {
-		return super.toString() + "[lat=" + lat + ",lng=" + lng + ",zoneId="
-				+ zoneId + "]";
+		return super.toString() + "[lat=" + getLat() + ",lng=" + getLng()
+				+ ",zoneId=" + zoneId + "]";
 	}
 
 }
