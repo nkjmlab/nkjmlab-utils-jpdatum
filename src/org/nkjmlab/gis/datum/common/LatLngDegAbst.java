@@ -1,7 +1,7 @@
 package org.nkjmlab.gis.datum.common;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.nkjmlab.gis.datum.util.Deg2Dms;
 import org.nkjmlab.gis.datum.util.Dms2Deg;
 
