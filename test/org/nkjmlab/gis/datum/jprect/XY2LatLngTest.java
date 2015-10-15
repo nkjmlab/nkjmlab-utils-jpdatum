@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.nkjmlab.gis.datum.jprect.common.JapanPlaneRectangular;
-import org.nkjmlab.gis.datum.jprect.common.LatLng;
+import org.nkjmlab.gis.datum.jprect.common.LatLngDeg;
 import org.nkjmlab.gis.datum.jprect.common.XY;
 import org.nkjmlab.gis.datum.jprect.numerical.XY2LatLng;
 
@@ -35,13 +35,13 @@ public class XY2LatLngTest {
 		double y = 0;
 		for (int zoneId = 1; zoneId <= 19; zoneId++) {
 
-			LatLng origin = JapanPlaneRectangular.getOrigin(zoneId);
-			LatLng latLng = XY2LatLng.toLatLng(new XY(x, y, zoneId));
+			LatLngDeg origin = JapanPlaneRectangular.getOrigin(zoneId);
+			LatLngDeg latLng = XY2LatLng.toLatLngDeg(new XY(x, y, zoneId));
 
 			System.out.println("Origin: " + origin);
 			System.out.println("Calced: " + latLng);
-			assertEquals(origin.getLat(), latLng.getLat(), 0.1);
-			assertEquals(origin.getLat(), latLng.getLat(), 0.1);
+			assertEquals(origin.latDeg, latLng.latDeg, 0.1);
+			assertEquals(origin.latDeg, latLng.latDeg, 0.1);
 		}
 
 	}

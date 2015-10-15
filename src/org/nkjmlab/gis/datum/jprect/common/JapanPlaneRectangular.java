@@ -5,8 +5,7 @@ import java.security.InvalidParameterException;
 /**
  *
  * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）
- *
- * http://www.gsi.go.jp/LAW/heimencho.html
+ * http://www.gsi.go.jp/LAW/heimencho.html にzoneId(系番号)と適用区域が書かれている．
  *
  * 　測量法（昭和二十四年法律第百八十八号。以下「法」という。)第十一条第一項第一号の規定を実施するため、
  * 直角座標で位置を表示する場合の平面直角座標系を次のように定める。
@@ -16,7 +15,7 @@ import java.security.InvalidParameterException;
  */
 public class JapanPlaneRectangular {
 
-	public static LatLng getOrigin(int zoneId) {
+	public static LatLngDeg getOrigin(int zoneId) {
 		double lat;
 		double lng;
 		switch (zoneId) {
@@ -103,6 +102,6 @@ public class JapanPlaneRectangular {
 			throw new InvalidParameterException(s);
 
 		}
-		return new LatLng(lat, lng, zoneId);
+		return new LatLngDeg(lat, lng, zoneId);
 	}
 }

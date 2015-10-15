@@ -1,7 +1,7 @@
 package org.nkjmlab.gis.datum.jprect.numerical;
 
 import org.nkjmlab.gis.datum.jprect.common.JapanPlaneRectangular;
-import org.nkjmlab.gis.datum.jprect.common.LatLng;
+import org.nkjmlab.gis.datum.jprect.common.LatLngDeg;
 import org.nkjmlab.gis.datum.jprect.common.XY;
 
 /**
@@ -17,23 +17,32 @@ import org.nkjmlab.gis.datum.jprect.common.XY;
  */
 public class LatLng2XY {
 
-	public static XY toXY(LatLng latLng) {
-		double lat = latLng.getLat();
-		double lng = latLng.getLng();
-		int zoneId = latLng.getZoneId();
+	public static XY toXY(LatLngDeg latLng) {
+		double lat = latLng.latDeg;
+		double lng = latLng.lngDeg;
+		int zoneId = latLng.zoneId;
 		double x = LatLng2XY.toX(lat, lng, zoneId);
 		double y = LatLng2XY.toY(lat, lng, zoneId);
 		return new XY(x, y, zoneId);
 	}
 
+	/**
+	 * zoneIdは平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
+	 * http://www.gsi.go.jp/LAW/heimencho.html にzoneId(系番号)と適用区域が書かれている．
+	 *
+	 * @param lat
+	 * @param lng
+	 * @param zoneId
+	 * @return
+	 */
 	public static double toX(double lat, double lng, int zoneId) {
-		LatLng origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return toXCoord(lat, lng, origin.getLat(), origin.getLng());
+		LatLngDeg origin = JapanPlaneRectangular.getOrigin(zoneId);
+		return toXCoord(lat, lng, origin.latDeg, origin.lngDeg);
 	}
 
 	public static double toY(double lat, double lng, int zoneId) {
-		LatLng origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return toYCoord(lat, lng, origin.getLat(), origin.getLng());
+		LatLngDeg origin = JapanPlaneRectangular.getOrigin(zoneId);
+		return toYCoord(lat, lng, origin.latDeg, origin.lngDeg);
 	}
 
 	/**

@@ -9,9 +9,9 @@ import java.security.InvalidParameterException;
  */
 public class XY {
 
-	private double x;
-	private double y;
-	private int zoneId;
+	public final double x;
+	public final double y;
+	public final int zoneId;
 
 	public XY(double x, double y, int zoneId) {
 		this.x = x;
@@ -24,18 +24,6 @@ public class XY {
 			System.err.println(s);
 			throw new InvalidParameterException(s);
 		}
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public int getZoneId() {
-		return zoneId;
-	}
-
-	public double getX() {
-		return x;
 	}
 
 	@Override

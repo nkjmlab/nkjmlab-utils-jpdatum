@@ -9,15 +9,9 @@ package org.nkjmlab.gis.datum.common;
  * Google Mapなどが採用しているWGS84とは異なるが日常的に使うならば，許容できる程度の差しかない．
  */
 
-public class LatLngWGS extends LatLng {
-	/**
-	 * @param lat
-	 *            十進法(degree: ddd.dddd)表記
-	 * @param lng
-	 *            十進法(degree: ddd.dddd)表記
-	 */
-	public LatLngWGS(double lat, double lng) {
-		super(lat, lng);
+public class LatLngDegWGS extends LatLngDegAbst {
+	public LatLngDegWGS(double latDeg, double lngDeg) {
+		super(latDeg, lngDeg);
 	}
 
 }

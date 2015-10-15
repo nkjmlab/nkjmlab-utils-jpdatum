@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nkjmlab.gis.datum.jprect.common.LatLng;
+import org.nkjmlab.gis.datum.jprect.common.LatLngDeg;
 import org.nkjmlab.gis.datum.jprect.common.XY;
 import org.nkjmlab.gis.datum.jprect.numerical.LatLng2XY;
 import org.nkjmlab.gis.datum.util.Deg2Dms;
@@ -41,21 +41,21 @@ public class LatLng2XYTest {
 	@Test
 	public void test() {
 
-		Map<LatLng, XY> qas = new HashMap<>();
+		Map<LatLngDeg, XY> qas = new HashMap<>();
 		// 国土地理院
-		qas.put(new LatLng(36.061358925, 140.051627815, 9), new XY(11542.461,
+		qas.put(new LatLngDeg(36.061358925, 140.051627815, 9), new XY(11542.461,
 				22913.506, 9));
 		// スカイツリー
-		qas.put(new LatLng(Deg2Dms.toDms(35.71004), Deg2Dms
+		qas.put(new LatLngDeg(Deg2Dms.toDms(35.71004), Deg2Dms
 				.toDms(139.81070), 9), new XY(-32166.024, -2047.700, 9));
 
-		for (LatLng query : qas.keySet()) {
+		for (LatLngDeg query : qas.keySet()) {
 			XY expected = qas.get(query);
 			XY actual = LatLng2XY.toXY(query);
 			System.out.println("Expected:" + expected);
 			System.out.println("Actual:" + actual);
-			assertEquals(expected.getX(), actual.getX(), 0.5);
-			assertEquals(expected.getY(), actual.getY(), 0.5);
+			assertEquals(expected.x, actual.x, 0.5);
+			assertEquals(expected.y, actual.y, 0.5);
 
 		}
 	}

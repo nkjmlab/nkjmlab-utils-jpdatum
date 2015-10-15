@@ -1,8 +1,7 @@
 package org.nkjmlab.gis.datum.util;
 
-import org.nkjmlab.gis.datum.common.LatLngTD;
-import org.nkjmlab.gis.datum.common.LatLngWGS;
-
+import org.nkjmlab.gis.datum.common.LatLngDegTD;
+import org.nkjmlab.gis.datum.common.LatLngDegWGS;
 
 /***
  * 簡易的な日本測地系=>世界測地系変換をする
@@ -12,19 +11,19 @@ import org.nkjmlab.gis.datum.common.LatLngWGS;
 
 public class WGS2TD {
 
-	public static LatLngWGS toWGS(LatLngTD td) {
-		double lat = td.getLat() - 0.00010695 * td.getLat() + 0.000017464
-				* td.getLng() + 0.0046017;
+	public static LatLngDegWGS toWGS(LatLngDegTD td) {
+		double lat = td.latDeg - 0.00010695 * td.latDeg + 0.000017464 * td.lngDeg
+				+ 0.0046017;
 
-		double lng = td.getLng() - 0.000046038 * td.getLat() - 0.000083043
-				* td.getLng() + 0.010040;
-		return new LatLngWGS(lat, lng);
+		double lng = td.lngDeg - 0.000046038 * td.latDeg - 0.000083043 * td.lngDeg
+				+ 0.010040;
+		return new LatLngDegWGS(lat, lng);
 	}
 
 	public static void main(String[] args) {
 		// TD(35.71004, 139.81070)=>JGD2000(35.713274983, 139.807461872)
 
-		System.out.println(toWGS(new LatLngTD(35.71004, 139.81070)));
+		System.out.println(toWGS(new LatLngDegTD(35.71004, 139.81070)));
 
 	}
 }
