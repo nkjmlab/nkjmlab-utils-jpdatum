@@ -2,8 +2,6 @@ package org.nkjmlab.gis.datum.jprect.common;
 
 import java.security.InvalidParameterException;
 
-import org.nkjmlab.gis.datum.common.LatLngDegAbst;
-
 /**
  * 日本測地系(TD: Tokyo Datum)
  *

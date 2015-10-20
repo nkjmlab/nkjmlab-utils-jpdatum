@@ -56,16 +56,17 @@ public class LatLng2XYTest {
 				XYWithZoneId actual = LatLngDegTD2XY.toXY(query);
 				System.out.println("Expected:" + expected);
 				System.out.println("Actual:" + actual);
-				assertEquals(expected.x, actual.x, 0.1);
-				assertEquals(expected.y, actual.y, 0.1);
+				assertEquals(expected.getX(), actual.getX(), 0.001);
+				assertEquals(expected.getY(), actual.getY(), 0.001);
 			}
 			{
 				LatLngDegTDWithZoneId expected = query;
-				LatLngDegTDWithZoneId actual = XY2LatLngDegTD.toLatLng(qas.get(query));
+				LatLngDegTDWithZoneId actual = XY2LatLngDegTD
+						.toLatLng(qas.get(query));
 				System.out.println("Expected:" + expected);
 				System.out.println("Actual:" + actual);
-				assertEquals(expected.latDeg, actual.latDeg, 0.1);
-				assertEquals(expected.lngDeg, actual.lngDeg, 0.1);
+				assertEquals(expected.getLatDeg(), actual.getLatDeg(), 0.001);
+				assertEquals(expected.getLngDeg(), actual.getLngDeg(), 0.001);
 
 			}
 		}

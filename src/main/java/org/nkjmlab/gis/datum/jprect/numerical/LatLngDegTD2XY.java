@@ -2,6 +2,7 @@ package org.nkjmlab.gis.datum.jprect.numerical;
 
 import org.nkjmlab.gis.datum.jprect.common.JapanPlaneRectangular;
 import org.nkjmlab.gis.datum.jprect.common.LatLngDegTDWithZoneId;
+import org.nkjmlab.gis.datum.jprect.common.XY;
 import org.nkjmlab.gis.datum.jprect.common.XYWithZoneId;
 import org.nkjmlab.gis.datum.util.Deg2Dms;
 
@@ -18,6 +19,20 @@ import org.nkjmlab.gis.datum.util.Deg2Dms;
  */
 public class LatLngDegTD2XY {
 
+	private final XY xy;
+
+	public LatLngDegTD2XY(double latDegTD, double lngDegTD, int zoneId) {
+		this(new LatLngDegTDWithZoneId(latDegTD, lngDegTD, zoneId));
+	}
+
+	public LatLngDegTD2XY(LatLngDegTDWithZoneId latLng) {
+		this.xy = toXY(latLng);
+	}
+
+	public double getX() {
+		return xy.getX();
+	}
+
 	/**
 	 * zoneIdは平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
 	 * http://www.gsi.go.jp/LAW/heimencho.html にzoneId(系番号)と適用区域が書かれている．
@@ -29,8 +44,8 @@ public class LatLngDegTD2XY {
 	 */
 
 	public static XYWithZoneId toXY(LatLngDegTDWithZoneId latLng) {
-		double latDeg = latLng.latDeg;
-		double lngDeg = latLng.lngDeg;
+		double latDeg = latLng.getLatDeg();
+		double lngDeg = latLng.getLngDeg();
 		int zoneId = latLng.zoneId;
 		double x = LatLngDegTD2XY.toX(latDeg, lngDeg, zoneId);
 		double y = LatLngDegTD2XY.toY(latDeg, lngDeg, zoneId);
@@ -40,13 +55,13 @@ public class LatLngDegTD2XY {
 	public static double toX(double latDegTD, double lngDegTD, int zoneId) {
 		LatLngDegTDWithZoneId origin = JapanPlaneRectangular.getOrigin(zoneId);
 		return toXCoord(Deg2Dms.to(latDegTD), Deg2Dms.to(lngDegTD),
-				Deg2Dms.to(origin.latDeg), Deg2Dms.to(origin.lngDeg));
+				Deg2Dms.to(origin.getLatDeg()), Deg2Dms.to(origin.getLngDeg()));
 	}
 
 	public static double toY(double latDegTD, double lngDegTD, int zoneId) {
 		LatLngDegTDWithZoneId origin = JapanPlaneRectangular.getOrigin(zoneId);
 		return toYCoord(Deg2Dms.to(latDegTD), Deg2Dms.to(lngDegTD),
-				Deg2Dms.to(origin.latDeg), Deg2Dms.to(origin.lngDeg));
+				Deg2Dms.to(origin.getLatDeg()), Deg2Dms.to(origin.getLngDeg()));
 	}
 
 	/**

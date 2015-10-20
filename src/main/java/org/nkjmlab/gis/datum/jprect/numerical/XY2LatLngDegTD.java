@@ -28,8 +28,8 @@ public class XY2LatLngDegTD {
 	 */
 
 	public static LatLngDegTDWithZoneId toLatLng(XYWithZoneId xy) {
-		double x = xy.x;
-		double y = xy.y;
+		double x = xy.getX();
+		double y = xy.getY();
 		int zoneId = xy.zoneId;
 		double latDeg = XY2LatLngDegTD.toLat(x, y, zoneId);
 		double lngDeg = XY2LatLngDegTD.toLng(x, y, zoneId);
@@ -41,8 +41,8 @@ public class XY2LatLngDegTD {
 	 */
 	public static double toLng(double x, double y, int zoneId) {
 		LatLngDegTDWithZoneId origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return toLongitude(x, y, Deg2Dms.to(origin.latDeg),
-				Deg2Dms.to(origin.lngDeg));
+		return toLongitude(x, y, Deg2Dms.to(origin.getLatDeg()),
+				Deg2Dms.to(origin.getLngDeg()));
 	}
 
 	/**
@@ -50,8 +50,8 @@ public class XY2LatLngDegTD {
 	 */
 	public static double toLat(double x, double y, int zoneId) {
 		LatLngDegTDWithZoneId origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return toLatitude(x, y, Deg2Dms.to(origin.latDeg),
-				Deg2Dms.to(origin.lngDeg));
+		return toLatitude(x, y, Deg2Dms.to(origin.getLatDeg()),
+				Deg2Dms.to(origin.getLngDeg()));
 	}
 
 	public static double toLatDms(double x, double y, int zoneId) {

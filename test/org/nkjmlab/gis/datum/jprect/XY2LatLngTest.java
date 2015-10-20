@@ -35,13 +35,15 @@ public class XY2LatLngTest {
 		double y = 0;
 		for (int zoneId = 1; zoneId <= 19; zoneId++) {
 
-			LatLngDegTDWithZoneId origin = JapanPlaneRectangular.getOrigin(zoneId);
-			LatLngDegTDWithZoneId latLng = XY2LatLngDegTD.toLatLng(new XYWithZoneId(x, y, zoneId));
+			LatLngDegTDWithZoneId origin = JapanPlaneRectangular
+					.getOrigin(zoneId);
+			LatLngDegTDWithZoneId latLng = XY2LatLngDegTD
+					.toLatLng(new XYWithZoneId(x, y, zoneId));
 
 			System.out.println("Origin: " + origin);
 			System.out.println("Calced: " + latLng);
-			assertEquals(origin.latDeg, latLng.latDeg, 0.1);
-			assertEquals(origin.latDeg, latLng.latDeg, 0.1);
+			assertEquals(origin.getLatDeg(), latLng.getLatDeg(), 0.001);
+			assertEquals(origin.getLngDeg(), latLng.getLngDeg(), 0.001);
 		}
 
 	}

@@ -12,11 +12,11 @@ import org.nkjmlab.gis.datum.jprect.common.LatLngDegTD;
 public class WGS2TD {
 
 	public static LatLngDegWGS toWGS(LatLngDegTD td) {
-		double lat = td.latDeg - 0.00010695 * td.latDeg
-				+ 0.000017464 * td.lngDeg + 0.0046017;
+		double lat = td.getLatDeg() - 0.00010695 * td.getLatDeg()
+				+ 0.000017464 * td.getLngDeg() + 0.0046017;
 
-		double lng = td.lngDeg - 0.000046038 * td.latDeg
-				- 0.000083043 * td.lngDeg + 0.010040;
+		double lng = td.getLngDeg() - 0.000046038 * td.getLngDeg()
+				- 0.000083043 * td.getLngDeg() + 0.010040;
 		return new LatLngDegWGS(lat, lng);
 	}
 

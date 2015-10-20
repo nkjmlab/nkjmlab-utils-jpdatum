@@ -19,8 +19,8 @@ public abstract class LatLngDegAbst {
 	 *            十進法(degree: ddd.dddd)表記
 	 */
 
-	public final double latDeg;
-	public final double lngDeg;
+	protected final double latDeg;
+	protected final double lngDeg;
 
 	public LatLngDegAbst(double latDeg, double lngDeg) {
 		this.latDeg = latDeg;
@@ -60,7 +60,7 @@ public abstract class LatLngDegAbst {
 	}
 
 	public double getLngDeg() {
-		return Dms2Deg.to(lngDeg);
+		return lngDeg;
 	}
 
 }
