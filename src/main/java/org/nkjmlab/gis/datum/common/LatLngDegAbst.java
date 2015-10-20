@@ -48,11 +48,11 @@ public abstract class LatLngDegAbst {
 	}
 
 	public double getLatDms() {
-		return Deg2Dms.toDms(latDeg);
+		return Deg2Dms.to(latDeg);
 	}
 
 	public double getLngDms() {
-		return Deg2Dms.toDms(lngDeg);
+		return Deg2Dms.to(lngDeg);
 	}
 
 	public double getLatDeg() {
@@ -60,15 +60,7 @@ public abstract class LatLngDegAbst {
 	}
 
 	public double getLngDeg() {
-		return Dms2Deg.toDeg(lngDeg);
-	}
-
-	public double getLng() {
-		return getLngDeg();
-	}
-
-	public double getLat() {
-		return getLatDeg();
+		return Dms2Deg.to(lngDeg);
 	}
 
 }

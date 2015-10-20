@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.nkjmlab.gis.datum.jprect.common.JapanPlaneRectangular;
-import org.nkjmlab.gis.datum.jprect.common.LatLngDeg;
-import org.nkjmlab.gis.datum.jprect.common.XY;
-import org.nkjmlab.gis.datum.jprect.numerical.XY2LatLng;
+import org.nkjmlab.gis.datum.jprect.common.LatLngDegTDWithZoneId;
+import org.nkjmlab.gis.datum.jprect.common.XYWithZoneId;
+import org.nkjmlab.gis.datum.jprect.numerical.XY2LatLngDegTD;
 
 /**
  * 日本平面直角座標系 (Japan Plane Rectangular) に基づくXY座標 から 旧日本測地系 (Tokyo
@@ -35,8 +35,8 @@ public class XY2LatLngTest {
 		double y = 0;
 		for (int zoneId = 1; zoneId <= 19; zoneId++) {
 
-			LatLngDeg origin = JapanPlaneRectangular.getOrigin(zoneId);
-			LatLngDeg latLng = XY2LatLng.toLatLngDeg(new XY(x, y, zoneId));
+			LatLngDegTDWithZoneId origin = JapanPlaneRectangular.getOrigin(zoneId);
+			LatLngDegTDWithZoneId latLng = XY2LatLngDegTD.toLatLng(new XYWithZoneId(x, y, zoneId));
 
 			System.out.println("Origin: " + origin);
 			System.out.println("Calced: " + latLng);

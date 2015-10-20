@@ -1,8 +1,8 @@
 package org.nkjmlab.gis.datum.jprect.numerical;
 
 import org.nkjmlab.gis.datum.jprect.common.JapanPlaneRectangular;
-import org.nkjmlab.gis.datum.jprect.common.LatLngDeg;
-import org.nkjmlab.gis.datum.jprect.common.XY;
+import org.nkjmlab.gis.datum.jprect.common.LatLngDegTDWithZoneId;
+import org.nkjmlab.gis.datum.jprect.common.XYWithZoneId;
 import org.nkjmlab.gis.datum.util.Deg2Dms;
 
 /**
@@ -15,26 +15,7 @@ import org.nkjmlab.gis.datum.util.Deg2Dms;
  * @author Yoshinori Nie
  * @author Yuu NAKAJIMA
  */
-public class XY2LatLng {
-
-	public static LatLngDeg toLatLngDeg(XY xy) {
-		double x = xy.x;
-		double y = xy.y;
-		int zoneId = xy.zoneId;
-		double lat = XY2LatLng.toLatDeg(x, y, zoneId);
-		double lng = XY2LatLng.toLngDeg(x, y, zoneId);
-		return new LatLngDeg(lat, lng, zoneId);
-	}
-
-	public static double toLngDeg(double x, double y, int zoneId) {
-		LatLngDeg origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return toLongitude(x, y, origin.latDeg, origin.lngDeg);
-	}
-
-	public static double toLatDeg(double x, double y, int zoneId) {
-		LatLngDeg origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return toLatitude(x, y, origin.latDeg, origin.lngDeg);
-	}
+public class XY2LatLngDegTD {
 
 	/**
 	 * zoneIdは平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
@@ -45,22 +26,48 @@ public class XY2LatLng {
 	 * @param zoneId
 	 * @return
 	 */
+
+	public static LatLngDegTDWithZoneId toLatLng(XYWithZoneId xy) {
+		double x = xy.x;
+		double y = xy.y;
+		int zoneId = xy.zoneId;
+		double latDeg = XY2LatLngDegTD.toLat(x, y, zoneId);
+		double lngDeg = XY2LatLngDegTD.toLng(x, y, zoneId);
+		return new LatLngDegTDWithZoneId(latDeg, lngDeg, zoneId);
+	}
+
+	/**
+	 * 返り値は十進法(degree: ddd.dddd)表記
+	 */
+	public static double toLng(double x, double y, int zoneId) {
+		LatLngDegTDWithZoneId origin = JapanPlaneRectangular.getOrigin(zoneId);
+		return toLongitude(x, y, Deg2Dms.to(origin.latDeg),
+				Deg2Dms.to(origin.lngDeg));
+	}
+
+	/**
+	 * 返り値は十進法(degree: ddd.dddd)表記
+	 */
+	public static double toLat(double x, double y, int zoneId) {
+		LatLngDegTDWithZoneId origin = JapanPlaneRectangular.getOrigin(zoneId);
+		return toLatitude(x, y, Deg2Dms.to(origin.latDeg),
+				Deg2Dms.to(origin.lngDeg));
+	}
+
 	public static double toLatDms(double x, double y, int zoneId) {
-		LatLngDeg origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return Deg2Dms.toDms(toLatitude(x, y, origin.latDeg, origin.lngDeg));
+		return Deg2Dms.to(toLat(x, y, zoneId));
 	}
 
 	public static double toLngDms(double x, double y, int zoneId) {
-		LatLngDeg origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return Deg2Dms.toDms(toLongitude(x, y, origin.latDeg, origin.lngDeg));
+		return Deg2Dms.to(toLng(x, y, zoneId));
 	}
 
 	private static double rho = 180.0 / Math.PI;
 
-	private static double toLatitude(double x, double y, double latOfOrigin,
-			double lngOfOrigin) {
+	private static double toLatitude(double x, double y, double latDmsOfOrigin,
+			double lngDmsOfOrigin) {
 
-		double phi = calcPhi(latOfOrigin, x);
+		double phi = calcPhi(latDmsOfOrigin, x);
 
 		double b = phi;
 
@@ -99,10 +106,10 @@ public class XY2LatLng {
 	 *
 	 * @return 経度
 	 */
-	private static double toLongitude(double x, double y, double latOfOrigin,
-			double lngOfOrigin) {
-		double gentenL = AngleUtil.toAngle(lngOfOrigin);
-		double phi = calcPhi(latOfOrigin, x);
+	private static double toLongitude(double x, double y, double latDmsOfOrigin,
+			double lngDmsOfOrigin) {
+		double gentenL = AngleUtil.toAngle(lngDmsOfOrigin);
+		double phi = calcPhi(latDmsOfOrigin, x);
 
 		double b = phi;
 
@@ -129,9 +136,9 @@ public class XY2LatLng {
 	/**
 	 * phiを返すメソッド
 	 */
-	private static double calcPhi(double lat, double x) {
+	private static double calcPhi(double latDms, double x) {
 
-		double gentenB = AngleUtil.toRadian(lat);
+		double gentenB = AngleUtil.toRadian(latDms);
 		double arc_l = ArcLength.calcArcLength(gentenB);
 
 		double sxm = arc_l + x / Const.m0;

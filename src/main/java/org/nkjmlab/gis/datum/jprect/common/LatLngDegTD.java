@@ -1,11 +1,7 @@
-package org.nkjmlab.gis.datum.common;
+package org.nkjmlab.gis.datum.jprect.common;
 
-/**
- * 日本測地系(TD: Tokyo Datum)
- *
- * @author Yuu NAKAJIMA
- *
- */
+import org.nkjmlab.gis.datum.common.LatLngDegAbst;
+
 public class LatLngDegTD extends LatLngDegAbst {
 
 	public LatLngDegTD(double latDeg, double lngDeg) {

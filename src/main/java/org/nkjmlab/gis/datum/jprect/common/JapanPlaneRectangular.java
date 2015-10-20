@@ -7,7 +7,7 @@ import java.security.InvalidParameterException;
  * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）
  * http://www.gsi.go.jp/LAW/heimencho.html にzoneId(系番号)と適用区域が書かれている．
  *
- * 　測量法（昭和二十四年法律第百八十八号。以下「法」という。)第十一条第一項第一号の規定を実施するため、
+ * 測量法（昭和二十四年法律第百八十八号。以下「法」という。)第十一条第一項第一号の規定を実施するため、
  * 直角座標で位置を表示する場合の平面直角座標系を次のように定める。
  *
  * @author Yuu NAKAJIMA
@@ -15,13 +15,13 @@ import java.security.InvalidParameterException;
  */
 public class JapanPlaneRectangular {
 
-	public static LatLngDeg getOrigin(int zoneId) {
+	public static LatLngDegTDWithZoneId getOrigin(int zoneId) {
 		double lat;
 		double lng;
 		switch (zoneId) {
 		case 1:
 			lat = 33.00000;
-			lng = 129.30000;
+			lng = 129.0000;
 			break;
 		case 2:
 			lat = 33.00000;
@@ -29,15 +29,15 @@ public class JapanPlaneRectangular {
 			break;
 		case 3:
 			lat = 36.00000;
-			lng = 132.10000;
+			lng = 132.166666666666667;
 			break;
 		case 4:
 			lat = 33.00000;
-			lng = 133.30000;
+			lng = 133.50000;
 			break;
 		case 5:
 			lat = 36.00000;
-			lng = 134.20000;
+			lng = 134.333333333333333;
 			break;
 		case 6:
 			lat = 36.00000;
@@ -45,19 +45,19 @@ public class JapanPlaneRectangular {
 			break;
 		case 7:
 			lat = 36.00000;
-			lng = 137.10000;
+			lng = 137.166666666666667;
 			break;
 		case 8:
 			lat = 36.00000;
-			lng = 138.30000;
+			lng = 138.833333333333333;
 			break;
 		case 9:
 			lat = 36.00000;
-			lng = 139.50000;
+			lng = 139.833333333333333;
 			break;
 		case 10:
 			lat = 40.00000;
-			lng = 140.50000;
+			lng = 140.833333333333333;
 			break;
 		case 11:
 			lat = 44.00000;
@@ -65,11 +65,11 @@ public class JapanPlaneRectangular {
 			break;
 		case 12:
 			lat = 44.00000;
-			lng = 142.15000;
+			lng = 142.25000;
 			break;
 		case 13:
 			lat = 44.00000;
-			lng = 144.15000;
+			lng = 144.25000;
 			break;
 		case 14:
 			lat = 26.00000;
@@ -77,7 +77,7 @@ public class JapanPlaneRectangular {
 			break;
 		case 15:
 			lat = 26.00000;
-			lng = 127.30000;
+			lng = 127.50000;
 			break;
 		case 16:
 			lat = 26.00000;
@@ -102,6 +102,6 @@ public class JapanPlaneRectangular {
 			throw new InvalidParameterException(s);
 
 		}
-		return new LatLngDeg(lat, lng, zoneId);
+		return new LatLngDegTDWithZoneId(lat, lng, zoneId);
 	}
 }
