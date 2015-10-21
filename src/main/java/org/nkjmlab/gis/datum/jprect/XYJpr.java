@@ -1,17 +1,19 @@
-package org.nkjmlab.gis.datum.jprect.common;
+package org.nkjmlab.gis.datum.jprect;
 
 import java.security.InvalidParameterException;
+
+import org.nkjmlab.gis.datum.common.XY;
 
 /***
  *
  * @author Yuu NAKAJIMA
  *
  */
-public class XYWithZoneId extends XY {
+public class XYJpr extends XY {
 
 	public final int zoneId;
 
-	public XYWithZoneId(double x, double y, int zoneId) {
+	public XYJpr(double x, double y, int zoneId) {
 		super(x, y);
 		this.zoneId = zoneId;
 
@@ -30,17 +32,15 @@ public class XYWithZoneId extends XY {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof XYWithZoneId)) {
+		if (!(obj instanceof XYJpr)) {
 			return false;
 		}
-		XYWithZoneId xy = (XYWithZoneId) obj;
+		XYJpr xy = (XYJpr) obj;
 		return x == xy.x && y == xy.y && zoneId == xy.zoneId;
 	}
 
-	@Override
-	public String toString() {
-		return super.toString() + "[x=" + x + ",y=" + y + ",zoneId=" + zoneId
-				+ "]";
+	public int getZoneId() {
+		return zoneId;
 	}
 
 }

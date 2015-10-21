@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.datum.jprect.numerical;
+package org.nkjmlab.gis.datum.jprect;
 
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．

@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.nkjmlab.gis.datum.util.Deg2Dms;
 import org.nkjmlab.gis.datum.util.Dms2Deg;
 
-public class LatLngUtilsTest {
+public class LatLonUtilsTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -27,8 +27,8 @@ public class LatLngUtilsTest {
 		System.out.println(Deg2Dms.to(deg));
 		System.out.println(Dms2Deg.to(dms));
 
-		assertEquals(dms, Deg2Dms.to(deg), 0.001);
-		assertEquals(deg, Dms2Deg.to(dms), 0.001);
+		assertEquals(dms, Deg2Dms.to(deg), 0.01);
+		assertEquals(deg, Dms2Deg.to(dms), 0.01);
 
 	}
 }

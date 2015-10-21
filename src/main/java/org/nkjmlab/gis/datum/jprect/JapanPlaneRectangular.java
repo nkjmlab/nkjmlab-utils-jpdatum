@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.datum.jprect.common;
+package org.nkjmlab.gis.datum.jprect;
 
 import java.security.InvalidParameterException;
 
@@ -13,9 +13,9 @@ import java.security.InvalidParameterException;
  * @author Yuu NAKAJIMA
  *
  */
-public class JapanPlaneRectangular {
+class JapanPlaneRectangular {
 
-	public static LatLngDegTDWithZoneId getOrigin(int zoneId) {
+	public static LatLonWithZone getOrigin(int zoneId) {
 		double lat;
 		double lng;
 		switch (zoneId) {
@@ -102,6 +102,6 @@ public class JapanPlaneRectangular {
 			throw new InvalidParameterException(s);
 
 		}
-		return new LatLngDegTDWithZoneId(lat, lng, zoneId);
+		return new LatLonWithZone(lat, lng, zoneId);
 	}
 }
