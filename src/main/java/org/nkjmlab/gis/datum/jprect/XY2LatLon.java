@@ -14,45 +14,29 @@ import org.nkjmlab.gis.datum.util.Deg2Dms;
  */
 public class XY2LatLon {
 
-	private LatLonWithZone latLon;
-
-	public XY2LatLon(XYJpr xy) {
-		this.latLon = toLatLon(xy);
-	}
-
-	public double getLat() {
-		return latLon.getLat();
-	}
-
-	public double getLon() {
-		return latLon.getLon();
-	}
-
-	public LatLonWithZone getLatLon() {
-		return latLon;
-	}
-
 	/**
-	 * zoneIdは平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
-	 * http://www.gsi.go.jp/LAW/heimencho.html にzoneId(系番号)と適用区域が書かれている．
 	 *
-	 * @param x
-	 * @param y
-	 * @param zoneId
-	 * @return
+	 * @param xy
+	 *            平面直角座標系の系番号付きの平面直角座標系XY
+	 * @return 平面直角座標系の系番号付きの緯度経度
 	 */
-
 	public static LatLonWithZone toLatLon(XYJpr xy) {
 		double x = xy.getX();
 		double y = xy.getY();
 		int zoneId = xy.zoneId;
 		double latDeg = XY2LatLon.toLat(x, y, zoneId);
-		double lngDeg = XY2LatLon.toLon(x, y, zoneId);
-		return new LatLonWithZone(latDeg, lngDeg, zoneId);
+		double lonDeg = XY2LatLon.toLon(x, y, zoneId);
+		return new LatLonWithZone(latDeg, lonDeg, zoneId);
 	}
 
 	/**
-	 * 返り値は，日本測地系の緯度の十進法(degree: ddd.dddd)表記
+	 * @param x
+	 * @param y
+	 * @param zoneId
+	 *            平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
+	 *            http://www.gsi.go.jp/LAW/heimencho.html
+	 *            にzoneId(系番号)と適用区域が書かれている．
+	 * @return 日本測地系の緯度の十進法(degree: ddd.dddd)表記
 	 */
 	public static double toLat(double x, double y, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
@@ -61,7 +45,13 @@ public class XY2LatLon {
 	}
 
 	/**
-	 * 返り値は，日本測地系の経度の十進法(degree: ddd.dddd)表記
+	 * @param x
+	 * @param y
+	 * @param zoneId
+	 *            平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
+	 *            http://www.gsi.go.jp/LAW/heimencho.html
+	 *            にzoneId(系番号)と適用区域が書かれている．
+	 * @return 日本測地系の経度度の十進法(degree: ddd.dddd)表記
 	 */
 	public static double toLon(double x, double y, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
@@ -74,7 +64,7 @@ public class XY2LatLon {
 		private static double rho = 180.0 / Math.PI;
 
 		private static double toLatitude(double x, double y,
-				double latDmsOfOrigin, double lngDmsOfOrigin) {
+				double latDmsOfOrigin, double lonDmsOfOrigin) {
 
 			double phi = calcPhi(latDmsOfOrigin, x);
 
@@ -115,8 +105,8 @@ public class XY2LatLon {
 		 * @return 経度
 		 */
 		private static double toLongitude(double x, double y,
-				double latDmsOfOrigin, double lngDmsOfOrigin) {
-			double gentenL = AngleUtil.toAngle(lngDmsOfOrigin);
+				double latDmsOfOrigin, double lonDmsOfOrigin) {
+			double gentenL = AngleUtil.toAngle(lonDmsOfOrigin);
 			double phi = calcPhi(latDmsOfOrigin, x);
 
 			double b = phi;

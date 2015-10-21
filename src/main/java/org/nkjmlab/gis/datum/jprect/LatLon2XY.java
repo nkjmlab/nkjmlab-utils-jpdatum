@@ -15,67 +15,51 @@ import org.nkjmlab.gis.datum.util.Deg2Dms;
  */
 public class LatLon2XY {
 
-	private final XYJpr xy;
-
-	public LatLon2XY(LatLonWithZone latLon) {
-		this.xy = toXY(latLon);
-	}
-
 	/**
-	 * 平面直角座標系におけるX座標
+	 * 平面直角座標系の系番号付きの緯度経度を，平面直角座標系のXYに変換
 	 *
-	 * @return
+	 * @param latLon
+	 *            平面直角座標系の系番号付きの緯度経度
+	 * @return 平面直角座標系の系番号付きの平面直角座標系XY
 	 */
-	public double getX() {
-		return xy.getX();
-	}
-
-	/**
-	 * 平面直角座標系におけるX座標
-	 *
-	 * @return
-	 */
-	public double getY() {
-		return xy.getY();
-	}
-
-	/**
-	 * 平面直角座標系におけるXY座標
-	 *
-	 * @return
-	 */
-	public XYJpr getXY() {
-		return xy;
-	}
-
-	/**
-	 * zoneIdは平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
-	 * http://www.gsi.go.jp/LAW/heimencho.html にzoneId(系番号)と適用区域が書かれている．
-	 *
-	 * @param lat
-	 * @param lonDeg
-	 * @param zoneId
-	 * @return
-	 */
-
-	public static XYJpr toXY(LatLonWithZone latLng) {
-		double latDeg = latLng.getLat();
-		double lngDeg = latLng.getLon();
-		int zoneId = latLng.zoneId;
-		double x = LatLon2XY.toX(latDeg, lngDeg, zoneId);
-		double y = LatLon2XY.toY(latDeg, lngDeg, zoneId);
+	public static XYJpr toXY(LatLonWithZone latLon) {
+		double latDeg = latLon.getLat();
+		double lonDeg = latLon.getLon();
+		int zoneId = latLon.zoneId;
+		double x = LatLon2XY.toX(latDeg, lonDeg, zoneId);
+		double y = LatLon2XY.toY(latDeg, lonDeg, zoneId);
 		return new XYJpr(x, y, zoneId);
 	}
 
-	public static double toX(double latDegTD, double lngDegTD, int zoneId) {
+	/**
+	 *
+	 * @param latDegTD
+	 * @param lonDegTD
+	 * @param zoneId
+	 *            平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
+	 *            http://www.gsi.go.jp/LAW/heimencho.html
+	 *            にzoneId(系番号)と適用区域が書かれている．
+	 * @return
+	 */
+	public static double toX(double latDegTD, double lonDegTD, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return Helper.toXCoord(Deg2Dms.to(latDegTD), Deg2Dms.to(lngDegTD),
+		return Helper.toXCoord(Deg2Dms.to(latDegTD), Deg2Dms.to(lonDegTD),
 				Deg2Dms.to(origin.getLat()), Deg2Dms.to(origin.getLon()));
 	}
 
-	public static double toY(double latDegTD, double lngDegTD, int zoneId) {
+	/**
+	 *
+	 * @param latDegTD
+	 * @param lonDegTD
+	 * @param zoneId
+	 *            平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
+	 *            http://www.gsi.go.jp/LAW/heimencho.html
+	 *            にzoneId(系番号)と適用区域が書かれている．
+	 * @return
+	 */
+	public static double toY(double latDegTD, double lonDegTD, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return Helper.toYCoord(Deg2Dms.to(latDegTD), Deg2Dms.to(lngDegTD),
+		return Helper.toYCoord(Deg2Dms.to(latDegTD), Deg2Dms.to(lonDegTD),
 				Deg2Dms.to(origin.getLat()), Deg2Dms.to(origin.getLon()));
 	}
 
@@ -85,8 +69,8 @@ public class LatLon2XY {
 		 * 縮率に基づき算出された X,Y 座標値が有効かどうかを判断.
 		 */
 		@SuppressWarnings("unused")
-		private static boolean isValid(double lat, double lng, double x) {
-			double m = calcM(AngleUtil.toRadian(lat), AngleUtil.toRadian(lng),
+		private static boolean isValid(double lat, double lon, double x) {
+			double m = calcM(AngleUtil.toRadian(lat), AngleUtil.toRadian(lon),
 					x);
 			if (0.9999 <= m && m < 1.0001) {
 				return true;
@@ -94,14 +78,14 @@ public class LatLon2XY {
 			return false;
 		}
 
-		private static double toXCoord(double latDms, double lngDms,
-				double oLatDms, double oLngDms) {
+		private static double toXCoord(double latDms, double lonDms,
+				double oLatDms, double oLonDms) {
 
 			double b = AngleUtil.toRadian(latDms);
-			double l = AngleUtil.toRadian(lngDms);
+			double l = AngleUtil.toRadian(lonDms);
 
 			double gentenB = AngleUtil.toRadian(oLatDms);
-			double gentenL = AngleUtil.toRadian(oLngDms);
+			double gentenL = AngleUtil.toRadian(oLonDms);
 
 			double lam = l - gentenL;
 			double eta = Const.e1 * Math.cos(b);
@@ -128,11 +112,11 @@ public class LatLon2XY {
 			return Const.m0 * (arc_gap + x1 + x2 + x3);
 		}
 
-		private static double toYCoord(double latDms, double lngDms,
+		private static double toYCoord(double latDms, double lonDms,
 				double oLatDms, double oLngDms) {
 
 			double b = AngleUtil.toRadian(latDms);
-			double l = AngleUtil.toRadian(lngDms);
+			double l = AngleUtil.toRadian(lonDms);
 
 			double gentenL = AngleUtil.toRadian(oLngDms);
 

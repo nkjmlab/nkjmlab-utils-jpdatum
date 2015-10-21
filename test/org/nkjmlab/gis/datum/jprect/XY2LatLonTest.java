@@ -31,15 +31,13 @@ public class XY2LatLonTest {
 		double y = 0;
 		for (int zoneId = 1; zoneId <= 19; zoneId++) {
 
-			LatLonWithZone origin = JapanPlaneRectangular
-					.getOrigin(zoneId);
-			LatLonWithZone latLng = XY2LatLon
-					.toLatLon(new XYJpr(x, y, zoneId));
+			LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
+			LatLonWithZone latLon = XY2LatLon.toLatLon(new XYJpr(x, y, zoneId));
 
 			System.out.println("Origin: " + origin);
-			System.out.println("Calced: " + latLng);
-			assertEquals(origin.getLat(), latLng.getLat(), 0.01);
-			assertEquals(origin.getLon(), latLng.getLon(), 0.01);
+			System.out.println("Calculated: " + latLon);
+			assertEquals(origin.getLat(), latLon.getLat(), 0.01);
+			assertEquals(origin.getLon(), latLon.getLon(), 0.01);
 		}
 
 	}

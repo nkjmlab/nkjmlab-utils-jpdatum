@@ -18,12 +18,12 @@ public class LatLonWithZone extends LatLonDegTD {
 	 *
 	 * @param latDegTD
 	 *            日本測地系の緯度を十進法(degree: ddd.dddd)表記．
-	 * @param lngDegTD
+	 * @param lonDegTD
 	 *            日本測地系の経度を十進法(degree: ddd.dddd)表記．
 	 * @param zoneId
 	 */
-	public LatLonWithZone(double latDegTD, double lngDegTD, int zoneId) {
-		super(latDegTD, lngDegTD);
+	public LatLonWithZone(double latDegTD, double lonDegTD, int zoneId) {
+		super(latDegTD, lonDegTD);
 		this.zoneId = zoneId;
 
 		if (20 <= zoneId) {
@@ -32,6 +32,10 @@ public class LatLonWithZone extends LatLonDegTD {
 			System.err.println(s);
 			throw new InvalidParameterException(s);
 		}
+	}
+
+	public int getZoneId() {
+		return zoneId;
 	}
 
 }

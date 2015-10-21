@@ -15,9 +15,9 @@ public class Wgs2TD {
 		double lat = td.getLat() - 0.00010695 * td.getLat()
 				+ 0.000017464 * td.getLon() + 0.0046017;
 
-		double lng = td.getLon() - 0.000046038 * td.getLon()
+		double lon = td.getLon() - 0.000046038 * td.getLon()
 				- 0.000083043 * td.getLon() + 0.010040;
-		return new LatLonDegTD(lat, lng);
+		return new LatLonDegTD(lat, lon);
 	}
 
 	public static void main(String[] args) {

@@ -13,87 +13,87 @@ import java.security.InvalidParameterException;
  * @author Yuu NAKAJIMA
  *
  */
-class JapanPlaneRectangular {
+public class JapanPlaneRectangular {
 
 	public static LatLonWithZone getOrigin(int zoneId) {
 		double lat;
-		double lng;
+		double lon;
 		switch (zoneId) {
 		case 1:
 			lat = 33.00000;
-			lng = 129.0000;
+			lon = 129.0000;
 			break;
 		case 2:
 			lat = 33.00000;
-			lng = 131.00000;
+			lon = 131.00000;
 			break;
 		case 3:
 			lat = 36.00000;
-			lng = 132.166666666666667;
+			lon = 132.166666666666667;
 			break;
 		case 4:
 			lat = 33.00000;
-			lng = 133.50000;
+			lon = 133.50000;
 			break;
 		case 5:
 			lat = 36.00000;
-			lng = 134.333333333333333;
+			lon = 134.333333333333333;
 			break;
 		case 6:
 			lat = 36.00000;
-			lng = 136.00000;
+			lon = 136.00000;
 			break;
 		case 7:
 			lat = 36.00000;
-			lng = 137.166666666666667;
+			lon = 137.166666666666667;
 			break;
 		case 8:
 			lat = 36.00000;
-			lng = 138.833333333333333;
+			lon = 138.833333333333333;
 			break;
 		case 9:
 			lat = 36.00000;
-			lng = 139.833333333333333;
+			lon = 139.833333333333333;
 			break;
 		case 10:
 			lat = 40.00000;
-			lng = 140.833333333333333;
+			lon = 140.833333333333333;
 			break;
 		case 11:
 			lat = 44.00000;
-			lng = 140.15000;
+			lon = 140.15000;
 			break;
 		case 12:
 			lat = 44.00000;
-			lng = 142.25000;
+			lon = 142.25000;
 			break;
 		case 13:
 			lat = 44.00000;
-			lng = 144.25000;
+			lon = 144.25000;
 			break;
 		case 14:
 			lat = 26.00000;
-			lng = 142.00000;
+			lon = 142.00000;
 			break;
 		case 15:
 			lat = 26.00000;
-			lng = 127.50000;
+			lon = 127.50000;
 			break;
 		case 16:
 			lat = 26.00000;
-			lng = 124.00000;
+			lon = 124.00000;
 			break;
 		case 17:
 			lat = 26.00000;
-			lng = 131.00000;
+			lon = 131.00000;
 			break;
 		case 18:
 			lat = 20.00000;
-			lng = 136.00000;
+			lon = 136.00000;
 			break;
 		case 19:
 			lat = 26.00000;
-			lng = 154.00000;
+			lon = 154.00000;
 			break;
 		default:
 			String s = "zoneId=" + zoneId
@@ -102,6 +102,6 @@ class JapanPlaneRectangular {
 			throw new InvalidParameterException(s);
 
 		}
-		return new LatLonWithZone(lat, lng, zoneId);
+		return new LatLonWithZone(lat, lon, zoneId);
 	}
 }
