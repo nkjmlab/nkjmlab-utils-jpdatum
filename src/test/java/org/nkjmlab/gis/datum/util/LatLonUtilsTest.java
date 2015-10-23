@@ -7,8 +7,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nkjmlab.gis.datum.util.Deg2Dms;
-import org.nkjmlab.gis.datum.util.Dms2Deg;
 
 public class LatLonUtilsTest {
 

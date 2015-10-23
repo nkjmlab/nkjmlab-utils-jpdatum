@@ -77,7 +77,7 @@ public class LatLon {
 			throw new RuntimeException();
 		}
 
-		return new LatLon(latDeg, lonDeg);
+		return new LatLon(latDegTD, lonDegTD);
 	}
 
 	/**
