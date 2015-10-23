@@ -13,6 +13,9 @@ import org.nkjmlab.gis.datum.util.Wgs2TD;
  * 緯度経度を表現するクラス．作成時に，内部的には緯度 (TD座標系，十進法度表記)と 緯度 (TD座標系，十進法度表記)に変換して格納される．
  * 呼び出し時に指定した単位および座標系で取り出すことができる．
  *
+ * WGSとTDの間の変換の誤差が大きいので，XY平面に変換する場合は，インスタンスを作る際にTD座標系の値を入れた方が良い．同様の理由で，
+ * 内部をWGSで持たせることを諦めた．
+ *
  * @author nkjm
  *
  */
@@ -29,15 +32,31 @@ public class LatLon {
 		TD, WGS
 	}
 
-	public static LatLon create(double latTD, double lonTD, Detum detum) {
-		return create(latTD, lonTD, Unit.DEG, detum);
+	/**
+	 * WGSとTDの間の変換の誤差が大きいので，XY平面に変換する場合は，インスタンスを作る際にTD座標系の値を入れた方が良い．
+	 *
+	 * @param latDeg
+	 * @param lonDeg
+	 * @param detum
+	 * @return
+	 */
+	public static LatLon create(double latDeg, double lonDeg, Detum detum) {
+		return create(latDeg, lonDeg, Unit.DEG, detum);
 	}
 
 	public static LatLon create(double latTD, double lonTD, Unit unit) {
 		return create(latTD, lonTD, unit, Detum.TD);
 	}
 
-	public static LatLon create(double latTD, double lonTD, Unit unit,
+	/**
+	 * WGSとTDの間の変換の誤差が大きいので，XY平面に変換する場合は，インスタンスを作る際にTD座標系の値を入れた方が良い．
+	 *
+	 * @param latDeg
+	 * @param lonDeg
+	 * @param detum
+	 * @return
+	 */
+	public static LatLon create(double lat, double lon, Unit unit,
 			Detum detum) {
 
 		double latDeg = 0;
@@ -45,18 +64,18 @@ public class LatLon {
 
 		switch (unit) {
 		case DEG:
-			latDeg = latTD;
-			lonDeg = lonTD;
+			latDeg = lat;
+			lonDeg = lon;
 			break;
 		case DMS:
-			latDeg = Dms2Deg.toDeg(latTD);
-			lonDeg = Dms2Deg.toDeg(lonTD);
+			latDeg = Dms2Deg.toDeg(lat);
+			lonDeg = Dms2Deg.toDeg(lon);
 		case MILI_DEG:
-			latDeg = latTD * 1000;
-			lonDeg = lonTD * 1000;
+			latDeg = lat * 1000;
+			lonDeg = lon * 1000;
 		case SECOND:
-			latDeg = Sec2Dms.toDms(latTD);
-			lonDeg = Sec2Dms.toDms(lonTD);
+			latDeg = Sec2Dms.toDms(lat);
+			lonDeg = Sec2Dms.toDms(lon);
 		default:
 			throw new RuntimeException();
 		}

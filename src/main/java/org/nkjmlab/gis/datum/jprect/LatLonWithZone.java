@@ -19,7 +19,7 @@ public class LatLonWithZone extends LatLon {
 	 * @param zoneId
 	 */
 	public LatLonWithZone(LatLon latLon, int zoneId) {
-		super(latLon.getLat(), latLon.getLon());
+		super(latLon.getLatDegTD(), latLon.getLonDegTD());
 		this.zoneId = zoneId;
 
 		if (20 <= zoneId) {

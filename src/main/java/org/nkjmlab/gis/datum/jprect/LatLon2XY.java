@@ -1,7 +1,6 @@
 package org.nkjmlab.gis.datum.jprect;
 
 import org.nkjmlab.gis.datum.jprect.helper.LatLon2XYHelper;
-import org.nkjmlab.gis.datum.util.Deg2Dms;
 
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
@@ -24,8 +23,8 @@ public class LatLon2XY {
 	 * @return 平面直角座標系の系番号付きの平面直角座標系XY
 	 */
 	public static XYWithZone toXY(LatLonWithZone latLon) {
-		double latDegTD = latLon.getLat();
-		double lonDegTD = latLon.getLon();
+		double latDegTD = latLon.getLatDegTD();
+		double lonDegTD = latLon.getLonDegTD();
 		int zoneId = latLon.zoneId;
 		double x = LatLon2XY.toX(latDegTD, lonDegTD, zoneId);
 		double y = LatLon2XY.toY(latDegTD, lonDegTD, zoneId);
@@ -44,9 +43,8 @@ public class LatLon2XY {
 	 */
 	public static double toX(double latDegTD, double lonDegTD, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return LatLon2XYHelper.toXCoord(Deg2Dms.toDms(latDegTD),
-				Deg2Dms.toDms(lonDegTD), Deg2Dms.toDms(origin.getLat()),
-				Deg2Dms.toDms(origin.getLon()));
+		return LatLon2XYHelper.toXCoord(latDegTD, lonDegTD, origin.getLatDegTD(),
+				origin.getLonDegTD());
 	}
 
 	/**
@@ -61,9 +59,8 @@ public class LatLon2XY {
 	 */
 	public static double toY(double latDegTD, double lonDegTD, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return LatLon2XYHelper.toYCoord(Deg2Dms.toDms(latDegTD),
-				Deg2Dms.toDms(lonDegTD), Deg2Dms.toDms(origin.getLat()),
-				Deg2Dms.toDms(origin.getLon()));
+		return LatLon2XYHelper.toYCoord(latDegTD, lonDegTD, origin.getLatDegTD(),
+				origin.getLonDegTD());
 	}
 
 }

@@ -1,5 +1,7 @@
 package org.nkjmlab.gis.datum.jprect.helper;
 
+import org.nkjmlab.gis.datum.util.AngleUtil;
+
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
  *
@@ -25,14 +27,14 @@ public class LatLon2XYHelper {
 		return false;
 	}
 
-	public static double toXCoord(double latDms, double lonDms, double oLatDms,
-			double oLonDms) {
+	public static double toXCoord(double latDeg, double lonDeg, double oLatDeg,
+			double oLonDeg) {
 
-		double b = AngleUtil.toRadian(latDms);
-		double l = AngleUtil.toRadian(lonDms);
+		double b = AngleUtil.toRadian(latDeg);
+		double l = AngleUtil.toRadian(lonDeg);
 
-		double gentenB = AngleUtil.toRadian(oLatDms);
-		double gentenL = AngleUtil.toRadian(oLonDms);
+		double gentenB = AngleUtil.toRadian(oLatDeg);
+		double gentenL = AngleUtil.toRadian(oLonDeg);
 
 		double lam = l - gentenL;
 		double eta = Const.e1 * Math.cos(b);
@@ -58,13 +60,13 @@ public class LatLon2XYHelper {
 		return Const.m0 * (arc_gap + x1 + x2 + x3);
 	}
 
-	public static double toYCoord(double latDms, double lonDms, double oLatDms,
-			double oLngDms) {
+	public static double toYCoord(double latDeg, double lonDeg, double oLatDeg,
+			double oLonDeg) {
 
-		double b = AngleUtil.toRadian(latDms);
-		double l = AngleUtil.toRadian(lonDms);
+		double b = AngleUtil.toRadian(latDeg);
+		double l = AngleUtil.toRadian(lonDeg);
 
-		double gentenL = AngleUtil.toRadian(oLngDms);
+		double gentenL = AngleUtil.toRadian(oLonDeg);
 
 		double lam = l - gentenL;
 		double eta = Const.e1 * Math.cos(b);

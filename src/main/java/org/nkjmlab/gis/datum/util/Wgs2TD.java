@@ -1,7 +1,7 @@
 package org.nkjmlab.gis.datum.util;
 
 /***
- * 簡易的な世界測地系=>日本測地系変換をする．
+ * 簡易的な世界測地系=>旧日本測地系変換(TD: Tokyo Datum) をする．
  *
  * @author Yuu NAKAJIMA
  */

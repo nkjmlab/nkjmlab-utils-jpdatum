@@ -61,8 +61,10 @@ public class LatLon2XYTest {
 				LatLonWithZone actual = XY2LatLon.toLatLon(qas.get(query));
 				System.out.println("Expected:" + expected);
 				System.out.println("Actual:" + actual);
-				assertEquals(expected.getLat(), actual.getLat(), 0.01);
-				assertEquals(expected.getLon(), actual.getLon(), 0.01);
+				assertEquals(expected.getLatDegTD(), actual.getLatDegTD(),
+						0.01);
+				assertEquals(expected.getLonDegTD(), actual.getLonDegTD(),
+						0.01);
 			}
 		}
 	}

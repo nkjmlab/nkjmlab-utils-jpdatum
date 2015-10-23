@@ -1,5 +1,7 @@
 package org.nkjmlab.gis.datum.jprect.helper;
 
+import org.nkjmlab.gis.datum.util.AngleUtil;
+
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
  *
@@ -14,10 +16,10 @@ public class XY2LatLonHelper {
 
 	private static double rho = 180.0 / Math.PI;
 
-	public static double toLatitude(double x, double y, double latDmsOfOrigin,
-			double lonDmsOfOrigin) {
+	public static double toLatitude(double x, double y, double latDegOfOrigin,
+			double lonDegOfOrigin) {
 
-		double phi = calcPhi(latDmsOfOrigin, x);
+		double phi = calcPhi(latDegOfOrigin, x);
 
 		double b = phi;
 
@@ -56,10 +58,10 @@ public class XY2LatLonHelper {
 	 *
 	 * @return 経度
 	 */
-	public static double toLongitude(double x, double y, double latDmsOfOrigin,
-			double lonDmsOfOrigin) {
-		double gentenL = AngleUtil.toAngle(lonDmsOfOrigin);
-		double phi = calcPhi(latDmsOfOrigin, x);
+	public static double toLongitude(double x, double y, double latDegOfOrigin,
+			double lonDegOfOrigin) {
+		double gentenL = lonDegOfOrigin;
+		double phi = calcPhi(latDegOfOrigin, x);
 
 		double b = phi;
 
@@ -86,9 +88,9 @@ public class XY2LatLonHelper {
 	/**
 	 * phiを返すメソッド
 	 */
-	private static double calcPhi(double latDms, double x) {
+	private static double calcPhi(double latDeg, double x) {
 
-		double gentenB = AngleUtil.toRadian(latDms);
+		double gentenB = AngleUtil.toRadian(latDeg);
 		double arc_l = ArcLength.calcArcLength(gentenB);
 
 		double sxm = arc_l + x / Const.m0;

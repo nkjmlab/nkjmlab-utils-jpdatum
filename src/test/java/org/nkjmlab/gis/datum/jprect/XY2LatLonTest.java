@@ -37,8 +37,8 @@ public class XY2LatLonTest {
 
 			System.out.println("Origin: " + origin);
 			System.out.println("Calculated: " + latLon);
-			assertEquals(origin.getLat(), latLon.getLat(), 0.01);
-			assertEquals(origin.getLon(), latLon.getLon(), 0.01);
+			assertEquals(origin.getLatDegTD(), latLon.getLatDegTD(), 0.01);
+			assertEquals(origin.getLonDegTD(), latLon.getLonDegTD(), 0.01);
 		}
 
 	}

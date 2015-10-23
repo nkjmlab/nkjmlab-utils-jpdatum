@@ -1,7 +1,7 @@
 package org.nkjmlab.gis.datum.util;
 
 /***
- * 日本測地系(TD: Tokyo Datum) から 世界測地系(WGS: JGD2000)へ簡易的な変換をする．
+ * 旧日本測地系(TD: Tokyo Datum) から 世界測地系(WGS: JGD2000)へ簡易的な変換をする．
  *
  * 「測地系変換にともなうずれ」を参考にした．
  * http://www.museum.tokushima-ec.ed.jp/ogawa/map/datumconv/

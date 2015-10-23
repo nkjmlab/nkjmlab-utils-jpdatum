@@ -2,7 +2,6 @@ package org.nkjmlab.gis.datum.jprect;
 
 import org.nkjmlab.gis.datum.LatLon;
 import org.nkjmlab.gis.datum.jprect.helper.XY2LatLonHelper;
-import org.nkjmlab.gis.datum.util.Deg2Dms;
 
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
@@ -42,8 +41,8 @@ public class XY2LatLon {
 	 */
 	public static double toLat(double x, double y, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return XY2LatLonHelper.toLatitude(x, y, Deg2Dms.toDms(origin.getLat()),
-				Deg2Dms.toDms(origin.getLon()));
+		return XY2LatLonHelper.toLatitude(x, y, origin.getLatDegTD(),
+				origin.getLonDegTD());
 	}
 
 	/**
@@ -57,8 +56,8 @@ public class XY2LatLon {
 	 */
 	public static double toLon(double x, double y, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return XY2LatLonHelper.toLongitude(x, y, Deg2Dms.toDms(origin.getLat()),
-				Deg2Dms.toDms(origin.getLon()));
+		return XY2LatLonHelper.toLongitude(x, y, origin.getLatDegTD(),
+				origin.getLonDegTD());
 	}
 
 }
