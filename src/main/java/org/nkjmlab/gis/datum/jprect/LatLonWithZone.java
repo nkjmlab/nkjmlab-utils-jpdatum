@@ -2,28 +2,24 @@ package org.nkjmlab.gis.datum.jprect;
 
 import java.security.InvalidParameterException;
 
-import org.nkjmlab.gis.datum.common.LatLonDegTD;
+import org.nkjmlab.gis.datum.LatLon;
 
 /**
- * 日本測地系(TD: Tokyo Datum)の十進表記
+ * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）の系番号付きの緯度経度
  *
  * @author Yuu NAKAJIMA
  *
  */
-public class LatLonWithZone extends LatLonDegTD {
+public class LatLonWithZone extends LatLon {
 
 	public final int zoneId;
 
 	/**
 	 *
-	 * @param latDegTD
-	 *            日本測地系の緯度を十進法(degree: ddd.dddd)表記．
-	 * @param lonDegTD
-	 *            日本測地系の経度を十進法(degree: ddd.dddd)表記．
 	 * @param zoneId
 	 */
-	public LatLonWithZone(double latDegTD, double lonDegTD, int zoneId) {
-		super(latDegTD, lonDegTD);
+	public LatLonWithZone(LatLon latLon, int zoneId) {
+		super(latLon.getLat(), latLon.getLon());
 		this.zoneId = zoneId;
 
 		if (20 <= zoneId) {

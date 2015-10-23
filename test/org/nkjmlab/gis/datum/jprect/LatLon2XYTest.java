@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.nkjmlab.gis.datum.LatLon;
 
 /**
  * 旧日本測地系(Tokyo Datum：2002年3月末までの日本の公式測地系．Bessel楕円体) に基づく緯度経度を日本平面直角座標系(Japan
@@ -37,19 +38,19 @@ public class LatLon2XYTest {
 	@Test
 	public void test() {
 
-		Map<LatLonWithZone, XYJpr> qas = new HashMap<>();
+		Map<LatLonWithZone, XYWithZone> qas = new HashMap<>();
 		// 国土地理院 (日本測地系)
-		qas.put(new LatLonWithZone(36.104583, 140.084583, 9),
-				new XYJpr(11631.3563, 22618.7053, 9));
+		qas.put(new LatLonWithZone(LatLon.create(36.104583, 140.084583), 9),
+				new XYWithZone(11631.3563, 22618.7053, 9));
 
 		// スカイツリー (日本測地系)
-		qas.put(new LatLonWithZone(35.71004, 139.81070, 9),
-				new XYJpr(-32166.0244, -2047.6996, 9));
+		qas.put(new LatLonWithZone(LatLon.create(35.71004, 139.81070), 9),
+				new XYWithZone(-32166.0244, -2047.6996, 9));
 
 		for (LatLonWithZone query : qas.keySet()) {
 			{
-				XYJpr expected = qas.get(query);
-				XYJpr actual = LatLon2XY.toXY(query);
+				XYWithZone expected = qas.get(query);
+				XYWithZone actual = LatLon2XY.toXY(query);
 				System.out.println("Expected:" + expected);
 				System.out.println("Actual:" + actual);
 				assertEquals(expected.getX(), actual.getX(), 0.01);
@@ -62,7 +63,6 @@ public class LatLon2XYTest {
 				System.out.println("Actual:" + actual);
 				assertEquals(expected.getLat(), actual.getLat(), 0.01);
 				assertEquals(expected.getLon(), actual.getLon(), 0.01);
-
 			}
 		}
 	}

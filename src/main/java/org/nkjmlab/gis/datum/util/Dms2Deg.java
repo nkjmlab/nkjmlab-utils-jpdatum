@@ -10,7 +10,7 @@ public class Dms2Deg {
 	/**
 	 * 度分秒表記(ddd.mmsss)を10進表記(ddd.ddddd)に変換
 	 */
-	public static double to(double ddd_mmsss) {
+	public static double toDeg(double ddd_mmsss) {
 		int ddd = (int) ddd_mmsss;
 		double min = ((int) ((ddd_mmsss - ddd) * 100.0));
 		double sec = (ddd_mmsss - ddd - min / 100) * 10000;

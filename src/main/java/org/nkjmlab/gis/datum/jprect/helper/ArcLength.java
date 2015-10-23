@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.datum.jprect;
+package org.nkjmlab.gis.datum.jprect.helper;
 
 /**
  * ArcLengthは，緯度までの子午線弧長を求めるクラスです．

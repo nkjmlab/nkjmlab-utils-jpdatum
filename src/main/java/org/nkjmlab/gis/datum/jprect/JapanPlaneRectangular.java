@@ -2,6 +2,8 @@ package org.nkjmlab.gis.datum.jprect;
 
 import java.security.InvalidParameterException;
 
+import org.nkjmlab.gis.datum.LatLon;
+
 /**
  *
  * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）
@@ -102,6 +104,6 @@ public class JapanPlaneRectangular {
 			throw new InvalidParameterException(s);
 
 		}
-		return new LatLonWithZone(lat, lon, zoneId);
+		return new LatLonWithZone(LatLon.create(lat, lon), zoneId);
 	}
 }

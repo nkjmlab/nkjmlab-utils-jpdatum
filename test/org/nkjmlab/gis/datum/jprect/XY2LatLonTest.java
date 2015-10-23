@@ -32,7 +32,8 @@ public class XY2LatLonTest {
 		for (int zoneId = 1; zoneId <= 19; zoneId++) {
 
 			LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-			LatLonWithZone latLon = XY2LatLon.toLatLon(new XYJpr(x, y, zoneId));
+			LatLonWithZone latLon = XY2LatLon
+					.toLatLon(new XYWithZone(x, y, zoneId));
 
 			System.out.println("Origin: " + origin);
 			System.out.println("Calculated: " + latLon);

@@ -24,11 +24,11 @@ public class LatLonUtilsTest {
 	}
 
 	private void testDmsDeg(double dms, double deg) {
-		System.out.println(Deg2Dms.to(deg));
-		System.out.println(Dms2Deg.to(dms));
+		System.out.println(Deg2Dms.toDms(deg));
+		System.out.println(Dms2Deg.toDeg(dms));
 
-		assertEquals(dms, Deg2Dms.to(deg), 0.01);
-		assertEquals(deg, Dms2Deg.to(dms), 0.01);
+		assertEquals(dms, Deg2Dms.toDms(deg), 0.01);
+		assertEquals(deg, Dms2Deg.toDeg(dms), 0.01);
 
 	}
 }
