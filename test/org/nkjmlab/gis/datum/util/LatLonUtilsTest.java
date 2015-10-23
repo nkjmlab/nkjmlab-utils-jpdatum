@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.datum.jprect;
+package org.nkjmlab.gis.datum.util;
 
 /***
  * @author Yuu NAKAJIMA

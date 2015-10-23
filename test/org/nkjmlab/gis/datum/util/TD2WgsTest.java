@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.datum.jprect;
+package org.nkjmlab.gis.datum.util;
 
 import org.junit.Before;
 import org.junit.Test;
