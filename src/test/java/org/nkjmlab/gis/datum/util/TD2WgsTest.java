@@ -1,8 +1,9 @@
 package org.nkjmlab.gis.datum.util;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.nkjmlab.gis.datum.util.Wgs2TD;
 
 public class TD2WgsTest {
 
@@ -12,10 +13,14 @@ public class TD2WgsTest {
 
 	@Test
 	public void testToWgs() {
-		// TD(35.71004, 139.81070)=>JGD2000(35.713274983, 139.807461872)
 
-		System.out.println(Wgs2TD.toLatTD(35.71004, 139.81070));
-		System.out.println(Wgs2TD.toLonTD(35.71004, 139.81070));
+		double latTD = 35.71004;
+		double lonTD = 139.81070;
+		double latWgs = 35.713274983;
+		double lonWgs = 139.807461872;
+		assertEquals(latTD, Wgs2TD.toLatTD(latWgs, lonWgs), 0.01);
+		assertEquals(lonTD, Wgs2TD.toLonTD(latWgs, lonWgs), 0.01);
+
 	}
 
 }
