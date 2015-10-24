@@ -12,7 +12,6 @@ import org.nkjmlab.gis.datum.util.Wgs2TD;
 /**
  * 緯度経度を表現するクラス．緯度経度は，作成時に指定された単位と測地系で保存される．呼び出し時に指定した単位および座標系で取り出すことができる．
  *
- * WGSとTDの間の変換の誤差が大きいので，XY平面に変換する場合は，インスタンスを作る際にTD座標系の値を入れた方が良い．
  *
  * @author nkjm
  *
@@ -41,13 +40,21 @@ public class LatLon {
 
 	}
 
+	public Unit getUnit() {
+		return this.unit;
+	}
+
+	public Detum getDetum() {
+		return this.detum;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof LatLon)) {
 			return false;
 		}
 		LatLon l = (LatLon) obj;
-		return this.lat == l.lat && this.lon == l.lon;
+		return this.lat == l.lat && this.lon == l.lon && this.unit == l.unit && this.detum == l.detum;
 	}
 
 	@Override
@@ -61,7 +68,7 @@ public class LatLon {
 	}
 
 	/**
-	 * 緯度を返す．単位や測地系はメンバの値に従う．
+	 * 緯度を返す．単位と測地系はインスタンス生成時の引数の値に従う．
 	 *
 	 * @return
 	 */
@@ -70,7 +77,7 @@ public class LatLon {
 	}
 
 	/**
-	 * 経度を返す．単位や測地系はメンバの値に従う．
+	 * 経度を返す．単位と測地系はインスタンス生成時の引数の値に従う．
 	 *
 	 * @return
 	 */
@@ -84,7 +91,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatDegTD() {
-		return convLatTo(Unit.DEG, Detum.TD);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.DEG, Detum.TD);
 	}
 
 	/**
@@ -93,7 +100,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonDegTD() {
-		return convLonTo(Unit.DEG, Detum.TD);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.DEG, Detum.TD);
 	}
 
 	/**
@@ -102,7 +109,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatMiliDegTD() {
-		return convLatTo(Unit.MILI_DEG, Detum.TD);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.MILI_DEG, Detum.TD);
 	}
 
 	/**
@@ -111,7 +118,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonMiliDegTD() {
-		return convLonTo(Unit.MILI_DEG, Detum.TD);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.MILI_DEG, Detum.TD);
 	}
 
 	/**
@@ -120,7 +127,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatDmsTD() {
-		return convLatTo(Unit.DMS, Detum.TD);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.DMS, Detum.TD);
 	}
 
 	/**
@@ -129,7 +136,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonDmsTD() {
-		return convLonTo(Unit.DMS, Detum.TD);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.DMS, Detum.TD);
 	}
 
 	/**
@@ -138,7 +145,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatSecTD() {
-		return convLatTo(Unit.SECOND, Detum.TD);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.SECOND, Detum.TD);
 	}
 
 	/**
@@ -147,7 +154,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonSecTD() {
-		return convLonTo(Unit.SECOND, Detum.TD);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.SECOND, Detum.TD);
 	}
 
 	/**
@@ -156,7 +163,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatDegWgs() {
-		return convLatTo(Unit.DEG, Detum.WGS);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.DEG, Detum.WGS);
 	}
 
 	/**
@@ -165,7 +172,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonDegWgs() {
-		return convLonTo(Unit.DEG, Detum.WGS);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.DEG, Detum.WGS);
 	}
 
 	/**
@@ -174,7 +181,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatMiliDegWgs() {
-		return convLatTo(Unit.MILI_DEG, Detum.WGS);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.MILI_DEG, Detum.WGS);
 	}
 
 	/**
@@ -183,7 +190,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonMiliDegWGS() {
-		return convLonTo(Unit.MILI_DEG, Detum.WGS);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.MILI_DEG, Detum.WGS);
 	}
 
 	/**
@@ -192,7 +199,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatDmsWGS() {
-		return convLatTo(Unit.DMS, Detum.WGS);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.DMS, Detum.WGS);
 	}
 
 	/**
@@ -201,7 +208,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonDmsWgs() {
-		return convLonTo(Unit.DMS, Detum.WGS);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.DMS, Detum.WGS);
 	}
 
 	/**
@@ -210,7 +217,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatSecWgs() {
-		return convLatTo(Unit.SECOND, Detum.WGS);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.SECOND, Detum.WGS);
 	}
 
 	/**
@@ -219,26 +226,30 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonSecWgs() {
-		return convLonTo(Unit.SECOND, Detum.WGS);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.SECOND, Detum.WGS);
 	}
 
-	private double convLatTo(Unit toUnit, Detum toDetum) {
-		if (this.detum == toDetum) {
-			return convTo(lat, toUnit);
+	public static double chageBasisOfLat(double lat, double lon, Unit fromUnit, Detum fromDetum, Unit toUnit,
+			Detum toDetum) {
+		if (fromDetum == toDetum) {
+			return changeUnit(lat, fromUnit, toUnit);
 		}
-		double valOnToDetum = convLatTo(convTo(lat, Unit.DEG), convTo(lon, Unit.DEG), toDetum);
-		return convTo(valOnToDetum, toUnit);
+		double valOnToDetum = changeDetumOfLat(changeUnit(lat, fromUnit, Unit.DEG), changeUnit(lon, fromUnit, Unit.DEG),
+				toDetum);
+		return changeUnit(valOnToDetum, fromUnit, toUnit);
 	}
 
-	private double convLonTo(Unit toUnit, Detum toDetum) {
-		if (this.detum == toDetum) {
-			return convTo(lon, toUnit);
+	public static double changeBasisOfLon(double lat, double lon, Unit fromUnit, Detum fromDetum, Unit toUnit,
+			Detum toDetum) {
+		if (fromDetum == toDetum) {
+			return changeUnit(lon, fromUnit, toUnit);
 		}
-		double valOnToDetum = convLonTo(convTo(lat, Unit.DEG), convTo(lon, Unit.DEG), toDetum);
-		return convTo(valOnToDetum, toUnit);
+		double valOnToDetum = changeDetumOfLon(changeUnit(lon, fromUnit, Unit.DEG), changeUnit(lon, fromUnit, Unit.DEG),
+				toDetum);
+		return changeUnit(valOnToDetum, fromUnit, toUnit);
 	}
 
-	private double convLatTo(double latDeg, double lonDeg, Detum toDetum) {
+	public static double changeDetumOfLat(double latDeg, double lonDeg, Detum toDetum) {
 		switch (toDetum) {
 		case TD:
 			return Wgs2TD.toLatTD(latDeg, lonDeg);
@@ -249,7 +260,7 @@ public class LatLon {
 		}
 	}
 
-	private double convLonTo(double latDeg, double lonDeg, Detum toDetum) {
+	public static double changeDetumOfLon(double latDeg, double lonDeg, Detum toDetum) {
 		switch (toDetum) {
 		case TD:
 			return Wgs2TD.toLonTD(latDeg, lonDeg);
@@ -260,12 +271,12 @@ public class LatLon {
 		}
 	}
 
-	private double convTo(double val, Unit toUnit) {
-		if (this.unit == toUnit) {
+	public static double changeUnit(double val, Unit fromUnit, Unit toUnit) {
+		if (fromUnit == toUnit) {
 			return val;
 		}
 
-		switch (this.unit) {
+		switch (fromUnit) {
 		case DEG:
 			if (toUnit == Unit.MILI_DEG) {
 				return val * 1000;
@@ -301,14 +312,6 @@ public class LatLon {
 		default:
 			throw new RuntimeException();
 		}
-	}
-
-	public Unit getUnit() {
-		return this.unit;
-	}
-
-	public Detum getDetum() {
-		return this.detum;
 	}
 
 }
