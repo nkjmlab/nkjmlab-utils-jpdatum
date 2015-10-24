@@ -2,7 +2,8 @@ package org.nkjmlab.gis.datum.jprect;
 
 import java.security.InvalidParameterException;
 
-import org.nkjmlab.gis.datum.LatLon;
+import org.nkjmlab.gis.datum.LatLon.Detum;
+import org.nkjmlab.gis.datum.LatLon.Unit;
 
 /**
  *
@@ -98,12 +99,11 @@ public class JapanPlaneRectangular {
 			lon = 154.00000;
 			break;
 		default:
-			String s = "zoneId=" + zoneId
-					+ " is invalid. The zone id range from 1 to 19.";
+			String s = "zoneId=" + zoneId + " is invalid. The zone id range from 1 to 19.";
 			System.err.println(s);
 			throw new InvalidParameterException(s);
 
 		}
-		return new LatLonWithZone(LatLon.create(lat, lon), zoneId);
+		return new LatLonWithZone(lat, lon, Unit.DEG, Detum.TD, zoneId);
 	}
 }

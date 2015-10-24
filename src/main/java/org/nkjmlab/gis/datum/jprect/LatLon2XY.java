@@ -3,13 +3,6 @@ package org.nkjmlab.gis.datum.jprect;
 import org.nkjmlab.gis.datum.jprect.helper.LatLon2XYHelper;
 
 /**
- * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
- *
- * scalcは，琉球大学工学部情報工学科 宮城研究室の成果物 を，ジャスミンソフトが整理・統合したものです． 再利用を快諾
- * して頂いた宮城隼夫教授以下，宮城研究室のスタッフにこの場を借りて感謝致します．
- *
- * @author Miho Nagata
- * @author Yoshinori Nie
  * @author Yuu NAKAJIMA
  *
  */
@@ -43,8 +36,7 @@ public class LatLon2XY {
 	 */
 	public static double toX(double latDegTD, double lonDegTD, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return LatLon2XYHelper.toXCoord(latDegTD, lonDegTD, origin.getLatDegTD(),
-				origin.getLonDegTD());
+		return LatLon2XYHelper.toXCoord(latDegTD, lonDegTD, origin.getLatDegTD(), origin.getLonDegTD());
 	}
 
 	/**
@@ -59,8 +51,7 @@ public class LatLon2XY {
 	 */
 	public static double toY(double latDegTD, double lonDegTD, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return LatLon2XYHelper.toYCoord(latDegTD, lonDegTD, origin.getLatDegTD(),
-				origin.getLonDegTD());
+		return LatLon2XYHelper.toYCoord(latDegTD, lonDegTD, origin.getLatDegTD(), origin.getLonDegTD());
 	}
 
 }

@@ -12,15 +12,14 @@ import org.nkjmlab.gis.datum.XY;
  */
 public class XYWithZone extends XY {
 
-	public final int zoneId;
+	protected final int zoneId;
 
 	public XYWithZone(double x, double y, int zoneId) {
 		super(x, y);
 		this.zoneId = zoneId;
 
 		if (zoneId <= 0 || 20 <= zoneId) {
-			String s = "zoneId=" + zoneId
-					+ " is invalid. The zone id range from 1 to 19.";
+			String s = "zoneId=" + zoneId + " is invalid. The zone id range from 1 to 19.";
 			System.err.println(s);
 			throw new InvalidParameterException(s);
 		}

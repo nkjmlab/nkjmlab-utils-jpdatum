@@ -1,16 +1,11 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import org.nkjmlab.gis.datum.LatLon;
+import org.nkjmlab.gis.datum.LatLon.Detum;
+import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.jprect.helper.XY2LatLonHelper;
 
 /**
- * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
  *
- * scalcは，琉球大学工学部情報工学科 宮城研究室の成果物 を，ジャスミンソフトが整理・統合したものです． 再利用を快諾
- * して頂いた宮城隼夫教授以下，宮城研究室のスタッフにこの場を借りて感謝致します．
- *
- * @author Miho Nagata
- * @author Yoshinori Nie
  * @author Yuu NAKAJIMA
  */
 public class XY2LatLon {
@@ -27,7 +22,7 @@ public class XY2LatLon {
 		int zoneId = xy.zoneId;
 		double latDeg = XY2LatLon.toLat(x, y, zoneId);
 		double lonDeg = XY2LatLon.toLon(x, y, zoneId);
-		return new LatLonWithZone(LatLon.create(latDeg, lonDeg), zoneId);
+		return new LatLonWithZone(latDeg, lonDeg, Unit.DEG, Detum.TD, zoneId);
 	}
 
 	/**
@@ -41,8 +36,7 @@ public class XY2LatLon {
 	 */
 	public static double toLat(double x, double y, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return XY2LatLonHelper.toLatitude(x, y, origin.getLatDegTD(),
-				origin.getLonDegTD());
+		return XY2LatLonHelper.toLatitude(x, y, origin.getLatDegTD(), origin.getLonDegTD());
 	}
 
 	/**
@@ -56,8 +50,7 @@ public class XY2LatLon {
 	 */
 	public static double toLon(double x, double y, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return XY2LatLonHelper.toLongitude(x, y, origin.getLatDegTD(),
-				origin.getLonDegTD());
+		return XY2LatLonHelper.toLongitude(x, y, origin.getLatDegTD(), origin.getLonDegTD());
 	}
 
 }

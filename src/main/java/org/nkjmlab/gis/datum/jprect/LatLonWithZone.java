@@ -12,26 +12,42 @@ import org.nkjmlab.gis.datum.LatLon;
  */
 public class LatLonWithZone extends LatLon {
 
-	public final int zoneId;
+	protected final int zoneId;
 
 	/**
 	 *
 	 * @param zoneId
 	 */
 	public LatLonWithZone(LatLon latLon, int zoneId) {
-		super(latLon.getLatDegTD(), latLon.getLonDegTD());
+		this(latLon.getLatDegTD(), latLon.getLonDegTD(), latLon.getUnit(), latLon.getDetum(), zoneId);
+	}
+
+	public LatLonWithZone(double lat, double lon, Unit unit, Detum detum, int zoneId) {
+		super(lat, lon, unit, detum);
 		this.zoneId = zoneId;
 
 		if (20 <= zoneId) {
-			String s = "zoneId=" + zoneId
-					+ " is invalid. The zone id range from 1 to 19.";
+			String s = "zoneId=" + zoneId + " is invalid. The zone id range from 1 to 19.";
 			System.err.println(s);
 			throw new InvalidParameterException(s);
 		}
+
+	}
+
+	public LatLonWithZone(double lat, double lon, LatLonBasisWithZone basis) {
+		this(lat, lon, basis.getUnit(), basis.getDetum(), basis.getZoneId());
 	}
 
 	public int getZoneId() {
 		return zoneId;
+	}
+
+	public double getX() {
+		return LatLon2XY.toX(this.getLatDegTD(), this.getLonDegTD(), zoneId);
+	}
+
+	public double getY() {
+		return LatLon2XY.toY(this.getLatDegTD(), this.getLonDegTD(), zoneId);
 	}
 
 }
