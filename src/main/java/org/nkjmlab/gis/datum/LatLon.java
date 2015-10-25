@@ -25,11 +25,11 @@ public class LatLon {
 	protected final Detum detum;
 
 	public enum Unit {
-		DEG, MILI_DEG, DMS, SECOND
+		DEGREE, MILI_DEGREE, DMS, SECOND
 	}
 
 	public enum Detum {
-		TD, WGS
+		TOKYO, WGS84
 	}
 
 	protected LatLon(double lat, double lon, Unit unit, Detum detum) {
@@ -91,7 +91,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatDegTD() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.DEG, Detum.TD);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.DEGREE, Detum.TOKYO);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonDegTD() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.DEG, Detum.TD);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.DEGREE, Detum.TOKYO);
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatMiliDegTD() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.MILI_DEG, Detum.TD);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.MILI_DEGREE, Detum.TOKYO);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonMiliDegTD() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.MILI_DEG, Detum.TD);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.MILI_DEGREE, Detum.TOKYO);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatDmsTD() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.DMS, Detum.TD);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.DMS, Detum.TOKYO);
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonDmsTD() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.DMS, Detum.TD);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.DMS, Detum.TOKYO);
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatSecTD() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.SECOND, Detum.TD);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.SECOND, Detum.TOKYO);
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonSecTD() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.SECOND, Detum.TD);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.SECOND, Detum.TOKYO);
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatDegWgs() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.DEG, Detum.WGS);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.DEGREE, Detum.WGS84);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonDegWgs() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.DEG, Detum.WGS);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.DEGREE, Detum.WGS84);
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatMiliDegWgs() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.MILI_DEG, Detum.WGS);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.MILI_DEGREE, Detum.WGS84);
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonMiliDegWGS() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.MILI_DEG, Detum.WGS);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.MILI_DEGREE, Detum.WGS84);
 	}
 
 	/**
@@ -199,7 +199,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatDmsWGS() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.DMS, Detum.WGS);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.DMS, Detum.WGS84);
 	}
 
 	/**
@@ -208,7 +208,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonDmsWgs() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.DMS, Detum.WGS);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.DMS, Detum.WGS84);
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLatSecWgs() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.SECOND, Detum.WGS);
+		return chageBasisOfLat(lat, lon, unit, detum, Unit.SECOND, Detum.WGS84);
 	}
 
 	/**
@@ -226,7 +226,7 @@ public class LatLon {
 	 * @return
 	 */
 	public double getLonSecWgs() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.SECOND, Detum.WGS);
+		return changeBasisOfLon(lat, lon, unit, detum, Unit.SECOND, Detum.WGS84);
 	}
 
 	public static double chageBasisOfLat(double lat, double lon, Unit fromUnit, Detum fromDetum, Unit toUnit,
@@ -234,8 +234,8 @@ public class LatLon {
 		if (fromDetum == toDetum) {
 			return changeUnit(lat, fromUnit, toUnit);
 		}
-		double valOnToDetum = changeDetumOfLat(changeUnit(lat, fromUnit, Unit.DEG), changeUnit(lon, fromUnit, Unit.DEG),
-				toDetum);
+		double valOnToDetum = changeDetumOfLat(changeUnit(lat, fromUnit, Unit.DEGREE),
+				changeUnit(lon, fromUnit, Unit.DEGREE), toDetum);
 		return changeUnit(valOnToDetum, fromUnit, toUnit);
 	}
 
@@ -244,16 +244,16 @@ public class LatLon {
 		if (fromDetum == toDetum) {
 			return changeUnit(lon, fromUnit, toUnit);
 		}
-		double valOnToDetum = changeDetumOfLon(changeUnit(lon, fromUnit, Unit.DEG), changeUnit(lon, fromUnit, Unit.DEG),
-				toDetum);
+		double valOnToDetum = changeDetumOfLon(changeUnit(lon, fromUnit, Unit.DEGREE),
+				changeUnit(lon, fromUnit, Unit.DEGREE), toDetum);
 		return changeUnit(valOnToDetum, fromUnit, toUnit);
 	}
 
 	public static double changeDetumOfLat(double latDeg, double lonDeg, Detum toDetum) {
 		switch (toDetum) {
-		case TD:
+		case TOKYO:
 			return Wgs2TD.toLatTD(latDeg, lonDeg);
-		case WGS:
+		case WGS84:
 			return TD2Wgs.toLatWgs(latDeg, lonDeg);
 		default:
 			throw new RuntimeException();
@@ -262,9 +262,9 @@ public class LatLon {
 
 	public static double changeDetumOfLon(double latDeg, double lonDeg, Detum toDetum) {
 		switch (toDetum) {
-		case TD:
+		case TOKYO:
 			return Wgs2TD.toLonTD(latDeg, lonDeg);
-		case WGS:
+		case WGS84:
 			return TD2Wgs.toLonWgs(latDeg, lonDeg);
 		default:
 			throw new RuntimeException();
@@ -277,16 +277,16 @@ public class LatLon {
 		}
 
 		switch (fromUnit) {
-		case DEG:
-			if (toUnit == Unit.MILI_DEG) {
+		case DEGREE:
+			if (toUnit == Unit.MILI_DEGREE) {
 				return val * 1000;
 			} else if (toUnit == Unit.DMS) {
 				return Deg2Dms.toDms(val);
 			} else if (toUnit == Unit.SECOND) {
 				return Dms2Sec.toSec(Deg2Dms.toDms(val));
 			}
-		case MILI_DEG:
-			if (toUnit == Unit.DEG) {
+		case MILI_DEGREE:
+			if (toUnit == Unit.DEGREE) {
 				return val / 1000;
 			} else if (toUnit == Unit.DMS) {
 				return Deg2Dms.toDms(val / 1000);
@@ -294,17 +294,17 @@ public class LatLon {
 				return Dms2Sec.toSec(Deg2Dms.toDms(val / 1000));
 			}
 		case DMS:
-			if (toUnit == Unit.DEG) {
+			if (toUnit == Unit.DEGREE) {
 				return Dms2Deg.toDeg(val);
-			} else if (toUnit == Unit.MILI_DEG) {
+			} else if (toUnit == Unit.MILI_DEGREE) {
 				return Dms2Deg.toDeg(val) * 1000;
 			} else if (toUnit == Unit.SECOND) {
 				return Dms2Sec.toSec(val);
 			}
 		case SECOND:
-			if (toUnit == Unit.DEG) {
+			if (toUnit == Unit.DEGREE) {
 				return Dms2Deg.toDeg(Sec2Dms.toDms(val));
-			} else if (toUnit == Unit.MILI_DEG) {
+			} else if (toUnit == Unit.MILI_DEGREE) {
 				return Dms2Deg.toDeg(Sec2Dms.toDms(val)) * 1000;
 			} else if (toUnit == Unit.DMS) {
 				return Sec2Dms.toDms(val);

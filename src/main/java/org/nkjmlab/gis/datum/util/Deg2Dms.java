@@ -8,16 +8,38 @@ package org.nkjmlab.gis.datum.util;
 public class Deg2Dms {
 
 	/**
-	 * 10進表記(ddd.ddddd)を度分秒表記(ddd.mmss_s)に変換
+	 * 十進法度単位(ddd.ddddd)を度分秒単位(dddmmss.s)に変換
 	 */
 	public static double toDms(double ddd_ddddd) {
 		int ddd = (int) ddd_ddddd;
-		double min = (int) ((ddd_ddddd - ddd) * 60.0);
-		double sec = (int) ((((ddd_ddddd - ddd) * 60.0) - min) * 60.0);
-		double s = (((((ddd_ddddd - ddd) * 60.0) - min) * 60.0) - sec);
+		double min = (ddd_ddddd - ddd) * 60.0;
+		double sec = (min % 1 * 60.0);
+		double _s = sec % 1;
 
-		return ddd + min / 100 + sec / 10000 + s / 10000;
+		return carry(ddd * 10000 + (int) min * 100 + (int) sec + _s);
 
+	}
+
+	private static double carry(double dddmmss_s) {
+		int ddd = (int) (dddmmss_s / 10000);
+
+		int mm = (int) ((dddmmss_s - ddd * 10000) / 100);
+
+		int ss = (int) ((dddmmss_s - ddd * 10000 - mm * 100));
+
+		double _s = (dddmmss_s - ddd * 10000 - mm * 100 - ss) % 1;
+
+		if (ss == 60) {
+			ss = 0;
+			mm++;
+		}
+
+		if (mm == 60) {
+			mm = 0;
+			ddd++;
+		}
+
+		return ddd * 10000 + mm * 100 + ss + _s;
 	}
 
 }

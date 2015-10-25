@@ -1,6 +1,6 @@
 package org.nkjmlab.gis.datum.util;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,12 +14,19 @@ public class TD2WgsTest {
 	@Test
 	public void testToWgs() {
 
-		double latTD = 35.71004;
-		double lonTD = 139.81070;
-		double latWgs = 35.713274983;
-		double lonWgs = 139.807461872;
-		assertEquals(latTD, Wgs2TD.toLatTD(latWgs, lonWgs), 0.01);
-		assertEquals(lonTD, Wgs2TD.toLonTD(latWgs, lonWgs), 0.01);
+		double latDegTD = 35.71004;
+		double lonDegTD = 139.81070;
+		double latDegWgs = 35.71327498;
+		double lonDegWgs = 139.80746187;
+		// 0.0001度もズレない．
+		assertEquals(latDegTD, Wgs2TD.toLatTD(latDegWgs, lonDegWgs), 0.0001);
+		assertEquals(lonDegTD, Wgs2TD.toLonTD(latDegWgs, lonDegWgs), 0.0001);
+
+		// 0.01度はズレないけど，0.001度はズレる．ざっくりと1度が111kmとすると100mはズレちゃうのか…
+		assertEquals(latDegWgs,
+				TD2Wgs.toLatWgs(Wgs2TD.toLatTD(latDegWgs, lonDegWgs), Wgs2TD.toLonTD(latDegWgs, lonDegWgs)), 0.01);
+		assertEquals(lonDegWgs,
+				TD2Wgs.toLonWgs(Wgs2TD.toLatTD(latDegWgs, lonDegWgs), Wgs2TD.toLonTD(latDegWgs, lonDegWgs)), 0.01);
 
 	}
 

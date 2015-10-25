@@ -10,10 +10,15 @@ public class Dms2Sec {
 
 	}
 
-	public static double toSec(double ddd_mmss) {
-		int d = (int) ddd_mmss;
-		int m = (int) (((ddd_mmss - d) * 100));
-		double s = (ddd_mmss * 100 - (int) (ddd_mmss * 100)) * 100;
+	/**
+	 * 度分秒単位(dddmmss.s)を秒に変換
+	 */
+
+	public static double toSec(double dddmmss_s) {
+		double ddd_mmsss = dddmmss_s / 10000;
+		int d = (int) ddd_mmsss;
+		int m = (int) (((ddd_mmsss - d) * 100));
+		double s = (ddd_mmsss * 100 - (int) (ddd_mmsss * 100)) * 100;
 		return d * 3600 + m * 60 + s;
 	}
 

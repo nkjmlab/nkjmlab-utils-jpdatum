@@ -8,11 +8,12 @@ package org.nkjmlab.gis.datum.util;
 public class Dms2Deg {
 
 	/**
-	 * 度分秒表記(ddd.mmsss)を10進表記(ddd.ddddd)に変換
+	 * 度分秒単位(dddmmss.s)を10進法度単位(ddd.ddddd)に変換
 	 */
-	public static double toDeg(double ddd_mmsss) {
+	public static double toDeg(double dddmmss_s) {
+		double ddd_mmsss = dddmmss_s / 10000;
 		int ddd = (int) ddd_mmsss;
-		double min = ((int) ((ddd_mmsss - ddd) * 100.0));
+		double min = (ddd_mmsss - ddd) * 100.0;
 		double sec = (ddd_mmsss - ddd - min / 100) * 10000;
 
 		return ddd + min / 60 + sec / 3600;

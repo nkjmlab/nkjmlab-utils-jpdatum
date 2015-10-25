@@ -104,6 +104,6 @@ public class JapanPlaneRectangular {
 			throw new InvalidParameterException(s);
 
 		}
-		return new LatLonWithZone(lat, lon, Unit.DEG, Detum.TD, zoneId);
+		return new LatLonWithZone(lat, lon, Unit.DEGREE, Detum.TOKYO, zoneId);
 	}
 }

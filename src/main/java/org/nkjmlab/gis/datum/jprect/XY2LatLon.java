@@ -22,7 +22,7 @@ public class XY2LatLon {
 		int zoneId = xy.zoneId;
 		double latDeg = XY2LatLon.toLat(x, y, zoneId);
 		double lonDeg = XY2LatLon.toLon(x, y, zoneId);
-		return new LatLonWithZone(latDeg, lonDeg, Unit.DEG, Detum.TD, zoneId);
+		return new LatLonWithZone(latDeg, lonDeg, Unit.DEGREE, Detum.TOKYO, zoneId);
 	}
 
 	/**

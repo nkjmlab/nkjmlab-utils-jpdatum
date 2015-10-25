@@ -17,7 +17,7 @@ public class Sec2Dms {
 	}
 
 	/**
-	 * ddd.mmss
+	 * dddmmss.sss
 	 *
 	 * @param second
 	 * @return
@@ -27,7 +27,7 @@ public class Sec2Dms {
 		double minute = (int) ((second - hour * 3600) / 60);
 		double sec = second - hour * 3600 - minute * 60;
 
-		return hour + minute / 100 + sec / 10000;
+		return hour * 10000 + minute * 100 + sec;
 	}
 
 }

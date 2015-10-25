@@ -1,6 +1,6 @@
 package org.nkjmlab.gis.datum.util;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,12 +13,12 @@ public class Wgs2TDTest {
 
 	@Test
 	public void testToWGS() {
-		double latTD = 35.71004;
-		double lonTD = 139.81070;
-		double latWgs = 35.713274983;
-		double lonWgs = 139.807461872;
-		assertEquals(latWgs, TD2Wgs.toLatWgs(latTD, lonTD), 0.01);
-		assertEquals(lonWgs, TD2Wgs.toLonWgs(latTD, lonTD), 0.01);
+		double latDegTD = 35.71004;
+		double lonDegTD = 139.81070;
+		double latDegWgs = 35.71327498;
+		double lonDegWgs = 139.80746187;
+		assertEquals(latDegWgs, TD2Wgs.toLatWgs(latDegTD, lonDegTD), 0.001);
+		assertEquals(lonDegWgs, TD2Wgs.toLonWgs(latDegTD, lonDegTD), 0.001);
 
 	}
 
