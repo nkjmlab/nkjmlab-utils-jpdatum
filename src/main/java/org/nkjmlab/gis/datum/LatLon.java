@@ -54,7 +54,8 @@ public class LatLon {
 			return false;
 		}
 		LatLon l = (LatLon) obj;
-		return this.lat == l.lat && this.lon == l.lon && this.unit == l.unit && this.detum == l.detum;
+		return this.lat == l.lat && this.lon == l.lon && this.unit == l.unit
+				&& this.detum == l.detum;
 	}
 
 	@Override
@@ -64,7 +65,8 @@ public class LatLon {
 
 	@Override
 	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+		return ToStringBuilder.reflectionToString(this,
+				ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
 	/**
@@ -86,170 +88,111 @@ public class LatLon {
 	}
 
 	/**
-	 * 緯度を返す．(TD座標系，十進法度(ddd.ddd)表記)
+	 * 緯度を返す．単位と測地系は引数の値に従う．
+	 *
+	 * @param basis
 	 *
 	 * @return
 	 */
-	public double getLatDegTD() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.DEGREE, Detum.TOKYO);
+	public double getLat(LatLonBasis basis) {
+		return getLat(basis.getUnit(), basis.getDetum());
 	}
 
 	/**
-	 * 経度を返す．(TD座標系，十進法度(ddd.ddd)表記)
+	 * 緯度を返す．単位と測地系は引数の値に従う．
+	 *
+	 * @param basis
 	 *
 	 * @return
 	 */
-	public double getLonDegTD() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.DEGREE, Detum.TOKYO);
+	public double getLon(LatLonBasis basis) {
+		return getLon(basis.getUnit(), basis.getDetum());
 	}
 
 	/**
-	 * 緯度を返す．(TD座標系，十進法ミリ度表記)
+	 * 緯度を返す．単位と測地系は引数の値に従う．
 	 *
 	 * @return
 	 */
-	public double getLatMiliDegTD() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.MILI_DEGREE, Detum.TOKYO);
+	public double getLat(Unit toUnit, Detum toDetum) {
+		return changeBasisOfLat(lat, lon, this.unit, this.detum, toUnit,
+				toDetum);
 	}
 
 	/**
-	 * 経度を返す．(TD座標系，十進法ミリ度表記)
+	 * 経度を返す．単位と測地系は引数の値に従う．
 	 *
 	 * @return
 	 */
-	public double getLonMiliDegTD() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.MILI_DEGREE, Detum.TOKYO);
+	public double getLon(Unit toUnit, Detum toDetum) {
+		return changeBasisOfLon(lat, lon, this.unit, this.detum, toUnit,
+				toDetum);
 	}
 
 	/**
-	 * 緯度を返す．(TD座標系，DMS(ddd.mmss)表記)
+	 * 経度を返す．単位は引数の値に，測地系はインスタンス生成時の値に従う．
 	 *
 	 * @return
 	 */
-	public double getLatDmsTD() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.DMS, Detum.TOKYO);
+	public double getLon(Unit toUnit) {
+		return changeBasisOfLon(lat, lon, this.unit, this.detum, toUnit,
+				this.detum);
 	}
 
 	/**
-	 * 経度を返す．(TD座標系，DMS(ddd.mmss)表記)
+	 * 緯度を返す．単位は引数の値に，測地系はインスタンス生成時の値に従う．
 	 *
 	 * @return
 	 */
-	public double getLonDmsTD() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.DMS, Detum.TOKYO);
+	public double getLat(Unit toUnit) {
+		return changeBasisOfLat(lat, lon, this.unit, this.detum, toUnit,
+				this.detum);
 	}
 
 	/**
-	 * 緯度を返す．(TD座標系，DMS(ddd.mmss)表記)
+	 * 緯度を返す．単位はインスタンス生成時の値に，測地系は引数の値に従う．
 	 *
 	 * @return
 	 */
-	public double getLatSecTD() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.SECOND, Detum.TOKYO);
+	public double getLat(Detum toDetum) {
+		return changeBasisOfLat(lat, lon, this.unit, this.detum, this.unit,
+				toDetum);
 	}
 
 	/**
-	 * 経度を返す．(TD座標系，DMS(ddd.mmss)表記)
+	 * 経度を返す．単位と測地系は引数の値に従う．
 	 *
 	 * @return
 	 */
-	public double getLonSecTD() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.SECOND, Detum.TOKYO);
+	public double getLon(Detum toDetum) {
+		return changeBasisOfLon(lat, lon, this.unit, this.detum, this.unit,
+				toDetum);
 	}
 
-	/**
-	 * 緯度を返す．(WGS座標系，十進法度(ddd.ddd)表記)
-	 *
-	 * @return
-	 */
-	public double getLatDegWgs() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.DEGREE, Detum.WGS84);
-	}
-
-	/**
-	 * 経度を返す．(WGS座標系，十進法度(ddd.ddd)表記)
-	 *
-	 * @return
-	 */
-	public double getLonDegWgs() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.DEGREE, Detum.WGS84);
-	}
-
-	/**
-	 * 緯度を返す．(WGS座標系，十進法ミリ度表記)
-	 *
-	 * @return
-	 */
-	public double getLatMiliDegWgs() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.MILI_DEGREE, Detum.WGS84);
-	}
-
-	/**
-	 * 経度を返す．(WGS座標系，十進法ミリ度表記)
-	 *
-	 * @return
-	 */
-	public double getLonMiliDegWGS() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.MILI_DEGREE, Detum.WGS84);
-	}
-
-	/**
-	 * 緯度を返す．(WGS座標系，DMS(ddd.mmss)表記)
-	 *
-	 * @return
-	 */
-	public double getLatDmsWGS() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.DMS, Detum.WGS84);
-	}
-
-	/**
-	 * 経度を返す．(WGS座標系，DMS(ddd.mmss)表記)
-	 *
-	 * @return
-	 */
-	public double getLonDmsWgs() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.DMS, Detum.WGS84);
-	}
-
-	/**
-	 * 緯度を返す．(WGS座標系，DMS(ddd.mmss)表記)
-	 *
-	 * @return
-	 */
-	public double getLatSecWgs() {
-		return chageBasisOfLat(lat, lon, unit, detum, Unit.SECOND, Detum.WGS84);
-	}
-
-	/**
-	 * 経度を返す．(WGS座標系，DMS(ddd.mmss)表記)
-	 *
-	 * @return
-	 */
-	public double getLonSecWgs() {
-		return changeBasisOfLon(lat, lon, unit, detum, Unit.SECOND, Detum.WGS84);
-	}
-
-	public static double chageBasisOfLat(double lat, double lon, Unit fromUnit, Detum fromDetum, Unit toUnit,
-			Detum toDetum) {
+	public static double changeBasisOfLat(double lat, double lon, Unit fromUnit,
+			Detum fromDetum, Unit toUnit, Detum toDetum) {
 		if (fromDetum == toDetum) {
 			return changeUnit(lat, fromUnit, toUnit);
 		}
-		double valOnToDetum = changeDetumOfLat(changeUnit(lat, fromUnit, Unit.DEGREE),
+		double valOnToDetum = changeDetumOfLat(
+				changeUnit(lat, fromUnit, Unit.DEGREE),
 				changeUnit(lon, fromUnit, Unit.DEGREE), toDetum);
 		return changeUnit(valOnToDetum, fromUnit, toUnit);
 	}
 
-	public static double changeBasisOfLon(double lat, double lon, Unit fromUnit, Detum fromDetum, Unit toUnit,
-			Detum toDetum) {
+	public static double changeBasisOfLon(double lat, double lon, Unit fromUnit,
+			Detum fromDetum, Unit toUnit, Detum toDetum) {
 		if (fromDetum == toDetum) {
 			return changeUnit(lon, fromUnit, toUnit);
 		}
-		double valOnToDetum = changeDetumOfLon(changeUnit(lon, fromUnit, Unit.DEGREE),
+		double valOnToDetum = changeDetumOfLon(
+				changeUnit(lon, fromUnit, Unit.DEGREE),
 				changeUnit(lon, fromUnit, Unit.DEGREE), toDetum);
 		return changeUnit(valOnToDetum, fromUnit, toUnit);
 	}
 
-	public static double changeDetumOfLat(double latDeg, double lonDeg, Detum toDetum) {
+	public static double changeDetumOfLat(double latDeg, double lonDeg,
+			Detum toDetum) {
 		switch (toDetum) {
 		case TOKYO:
 			return Wgs2TD.toLatTD(latDeg, lonDeg);
@@ -260,7 +203,8 @@ public class LatLon {
 		}
 	}
 
-	public static double changeDetumOfLon(double latDeg, double lonDeg, Detum toDetum) {
+	public static double changeDetumOfLon(double latDeg, double lonDeg,
+			Detum toDetum) {
 		switch (toDetum) {
 		case TOKYO:
 			return Wgs2TD.toLonTD(latDeg, lonDeg);

@@ -3,6 +3,7 @@ package org.nkjmlab.gis.datum.jprect;
 import java.security.InvalidParameterException;
 
 import org.nkjmlab.gis.datum.LatLon;
+import org.nkjmlab.gis.datum.LatLonBasis;
 
 /**
  * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）の系番号付きの緯度経度
@@ -12,6 +13,9 @@ import org.nkjmlab.gis.datum.LatLon;
  */
 public class LatLonWithZone extends LatLon {
 
+	protected static LatLonBasis basis = new LatLonBasis(Unit.DEGREE,
+			Detum.TOKYO);
+
 	protected final int zoneId;
 
 	/**
@@ -19,15 +23,18 @@ public class LatLonWithZone extends LatLon {
 	 * @param zoneId
 	 */
 	public LatLonWithZone(LatLon latLon, int zoneId) {
-		this(latLon.getLatDegTD(), latLon.getLonDegTD(), latLon.getUnit(), latLon.getDetum(), zoneId);
+		this(latLon.getLat(), latLon.getLon(), latLon.getUnit(),
+				latLon.getDetum(), zoneId);
 	}
 
-	public LatLonWithZone(double lat, double lon, Unit unit, Detum detum, int zoneId) {
+	public LatLonWithZone(double lat, double lon, Unit unit, Detum detum,
+			int zoneId) {
 		super(lat, lon, unit, detum);
 		this.zoneId = zoneId;
 
 		if (20 <= zoneId) {
-			String s = "zoneId=" + zoneId + " is invalid. The zone id range from 1 to 19.";
+			String s = "zoneId=" + zoneId
+					+ " is invalid. The zone id range from 1 to 19.";
 			System.err.println(s);
 			throw new InvalidParameterException(s);
 		}
@@ -43,11 +50,11 @@ public class LatLonWithZone extends LatLon {
 	}
 
 	public double getX() {
-		return LatLon2XY.toX(this.getLatDegTD(), this.getLonDegTD(), zoneId);
+		return LatLon2XY.toX(this.getLat(basis), this.getLon(basis), zoneId);
 	}
 
 	public double getY() {
-		return LatLon2XY.toY(this.getLatDegTD(), this.getLonDegTD(), zoneId);
+		return LatLon2XY.toY(this.getLat(basis), this.getLon(basis), zoneId);
 	}
 
 }

@@ -1,6 +1,6 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
+import org.nkjmlab.gis.datum.LatLonBasis;
 
 /**
  * 旧日本測地系(Tokyo Datum：2002年3月末までの日本の公式測地系．Bessel楕円体) に基づく緯度経度を日本平面直角座標系(Japan
@@ -42,12 +43,15 @@ public class LatLon2XYTest {
 		Map<LatLonWithZone, XYWithZone> qas = new HashMap<>();
 		// 国土地理院 (日本測地系)
 
-		LatLonBasisWithZone basis = new LatLonBasisWithZone(Unit.DEGREE, Detum.TOKYO, 9);
+		LatLonBasisWithZone basis = new LatLonBasisWithZone(Unit.DEGREE,
+				Detum.TOKYO, 9);
 
-		qas.put(new LatLonWithZone(36.104583, 140.084583, basis), new XYWithZone(11631.3563, 22618.7053, 9));
+		qas.put(new LatLonWithZone(36.104583, 140.084583, basis),
+				new XYWithZone(11631.3563, 22618.7053, 9));
 
 		// スカイツリー (日本測地系)
-		qas.put(new LatLonWithZone(35.71004, 139.81070, basis), new XYWithZone(-32166.0244, -2047.6996, 9));
+		qas.put(new LatLonWithZone(35.71004, 139.81070, basis),
+				new XYWithZone(-32166.0244, -2047.6996, 9));
 
 		for (LatLonWithZone query : qas.keySet()) {
 			{
@@ -63,8 +67,10 @@ public class LatLon2XYTest {
 				LatLonWithZone actual = XY2LatLon.toLatLon(qas.get(query));
 				System.out.println("Expected:" + expected);
 				System.out.println("Actual:" + actual);
-				assertEquals(expected.getLatDegTD(), actual.getLatDegTD(), 0.01);
-				assertEquals(expected.getLonDegTD(), actual.getLonDegTD(), 0.01);
+				assertEquals(expected.getLat(basis), actual.getLat(basis),
+						0.01);
+				assertEquals(expected.getLon(basis), actual.getLon(basis),
+						0.01);
 			}
 		}
 	}

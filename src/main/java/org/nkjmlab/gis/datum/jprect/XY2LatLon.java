@@ -2,6 +2,7 @@ package org.nkjmlab.gis.datum.jprect;
 
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
+import org.nkjmlab.gis.datum.LatLonBasis;
 import org.nkjmlab.gis.datum.jprect.helper.XY2LatLonHelper;
 
 /**
@@ -9,6 +10,9 @@ import org.nkjmlab.gis.datum.jprect.helper.XY2LatLonHelper;
  * @author Yuu NAKAJIMA
  */
 public class XY2LatLon {
+
+	protected static LatLonBasis basis = new LatLonBasis(Unit.DEGREE,
+			Detum.TOKYO);
 
 	/**
 	 *
@@ -22,7 +26,8 @@ public class XY2LatLon {
 		int zoneId = xy.zoneId;
 		double latDeg = XY2LatLon.toLat(x, y, zoneId);
 		double lonDeg = XY2LatLon.toLon(x, y, zoneId);
-		return new LatLonWithZone(latDeg, lonDeg, Unit.DEGREE, Detum.TOKYO, zoneId);
+		return new LatLonWithZone(latDeg, lonDeg, basis.getUnit(),
+				basis.getDetum(), zoneId);
 	}
 
 	/**
@@ -36,7 +41,8 @@ public class XY2LatLon {
 	 */
 	public static double toLat(double x, double y, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return XY2LatLonHelper.toLatitude(x, y, origin.getLatDegTD(), origin.getLonDegTD());
+		return XY2LatLonHelper.toLatitude(x, y, origin.getLat(basis),
+				origin.getLon(basis));
 	}
 
 	/**
@@ -50,7 +56,8 @@ public class XY2LatLon {
 	 */
 	public static double toLon(double x, double y, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return XY2LatLonHelper.toLongitude(x, y, origin.getLatDegTD(), origin.getLonDegTD());
+		return XY2LatLonHelper.toLongitude(x, y, origin.getLat(basis),
+				origin.getLon(basis));
 	}
 
 }

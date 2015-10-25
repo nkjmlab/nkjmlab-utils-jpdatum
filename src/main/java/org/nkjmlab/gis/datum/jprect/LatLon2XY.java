@@ -1,5 +1,8 @@
 package org.nkjmlab.gis.datum.jprect;
 
+import org.nkjmlab.gis.datum.LatLon.Detum;
+import org.nkjmlab.gis.datum.LatLon.Unit;
+import org.nkjmlab.gis.datum.LatLonBasis;
 import org.nkjmlab.gis.datum.jprect.helper.LatLon2XYHelper;
 
 /**
@@ -7,6 +10,9 @@ import org.nkjmlab.gis.datum.jprect.helper.LatLon2XYHelper;
  *
  */
 public class LatLon2XY {
+
+	protected static LatLonBasis basis = new LatLonBasis(Unit.DEGREE,
+			Detum.TOKYO);
 
 	/**
 	 * 平面直角座標系の系番号付きの緯度経度(TD座標系，十進法度表記)を，平面直角座標系のXYに変換
@@ -16,8 +22,8 @@ public class LatLon2XY {
 	 * @return 平面直角座標系の系番号付きの平面直角座標系XY
 	 */
 	public static XYWithZone toXY(LatLonWithZone latLon) {
-		double latDegTD = latLon.getLatDegTD();
-		double lonDegTD = latLon.getLonDegTD();
+		double latDegTD = latLon.getLat(basis);
+		double lonDegTD = latLon.getLon(basis);
 		int zoneId = latLon.zoneId;
 		double x = LatLon2XY.toX(latDegTD, lonDegTD, zoneId);
 		double y = LatLon2XY.toY(latDegTD, lonDegTD, zoneId);
@@ -36,7 +42,8 @@ public class LatLon2XY {
 	 */
 	public static double toX(double latDegTD, double lonDegTD, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return LatLon2XYHelper.toXCoord(latDegTD, lonDegTD, origin.getLatDegTD(), origin.getLonDegTD());
+		return LatLon2XYHelper.toXCoord(latDegTD, lonDegTD,
+				origin.getLat(basis), origin.getLon(basis));
 	}
 
 	/**
@@ -51,7 +58,8 @@ public class LatLon2XY {
 	 */
 	public static double toY(double latDegTD, double lonDegTD, int zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return LatLon2XYHelper.toYCoord(latDegTD, lonDegTD, origin.getLatDegTD(), origin.getLonDegTD());
+		return LatLon2XYHelper.toYCoord(latDegTD, lonDegTD,
+				origin.getLat(basis), origin.getLon(basis));
 	}
 
 }
