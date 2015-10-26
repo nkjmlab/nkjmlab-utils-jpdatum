@@ -4,7 +4,7 @@ import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.BasisConverter;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
-import org.nkjmlab.gis.datum.DegreeUnitConverter;
+import org.nkjmlab.gis.datum.LatLonUnitConverter;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
@@ -66,7 +66,7 @@ public class XY2LatLon {
 			return BasisConverter.changeBasisOfLon(lat, lon, basis,
 					new Basis(toUnit, toDetum));
 		} else {
-			return DegreeUnitConverter.change(lat, Unit.DEGREE, toUnit);
+			return LatLonUnitConverter.change(lat, Unit.DEGREE, toUnit);
 		}
 	}
 
@@ -92,7 +92,7 @@ public class XY2LatLon {
 			return BasisConverter.changeBasisOfLon(lat, lon, basis,
 					new Basis(toUnit, toDetum));
 		} else {
-			return DegreeUnitConverter.change(lon, Unit.DEGREE, toUnit);
+			return LatLonUnitConverter.change(lon, Unit.DEGREE, toUnit);
 		}
 	}
 

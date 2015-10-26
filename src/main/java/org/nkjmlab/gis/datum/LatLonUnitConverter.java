@@ -2,7 +2,7 @@ package org.nkjmlab.gis.datum;
 
 import org.nkjmlab.gis.datum.LatLon.Unit;
 
-public class DegreeUnitConverter {
+public class LatLonUnitConverter {
 
 	public static void main(String[] args) {
 

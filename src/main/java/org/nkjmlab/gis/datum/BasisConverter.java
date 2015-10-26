@@ -25,11 +25,11 @@ public class BasisConverter {
 	public static double changeBasisOfLat(double lat, double lon, Unit fromUnit,
 			Detum fromDetum, Unit toUnit, Detum toDetum) {
 		if (fromDetum == toDetum) {
-			return DegreeUnitConverter.change(lat, fromUnit, toUnit);
+			return LatLonUnitConverter.change(lat, fromUnit, toUnit);
 		}
 		double valOnToDetum = DatumConverter.changeDetumOfLat(lat, lon,
 				fromUnit, fromDetum, toDetum);
-		return DegreeUnitConverter.change(valOnToDetum, fromUnit, toUnit);
+		return LatLonUnitConverter.change(valOnToDetum, fromUnit, toUnit);
 	}
 
 	/**
@@ -52,11 +52,11 @@ public class BasisConverter {
 	public static double changeBasisOfLon(double lat, double lon, Unit fromUnit,
 			Detum fromDetum, Unit toUnit, Detum toDetum) {
 		if (fromDetum == toDetum) {
-			return DegreeUnitConverter.change(lon, fromUnit, toUnit);
+			return LatLonUnitConverter.change(lon, fromUnit, toUnit);
 		}
 		double valOnToDetum = DatumConverter.changeDetumOfLon(lat, lon,
 				fromUnit, fromDetum, toDetum);
-		return DegreeUnitConverter.change(valOnToDetum, fromUnit, toUnit);
+		return LatLonUnitConverter.change(valOnToDetum, fromUnit, toUnit);
 	}
 
 	public static double changeBasisOfLon(double lat, double lon,

@@ -16,15 +16,15 @@ public class DatumConverter {
 	 */
 	public static double changeDetumOfLat(double lat, double lon, Unit fromUnit,
 			Detum fromDetum, Detum toDetum) {
-		double latDeg = DegreeUnitConverter.change(lat, fromUnit, Unit.DEGREE);
-		double lonDeg = DegreeUnitConverter.change(lon, fromUnit, Unit.DEGREE);
+		double latDeg = LatLonUnitConverter.change(lat, fromUnit, Unit.DEGREE);
+		double lonDeg = LatLonUnitConverter.change(lon, fromUnit, Unit.DEGREE);
 
 		switch (toDetum) {
 		case TOKYO:
-			return DegreeUnitConverter.change(changeDetumOfLatFromWgsToTd(latDeg, lonDeg),
+			return LatLonUnitConverter.change(changeDetumOfLatFromWgsToTd(latDeg, lonDeg),
 					Unit.DEGREE, fromUnit);
 		case WGS84:
-			return DegreeUnitConverter.change(changeDetumOfLatFromTdToWgs(latDeg, lonDeg),
+			return LatLonUnitConverter.change(changeDetumOfLatFromTdToWgs(latDeg, lonDeg),
 					Unit.DEGREE, fromUnit);
 		default:
 			throw new RuntimeException();
@@ -43,15 +43,15 @@ public class DatumConverter {
 	 */
 	public static double changeDetumOfLon(double lat, double lon, Unit fromUnit,
 			Detum fromDetum, Detum toDetum) {
-		double latDeg = DegreeUnitConverter.change(lat, fromUnit, Unit.DEGREE);
-		double lonDeg = DegreeUnitConverter.change(lon, fromUnit, Unit.DEGREE);
+		double latDeg = LatLonUnitConverter.change(lat, fromUnit, Unit.DEGREE);
+		double lonDeg = LatLonUnitConverter.change(lon, fromUnit, Unit.DEGREE);
 
 		switch (toDetum) {
 		case TOKYO:
-			return DegreeUnitConverter.change(changeDetumOfLonFromWgsToTd(latDeg, lonDeg),
+			return LatLonUnitConverter.change(changeDetumOfLonFromWgsToTd(latDeg, lonDeg),
 					Unit.DEGREE, fromUnit);
 		case WGS84:
-			return DegreeUnitConverter.change(changeDetumOfLonFromTdToWgs(latDeg, lonDeg),
+			return LatLonUnitConverter.change(changeDetumOfLonFromTdToWgs(latDeg, lonDeg),
 					Unit.DEGREE, fromUnit);
 		default:
 			throw new RuntimeException();
