@@ -18,92 +18,98 @@ import org.nkjmlab.gis.datum.LatLon.Unit;
  */
 public class JapanPlaneRectangular {
 
-	public static LatLonWithZone getOrigin(int zoneId) {
+	public enum ZoneId {
+		_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19,
+	}
+
+	public static LatLonWithZone getOrigin(ZoneId zoneId) {
 		double lat;
 		double lon;
 		switch (zoneId) {
-		case 1:
+		case _1:
 			lat = 33.00000;
 			lon = 129.0000;
 			break;
-		case 2:
+		case _2:
 			lat = 33.00000;
 			lon = 131.00000;
 			break;
-		case 3:
+		case _3:
 			lat = 36.00000;
 			lon = 132.166666666666667;
 			break;
-		case 4:
+		case _4:
 			lat = 33.00000;
 			lon = 133.50000;
 			break;
-		case 5:
+		case _5:
 			lat = 36.00000;
 			lon = 134.333333333333333;
 			break;
-		case 6:
+		case _6:
 			lat = 36.00000;
 			lon = 136.00000;
 			break;
-		case 7:
+		case _7:
 			lat = 36.00000;
 			lon = 137.166666666666667;
 			break;
-		case 8:
+		case _8:
 			lat = 36.00000;
 			lon = 138.833333333333333;
 			break;
-		case 9:
+		case _9:
 			lat = 36.00000;
 			lon = 139.833333333333333;
 			break;
-		case 10:
+		case _10:
 			lat = 40.00000;
 			lon = 140.833333333333333;
 			break;
-		case 11:
+		case _11:
 			lat = 44.00000;
 			lon = 140.15000;
 			break;
-		case 12:
+		case _12:
 			lat = 44.00000;
 			lon = 142.25000;
 			break;
-		case 13:
+		case _13:
 			lat = 44.00000;
 			lon = 144.25000;
 			break;
-		case 14:
+		case _14:
 			lat = 26.00000;
 			lon = 142.00000;
 			break;
-		case 15:
+		case _15:
 			lat = 26.00000;
 			lon = 127.50000;
 			break;
-		case 16:
+		case _16:
 			lat = 26.00000;
 			lon = 124.00000;
 			break;
-		case 17:
+		case _17:
 			lat = 26.00000;
 			lon = 131.00000;
 			break;
-		case 18:
+		case _18:
 			lat = 20.00000;
 			lon = 136.00000;
 			break;
-		case 19:
+		case _19:
 			lat = 26.00000;
 			lon = 154.00000;
 			break;
 		default:
-			String s = "zoneId=" + zoneId + " is invalid. The zone id range from 1 to 19.";
+			String s = "zoneId=" + zoneId
+					+ " is invalid. The zone id range from 1 to 19.";
 			System.err.println(s);
 			throw new InvalidParameterException(s);
 
 		}
-		return new LatLonWithZone(lat, lon, Unit.DEGREE, Detum.TOKYO, zoneId);
+		return new LatLonWithZone(lat, lon, Unit.DEGREE, Detum.TOKYO,
+				ZoneId._1);
 	}
 }

@@ -1,9 +1,8 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import java.security.InvalidParameterException;
-
 import org.nkjmlab.gis.datum.LatLon;
 import org.nkjmlab.gis.datum.LatLonBasis;
+import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
 
 /**
@@ -17,28 +16,21 @@ public class LatLonWithZone extends LatLon {
 	protected static LatLonBasis basis = new LatLonBasis(Unit.DEGREE,
 			Detum.TOKYO);
 
-	protected final int zoneId;
+	protected final ZoneId zoneId;
 
 	/**
 	 *
 	 * @param zoneId
 	 */
-	public LatLonWithZone(LatLon latLon, int zoneId) {
+	public LatLonWithZone(LatLon latLon, ZoneId zoneId) {
 		this(latLon.getLat(), latLon.getLon(), latLon.getUnit(),
 				latLon.getDetum(), zoneId);
 	}
 
 	public LatLonWithZone(double lat, double lon, Unit unit, Detum detum,
-			int zoneId) {
+			ZoneId zoneId) {
 		super(lat, lon, unit, detum);
 		this.zoneId = zoneId;
-
-		if (20 <= zoneId) {
-			String s = "zoneId=" + zoneId
-					+ " is invalid. The zone id range from 1 to 19.";
-			System.err.println(s);
-			throw new InvalidParameterException(s);
-		}
 
 	}
 
@@ -46,7 +38,7 @@ public class LatLonWithZone extends LatLon {
 		this(lat, lon, basis.getUnit(), basis.getDetum(), basis.getZoneId());
 	}
 
-	public int getZoneId() {
+	public ZoneId getZoneId() {
 		return zoneId;
 	}
 

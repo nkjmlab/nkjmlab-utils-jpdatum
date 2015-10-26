@@ -10,7 +10,8 @@ import org.nkjmlab.gis.datum.util.TD2WgsTest;
 import org.nkjmlab.gis.datum.util.Wgs2TDTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({ LatLon2XYTest.class, XY2LatLonTest.class, LatLonUtilsTest.class, TD2WgsTest.class, Wgs2TDTest.class })
+@SuiteClasses({ LatLon2XYTest.class, XY2LatLonTest.class, LatLonUtilsTest.class,
+		TD2WgsTest.class, Wgs2TDTest.class })
 public class AllTests {
 
 }

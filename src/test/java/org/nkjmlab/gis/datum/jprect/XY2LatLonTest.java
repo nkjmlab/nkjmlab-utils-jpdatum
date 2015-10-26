@@ -34,7 +34,8 @@ public class XY2LatLonTest {
 
 		double x = 0;
 		double y = 0;
-		for (int zoneId = 1; zoneId <= 19; zoneId++) {
+		for (JapanPlaneRectangular.ZoneId zoneId : JapanPlaneRectangular.ZoneId
+				.values()) {
 
 			LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
 			LatLonWithZone latLon = XY2LatLon

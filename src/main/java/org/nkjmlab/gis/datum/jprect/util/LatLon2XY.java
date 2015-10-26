@@ -7,6 +7,7 @@ import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
 import org.nkjmlab.gis.datum.jprect.XYWithZone;
 import org.nkjmlab.gis.datum.jprect.helper.LatLon2XYHelper;
+import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 
 /**
  * @author Yuu NAKAJIMA
@@ -27,7 +28,7 @@ public class LatLon2XY {
 	public static XYWithZone toXY(LatLonWithZone latLon) {
 		double latDegTD = latLon.getLat(basis);
 		double lonDegTD = latLon.getLon(basis);
-		int zoneId = latLon.getZoneId();
+		ZoneId zoneId = latLon.getZoneId();
 		double x = LatLon2XY.toX(latDegTD, lonDegTD, zoneId);
 		double y = LatLon2XY.toY(latDegTD, lonDegTD, zoneId);
 		return new XYWithZone(x, y, zoneId);
@@ -43,7 +44,7 @@ public class LatLon2XY {
 	 *            にzoneId(系番号)と適用区域が書かれている．
 	 * @return
 	 */
-	public static double toX(double latDegTD, double lonDegTD, int zoneId) {
+	public static double toX(double latDegTD, double lonDegTD, ZoneId zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
 		return LatLon2XYHelper.toXCoord(latDegTD, lonDegTD,
 				origin.getLat(basis), origin.getLon(basis));
@@ -59,7 +60,7 @@ public class LatLon2XY {
 	 *            にzoneId(系番号)と適用区域が書かれている．
 	 * @return
 	 */
-	public static double toY(double latDegTD, double lonDegTD, int zoneId) {
+	public static double toY(double latDegTD, double lonDegTD, ZoneId zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
 		return LatLon2XYHelper.toYCoord(latDegTD, lonDegTD,
 				origin.getLat(basis), origin.getLon(basis));

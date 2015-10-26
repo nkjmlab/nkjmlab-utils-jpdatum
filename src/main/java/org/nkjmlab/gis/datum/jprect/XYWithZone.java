@@ -1,8 +1,7 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import java.security.InvalidParameterException;
-
 import org.nkjmlab.gis.datum.XY;
+import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 
 /***
  * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）の系番号付きのXY
@@ -12,22 +11,16 @@ import org.nkjmlab.gis.datum.XY;
  */
 public class XYWithZone extends XY {
 
-	protected final int zoneId;
+	protected final ZoneId zoneId;
 
-	public XYWithZone(double x, double y, int zoneId) {
+	public XYWithZone(double x, double y, ZoneId zoneId) {
 		super(x, y);
 		this.zoneId = zoneId;
-
-		if (zoneId <= 0 || 20 <= zoneId) {
-			String s = "zoneId=" + zoneId + " is invalid. The zone id range from 1 to 19.";
-			System.err.println(s);
-			throw new InvalidParameterException(s);
-		}
 	}
 
 	@Override
 	public int hashCode() {
-		return (int) (x + y + zoneId);
+		return (int) (x + y + zoneId.ordinal());
 	}
 
 	@Override
@@ -39,7 +32,7 @@ public class XYWithZone extends XY {
 		return x == xy.x && y == xy.y && zoneId == xy.zoneId;
 	}
 
-	public int getZoneId() {
+	public ZoneId getZoneId() {
 		return zoneId;
 	}
 

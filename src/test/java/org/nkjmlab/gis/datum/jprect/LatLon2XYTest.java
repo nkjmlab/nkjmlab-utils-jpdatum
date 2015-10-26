@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
+import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
 import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
 
@@ -45,14 +46,14 @@ public class LatLon2XYTest {
 		// 国土地理院 (日本測地系)
 
 		LatLonBasisWithZone basis = new LatLonBasisWithZone(Unit.DEGREE,
-				Detum.TOKYO, 9);
+				Detum.TOKYO, ZoneId._9);
 
 		qas.put(new LatLonWithZone(36.104583, 140.084583, basis),
-				new XYWithZone(11631.3563, 22618.7053, 9));
+				new XYWithZone(11631.3563, 22618.7053, ZoneId._9));
 
 		// スカイツリー (日本測地系)
 		qas.put(new LatLonWithZone(35.71004, 139.81070, basis),
-				new XYWithZone(-32166.0244, -2047.6996, 9));
+				new XYWithZone(-32166.0244, -2047.6996, ZoneId._9));
 
 		for (LatLonWithZone query : qas.keySet()) {
 			{

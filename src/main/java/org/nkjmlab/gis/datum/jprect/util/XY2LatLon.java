@@ -4,6 +4,7 @@ import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.LatLonBasis;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
+import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
 import org.nkjmlab.gis.datum.jprect.XYWithZone;
 import org.nkjmlab.gis.datum.jprect.helper.XY2LatLonHelper;
@@ -26,7 +27,7 @@ public class XY2LatLon {
 	public static LatLonWithZone toLatLon(XYWithZone xy) {
 		double x = xy.getX();
 		double y = xy.getY();
-		int zoneId = xy.getZoneId();
+		ZoneId zoneId = xy.getZoneId();
 		double latDeg = XY2LatLon.toLat(x, y, zoneId);
 		double lonDeg = XY2LatLon.toLon(x, y, zoneId);
 		return new LatLonWithZone(latDeg, lonDeg, basis.getUnit(),
@@ -42,7 +43,7 @@ public class XY2LatLon {
 	 *            にzoneId(系番号)と適用区域が書かれている．
 	 * @return 日本測地系の緯度の十進法(degree: ddd.dddd)表記
 	 */
-	public static double toLat(double x, double y, int zoneId) {
+	public static double toLat(double x, double y, ZoneId zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
 		return XY2LatLonHelper.toLatitude(x, y, origin.getLat(basis),
 				origin.getLon(basis));
@@ -57,7 +58,7 @@ public class XY2LatLon {
 	 *            にzoneId(系番号)と適用区域が書かれている．
 	 * @return 日本測地系の経度度の十進法(degree: ddd.dddd)表記
 	 */
-	public static double toLon(double x, double y, int zoneId) {
+	public static double toLon(double x, double y, ZoneId zoneId) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
 		return XY2LatLonHelper.toLongitude(x, y, origin.getLat(basis),
 				origin.getLon(basis));
