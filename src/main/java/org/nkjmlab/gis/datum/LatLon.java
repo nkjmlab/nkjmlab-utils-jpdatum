@@ -88,7 +88,7 @@ public class LatLon {
 	 *
 	 * @return
 	 */
-	public double getLat(LatLonBasis basis) {
+	public double getLat(Basis basis) {
 		return getLat(basis.getUnit(), basis.getDetum());
 	}
 
@@ -99,7 +99,7 @@ public class LatLon {
 	 *
 	 * @return
 	 */
-	public double getLon(LatLonBasis basis) {
+	public double getLon(Basis basis) {
 		return getLon(basis.getUnit(), basis.getDetum());
 	}
 

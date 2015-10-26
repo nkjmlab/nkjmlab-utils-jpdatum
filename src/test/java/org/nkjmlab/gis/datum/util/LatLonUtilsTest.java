@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.nkjmlab.gis.datum.LatLon.Unit;
-import org.nkjmlab.gis.datum.UnitConverter;
+import org.nkjmlab.gis.datum.DegreeUnitConverter;
 
 public class LatLonUtilsTest {
 
@@ -25,13 +25,13 @@ public class LatLonUtilsTest {
 
 	private void testDmsDeg(double dms, double deg) {
 		System.out
-				.println(UnitConverter.changeUnit(deg, Unit.DEGREE, Unit.DMS));
+				.println(DegreeUnitConverter.change(deg, Unit.DEGREE, Unit.DMS));
 		System.out
-				.println(UnitConverter.changeUnit(dms, Unit.DMS, Unit.DEGREE));
+				.println(DegreeUnitConverter.change(dms, Unit.DMS, Unit.DEGREE));
 
-		assertEquals(dms, UnitConverter.changeUnit(deg, Unit.DEGREE, Unit.DMS),
+		assertEquals(dms, DegreeUnitConverter.change(deg, Unit.DEGREE, Unit.DMS),
 				0.01);
-		assertEquals(deg, UnitConverter.changeUnit(dms, Unit.DMS, Unit.DEGREE),
+		assertEquals(deg, DegreeUnitConverter.change(dms, Unit.DMS, Unit.DEGREE),
 				0.01);
 
 	}

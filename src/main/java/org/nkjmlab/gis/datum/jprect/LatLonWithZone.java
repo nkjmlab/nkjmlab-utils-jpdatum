@@ -1,7 +1,7 @@
 package org.nkjmlab.gis.datum.jprect;
 
 import org.nkjmlab.gis.datum.LatLon;
-import org.nkjmlab.gis.datum.LatLonBasis;
+import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
 
@@ -13,7 +13,7 @@ import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
  */
 public class LatLonWithZone extends LatLon {
 
-	protected static LatLonBasis basis = new LatLonBasis(Unit.DEGREE,
+	protected static Basis basis = new Basis(Unit.DEGREE,
 			Detum.TOKYO);
 
 	protected final ZoneId zoneId;
@@ -34,7 +34,7 @@ public class LatLonWithZone extends LatLon {
 
 	}
 
-	public LatLonWithZone(double lat, double lon, LatLonBasisWithZone basis) {
+	public LatLonWithZone(double lat, double lon, BasisWithZone basis) {
 		this(lat, lon, basis.getUnit(), basis.getDetum(), basis.getZoneId());
 	}
 

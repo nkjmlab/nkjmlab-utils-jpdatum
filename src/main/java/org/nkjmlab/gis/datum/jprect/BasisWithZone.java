@@ -2,7 +2,7 @@ package org.nkjmlab.gis.datum.jprect;
 
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
-import org.nkjmlab.gis.datum.LatLonBasis;
+import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 
 /**
@@ -11,11 +11,15 @@ import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
  * @author nkjm
  *
  */
-public class LatLonBasisWithZone extends LatLonBasis {
+public class BasisWithZone extends Basis {
 
 	protected final ZoneId zoneId;
 
-	public LatLonBasisWithZone(Unit unit, Detum detum, ZoneId zoneId) {
+	public BasisWithZone(Basis basis, ZoneId zoneId) {
+		this(basis.getUnit(), basis.getDetum(), zoneId);
+	}
+
+	public BasisWithZone(Unit unit, Detum detum, ZoneId zoneId) {
 		super(unit, detum);
 		this.zoneId = zoneId;
 	}

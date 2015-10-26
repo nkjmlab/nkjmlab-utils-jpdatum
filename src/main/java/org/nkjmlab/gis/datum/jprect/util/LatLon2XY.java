@@ -2,7 +2,7 @@ package org.nkjmlab.gis.datum.jprect.util;
 
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
-import org.nkjmlab.gis.datum.LatLonBasis;
+import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
 import org.nkjmlab.gis.datum.jprect.XYWithZone;
@@ -15,7 +15,7 @@ import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
  */
 public class LatLon2XY {
 
-	protected static LatLonBasis basis = new LatLonBasis(Unit.DEGREE,
+	protected static Basis basis = new Basis(Unit.DEGREE,
 			Detum.TOKYO);
 
 	/**

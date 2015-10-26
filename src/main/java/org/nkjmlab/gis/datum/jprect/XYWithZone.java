@@ -13,6 +13,10 @@ public class XYWithZone extends XY {
 
 	protected final ZoneId zoneId;
 
+	public XYWithZone(XY xy, ZoneId zoneId) {
+		this(xy.getX(), xy.getY(), zoneId);
+	}
+
 	public XYWithZone(double x, double y, ZoneId zoneId) {
 		super(x, y);
 		this.zoneId = zoneId;

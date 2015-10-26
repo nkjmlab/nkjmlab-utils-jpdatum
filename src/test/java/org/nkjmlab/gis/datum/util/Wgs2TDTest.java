@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.nkjmlab.gis.datum.DatumConverter;
 
 public class Wgs2TDTest {
 
@@ -17,8 +18,11 @@ public class Wgs2TDTest {
 		double lonDegTD = 139.81070;
 		double latDegWgs = 35.71327498;
 		double lonDegWgs = 139.80746187;
-		assertEquals(latDegWgs, TD2Wgs.toLatWgs(latDegTD, lonDegTD), 0.01);
-		assertEquals(lonDegWgs, TD2Wgs.toLonWgs(latDegTD, lonDegTD), 0.01);
+		assertEquals(latDegWgs,
+				DatumConverter.changeDetumOfLatFromTdToWgs(latDegTD, lonDegTD),
+				0.01);
+		assertEquals(lonDegWgs, DatumConverter
+				.changeDetumOfLonFromTdToWgs(latDegTD, lonDegTD), 0.01);
 
 	}
 

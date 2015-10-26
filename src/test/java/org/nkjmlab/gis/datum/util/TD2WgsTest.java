@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.nkjmlab.gis.datum.DatumConverter;
 
 public class TD2WgsTest {
 
@@ -19,14 +20,26 @@ public class TD2WgsTest {
 		double latDegWgs = 35.71327498;
 		double lonDegWgs = 139.80746187;
 		// 0.0001度もズレない．
-		assertEquals(latDegTD, Wgs2TD.toLatTD(latDegWgs, lonDegWgs), 0.0001);
-		assertEquals(lonDegTD, Wgs2TD.toLonTD(latDegWgs, lonDegWgs), 0.0001);
+		assertEquals(latDegTD, DatumConverter.changeDetumOfLatFromWgsToTd(
+				latDegWgs, lonDegWgs), 0.0001);
+		assertEquals(lonDegTD, DatumConverter.changeDetumOfLonFromWgsToTd(
+				latDegWgs, lonDegWgs), 0.0001);
 
 		// 0.01度はズレないけど，0.001度はズレる．ざっくりと1度が111kmとすると100mはズレちゃうのか…
 		assertEquals(latDegWgs,
-				TD2Wgs.toLatWgs(Wgs2TD.toLatTD(latDegWgs, lonDegWgs), Wgs2TD.toLonTD(latDegWgs, lonDegWgs)), 0.01);
+				DatumConverter.changeDetumOfLatFromTdToWgs(
+						DatumConverter.changeDetumOfLatFromWgsToTd(
+								latDegWgs, lonDegWgs),
+				DatumConverter.changeDetumOfLonFromWgsToTd(latDegWgs,
+						lonDegWgs)),
+				0.01);
 		assertEquals(lonDegWgs,
-				TD2Wgs.toLonWgs(Wgs2TD.toLatTD(latDegWgs, lonDegWgs), Wgs2TD.toLonTD(latDegWgs, lonDegWgs)), 0.01);
+				DatumConverter.changeDetumOfLonFromTdToWgs(
+						DatumConverter.changeDetumOfLatFromWgsToTd(
+								latDegWgs, lonDegWgs),
+						DatumConverter.changeDetumOfLonFromWgsToTd(
+								latDegWgs, lonDegWgs)),
+				0.01);
 
 	}
 

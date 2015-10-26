@@ -1,8 +1,10 @@
 package org.nkjmlab.gis.datum.jprect.util;
 
+import org.nkjmlab.gis.datum.Basis;
+import org.nkjmlab.gis.datum.BasisConverter;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
-import org.nkjmlab.gis.datum.LatLonBasis;
+import org.nkjmlab.gis.datum.DegreeUnitConverter;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
@@ -15,8 +17,7 @@ import org.nkjmlab.gis.datum.jprect.helper.XY2LatLonHelper;
  */
 public class XY2LatLon {
 
-	protected static LatLonBasis basis = new LatLonBasis(Unit.DEGREE,
-			Detum.TOKYO);
+	protected static Basis basis = new Basis(Unit.DEGREE, Detum.TOKYO);
 
 	/**
 	 *
@@ -28,25 +29,20 @@ public class XY2LatLon {
 		double x = xy.getX();
 		double y = xy.getY();
 		ZoneId zoneId = xy.getZoneId();
-		double latDeg = XY2LatLon.toLat(x, y, zoneId);
-		double lonDeg = XY2LatLon.toLon(x, y, zoneId);
+		double latDeg = XY2LatLon.toLat(x, y, zoneId, basis);
+		double lonDeg = XY2LatLon.toLon(x, y, zoneId, basis);
 		return new LatLonWithZone(latDeg, lonDeg, basis.getUnit(),
 				basis.getDetum(), zoneId);
 	}
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param zoneId
-	 *            平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
-	 *            http://www.gsi.go.jp/LAW/heimencho.html
-	 *            にzoneId(系番号)と適用区域が書かれている．
-	 * @return 日本測地系の緯度の十進法(degree: ddd.dddd)表記
-	 */
-	public static double toLat(double x, double y, ZoneId zoneId) {
-		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return XY2LatLonHelper.toLatitude(x, y, origin.getLat(basis),
-				origin.getLon(basis));
+	private static double toLat(double x, double y, ZoneId zoneId,
+			Basis toBasis) {
+		return toLat(x, y, zoneId, toBasis.getUnit(), toBasis.getDetum());
+	}
+
+	private static double toLon(double x, double y, ZoneId zoneId,
+			Basis toBasis) {
+		return toLon(x, y, zoneId, toBasis.getUnit(), toBasis.getDetum());
 	}
 
 	/**
@@ -56,12 +52,48 @@ public class XY2LatLon {
 	 *            平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
 	 *            http://www.gsi.go.jp/LAW/heimencho.html
 	 *            にzoneId(系番号)と適用区域が書かれている．
+	 * @param basis2
+	 * @return 日本測地系の緯度の十進法(degree: ddd.dddd)表記
+	 */
+	public static double toLat(double x, double y, ZoneId zoneId, Unit toUnit,
+			Detum toDetum) {
+		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
+		double lat = XY2LatLonHelper.toLatitude(x, y, origin.getLat(basis),
+				origin.getLon(basis));
+		if (toDetum == Detum.WGS84) {
+			double lon = XY2LatLonHelper.toLongitude(x, y, origin.getLat(basis),
+					origin.getLon(basis));
+			return BasisConverter.changeBasisOfLon(lat, lon, basis,
+					new Basis(toUnit, toDetum));
+		} else {
+			return DegreeUnitConverter.change(lat, Unit.DEGREE, toUnit);
+		}
+	}
+
+	/**
+	 * @param x
+	 * @param y
+	 * @param zoneId
+	 *            平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院
+	 *            http://www.gsi.go.jp/LAW/heimencho.html
+	 *            にzoneId(系番号)と適用区域が書かれている．
+	 * @param miliDegree
+	 * @param tokyo
 	 * @return 日本測地系の経度度の十進法(degree: ddd.dddd)表記
 	 */
-	public static double toLon(double x, double y, ZoneId zoneId) {
+	public static double toLon(double x, double y, ZoneId zoneId, Unit toUnit,
+			Detum toDetum) {
 		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-		return XY2LatLonHelper.toLongitude(x, y, origin.getLat(basis),
+		double lon = XY2LatLonHelper.toLongitude(x, y, origin.getLat(basis),
 				origin.getLon(basis));
+		if (toDetum == Detum.WGS84) {
+			double lat = XY2LatLonHelper.toLatitude(x, y, origin.getLat(basis),
+					origin.getLon(basis));
+			return BasisConverter.changeBasisOfLon(lat, lon, basis,
+					new Basis(toUnit, toDetum));
+		} else {
+			return DegreeUnitConverter.change(lon, Unit.DEGREE, toUnit);
+		}
 	}
 
 }

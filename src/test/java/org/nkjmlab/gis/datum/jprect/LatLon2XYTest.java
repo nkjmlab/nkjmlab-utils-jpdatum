@@ -45,7 +45,7 @@ public class LatLon2XYTest {
 		Map<LatLonWithZone, XYWithZone> qas = new HashMap<>();
 		// 国土地理院 (日本測地系)
 
-		LatLonBasisWithZone basis = new LatLonBasisWithZone(Unit.DEGREE,
+		BasisWithZone basis = new BasisWithZone(Unit.DEGREE,
 				Detum.TOKYO, ZoneId._9);
 
 		qas.put(new LatLonWithZone(36.104583, 140.084583, basis),

@@ -2,7 +2,7 @@ package org.nkjmlab.gis.datum;
 
 import org.nkjmlab.gis.datum.LatLon.Unit;
 
-public class UnitConverter {
+public class DegreeUnitConverter {
 
 	public static void main(String[] args) {
 
@@ -22,7 +22,15 @@ public class UnitConverter {
 
 	}
 
-	public static double changeUnit(double val, Unit fromUnit, Unit toUnit) {
+	/**
+	 * 単位を変える．
+	 *
+	 * @param val
+	 * @param fromUnit
+	 * @param toUnit
+	 * @return
+	 */
+	public static double change(double val, Unit fromUnit, Unit toUnit) {
 		if (fromUnit == toUnit) {
 			return val;
 		}

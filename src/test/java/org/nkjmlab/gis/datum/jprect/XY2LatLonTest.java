@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
-import org.nkjmlab.gis.datum.LatLonBasis;
+import org.nkjmlab.gis.datum.Basis;
 
 /**
  * 日本平面直角座標系 (Japan Plane Rectangular) に基づくXY座標 から 旧日本測地系 (Tokyo
@@ -30,7 +30,7 @@ public class XY2LatLonTest {
 
 	@Test
 	public void test() {
-		LatLonBasis basis = new LatLonBasis(Unit.DEGREE, Detum.TOKYO);
+		Basis basis = new Basis(Unit.DEGREE, Detum.TOKYO);
 
 		double x = 0;
 		double y = 0;
