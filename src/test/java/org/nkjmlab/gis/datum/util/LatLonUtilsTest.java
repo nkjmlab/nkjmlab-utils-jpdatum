@@ -3,10 +3,12 @@ package org.nkjmlab.gis.datum.util;
 /***
  * @author Yuu NAKAJIMA
  */
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.nkjmlab.gis.datum.LatLon.Unit;
+import org.nkjmlab.gis.datum.UnitConverter;
 
 public class LatLonUtilsTest {
 
@@ -22,11 +24,15 @@ public class LatLonUtilsTest {
 	}
 
 	private void testDmsDeg(double dms, double deg) {
-		System.out.println(Deg2Dms.toDms(deg));
-		System.out.println(Dms2Deg.toDeg(dms));
+		System.out
+				.println(UnitConverter.changeUnit(deg, Unit.DEGREE, Unit.DMS));
+		System.out
+				.println(UnitConverter.changeUnit(dms, Unit.DMS, Unit.DEGREE));
 
-		assertEquals(dms, Deg2Dms.toDms(deg), 0.01);
-		assertEquals(deg, Dms2Deg.toDeg(dms), 0.01);
+		assertEquals(dms, UnitConverter.changeUnit(deg, Unit.DEGREE, Unit.DMS),
+				0.01);
+		assertEquals(deg, UnitConverter.changeUnit(dms, Unit.DMS, Unit.DEGREE),
+				0.01);
 
 	}
 }

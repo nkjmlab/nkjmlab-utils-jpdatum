@@ -1,7 +1,5 @@
 package org.nkjmlab.gis.datum.jprect.helper;
 
-import org.nkjmlab.gis.datum.util.AngleUtil;
-
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
  *

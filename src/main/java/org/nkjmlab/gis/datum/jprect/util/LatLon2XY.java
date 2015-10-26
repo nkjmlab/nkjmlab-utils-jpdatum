@@ -1,8 +1,11 @@
-package org.nkjmlab.gis.datum.jprect;
+package org.nkjmlab.gis.datum.jprect.util;
 
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.LatLonBasis;
+import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
+import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
+import org.nkjmlab.gis.datum.jprect.XYWithZone;
 import org.nkjmlab.gis.datum.jprect.helper.LatLon2XYHelper;
 
 /**
@@ -24,7 +27,7 @@ public class LatLon2XY {
 	public static XYWithZone toXY(LatLonWithZone latLon) {
 		double latDegTD = latLon.getLat(basis);
 		double lonDegTD = latLon.getLon(basis);
-		int zoneId = latLon.zoneId;
+		int zoneId = latLon.getZoneId();
 		double x = LatLon2XY.toX(latDegTD, lonDegTD, zoneId);
 		double y = LatLon2XY.toY(latDegTD, lonDegTD, zoneId);
 		return new XYWithZone(x, y, zoneId);

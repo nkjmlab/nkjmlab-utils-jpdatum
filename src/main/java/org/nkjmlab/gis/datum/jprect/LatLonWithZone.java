@@ -4,6 +4,7 @@ import java.security.InvalidParameterException;
 
 import org.nkjmlab.gis.datum.LatLon;
 import org.nkjmlab.gis.datum.LatLonBasis;
+import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
 
 /**
  * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）の系番号付きの緯度経度

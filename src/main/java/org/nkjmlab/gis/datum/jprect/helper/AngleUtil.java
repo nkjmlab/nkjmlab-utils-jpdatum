@@ -1,4 +1,4 @@
-package org.nkjmlab.gis.datum.util;
+package org.nkjmlab.gis.datum.jprect.helper;
 
 public class AngleUtil {
 
