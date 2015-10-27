@@ -32,6 +32,12 @@ public class BasisConverter {
 		return LatLonUnitConverter.change(valOnToDetum, fromUnit, toUnit);
 	}
 
+	public static double changeBasisOfLat(double lat, double lon,
+			Basis fromBasis, Basis toBasis) {
+		return changeBasisOfLat(lat, lon, fromBasis.getUnit(),
+				fromBasis.getDetum(), toBasis.getUnit(), toBasis.getDetum());
+	}
+
 	/**
 	 * 指定された単位・測地系の緯度・経度から，指定した単位・測地系の緯度を取り出す．
 	 *
@@ -63,6 +69,12 @@ public class BasisConverter {
 			Basis fromBasis, Basis toBasis) {
 		return changeBasisOfLon(lat, lon, fromBasis.getUnit(),
 				fromBasis.getDetum(), toBasis.getUnit(), toBasis.getDetum());
+	}
+
+	public static LatLon changeBasis(double lat, double lon, Basis fromBasis,
+			Basis toBasis) {
+		return new LatLon(changeBasisOfLat(lat, lon, fromBasis, toBasis),
+				changeBasisOfLon(lat, lon, fromBasis, toBasis), toBasis);
 	}
 
 }

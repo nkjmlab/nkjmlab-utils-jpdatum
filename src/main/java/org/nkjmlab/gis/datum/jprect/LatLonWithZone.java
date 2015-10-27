@@ -1,7 +1,8 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import org.nkjmlab.gis.datum.LatLon;
 import org.nkjmlab.gis.datum.Basis;
+import org.nkjmlab.gis.datum.BasisConverter;
+import org.nkjmlab.gis.datum.LatLon;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
 
@@ -12,9 +13,6 @@ import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
  *
  */
 public class LatLonWithZone extends LatLon {
-
-	protected static Basis basis = new Basis(Unit.DEGREE,
-			Detum.TOKYO);
 
 	protected final ZoneId zoneId;
 
@@ -38,16 +36,29 @@ public class LatLonWithZone extends LatLon {
 		this(lat, lon, basis.getUnit(), basis.getDetum(), basis.getZoneId());
 	}
 
+	@Override
+	public BasisWithZone getBasis() {
+		return new BasisWithZone(super.getBasis(), zoneId);
+	}
+
 	public ZoneId getZoneId() {
 		return zoneId;
 	}
 
 	public double getX() {
+		Basis basis = new Basis(Unit.DEGREE, Detum.TOKYO);
 		return LatLon2XY.toX(this.getLat(basis), this.getLon(basis), zoneId);
 	}
 
 	public double getY() {
+		Basis basis = new Basis(Unit.DEGREE, Detum.TOKYO);
 		return LatLon2XY.toY(this.getLat(basis), this.getLon(basis), zoneId);
 	}
 
+	@Override
+	public LatLonWithZone copyOn(Basis toBasis) {
+		LatLon latLon = BasisConverter.changeBasis(lat, lon, getBasis(),
+				toBasis);
+		return new LatLonWithZone(latLon, zoneId);
+	}
 }

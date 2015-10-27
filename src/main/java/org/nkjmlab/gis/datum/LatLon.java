@@ -34,6 +34,10 @@ public class LatLon {
 
 	}
 
+	public LatLon(double lat, double lon, Basis basis) {
+		this(lat, lon, basis.getUnit(), basis.getDetum());
+	}
+
 	public Unit getUnit() {
 		return this.unit;
 	}
@@ -161,6 +165,14 @@ public class LatLon {
 	public double getLon(Detum toDetum) {
 		return BasisConverter.changeBasisOfLon(lat, lon, this.unit, this.detum,
 				this.unit, toDetum);
+	}
+
+	public LatLon copyOn(Basis toBasis) {
+		return BasisConverter.changeBasis(lat, lon, getBasis(), toBasis);
+	}
+
+	public Basis getBasis() {
+		return new Basis(unit, detum);
 	}
 
 }
