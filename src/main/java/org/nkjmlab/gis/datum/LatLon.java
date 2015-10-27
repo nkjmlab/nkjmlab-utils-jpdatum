@@ -19,7 +19,7 @@ public class LatLon {
 	protected final Detum detum;
 
 	public enum Unit {
-		DEGREE, MILI_DEGREE, DMS, SECOND
+		DEGREE, MILLI_DEGREE, DMS, SECOND
 	}
 
 	public enum Detum {

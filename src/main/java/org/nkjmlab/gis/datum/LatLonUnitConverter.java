@@ -37,14 +37,14 @@ public class LatLonUnitConverter {
 
 		switch (fromUnit) {
 		case DEGREE:
-			if (toUnit == Unit.MILI_DEGREE) {
+			if (toUnit == Unit.MILLI_DEGREE) {
 				return val * 1000;
 			} else if (toUnit == Unit.DMS) {
 				return degToDms(val);
 			} else if (toUnit == Unit.SECOND) {
 				return dmsToSec(degToDms(val));
 			}
-		case MILI_DEGREE:
+		case MILLI_DEGREE:
 			if (toUnit == Unit.DEGREE) {
 				return val / 1000;
 			} else if (toUnit == Unit.DMS) {
@@ -55,7 +55,7 @@ public class LatLonUnitConverter {
 		case DMS:
 			if (toUnit == Unit.DEGREE) {
 				return dmsToDeg(val);
-			} else if (toUnit == Unit.MILI_DEGREE) {
+			} else if (toUnit == Unit.MILLI_DEGREE) {
 				return dmsToDeg(val) * 1000;
 			} else if (toUnit == Unit.SECOND) {
 				return dmsToSec(val);
@@ -63,7 +63,7 @@ public class LatLonUnitConverter {
 		case SECOND:
 			if (toUnit == Unit.DEGREE) {
 				return dmsToDeg(secToDms(val));
-			} else if (toUnit == Unit.MILI_DEGREE) {
+			} else if (toUnit == Unit.MILLI_DEGREE) {
 				return dmsToDeg(secToDms(val)) * 1000;
 			} else if (toUnit == Unit.DMS) {
 				return secToDms(val);
