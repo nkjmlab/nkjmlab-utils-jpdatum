@@ -35,12 +35,12 @@ public class XY2LatLon {
 				basis.getDetum(), zoneId);
 	}
 
-	private static double toLat(double x, double y, ZoneId zoneId,
+	public static double toLat(double x, double y, ZoneId zoneId,
 			Basis toBasis) {
 		return toLat(x, y, zoneId, toBasis.getUnit(), toBasis.getDetum());
 	}
 
-	private static double toLon(double x, double y, ZoneId zoneId,
+	public static double toLon(double x, double y, ZoneId zoneId,
 			Basis toBasis) {
 		return toLon(x, y, zoneId, toBasis.getUnit(), toBasis.getDetum());
 	}
