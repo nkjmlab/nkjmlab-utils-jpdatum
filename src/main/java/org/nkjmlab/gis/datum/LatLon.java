@@ -1,5 +1,7 @@
 package org.nkjmlab.gis.datum;
 
+import java.text.NumberFormat;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -65,6 +67,14 @@ public class LatLon {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this,
 				ToStringStyle.SHORT_PREFIX_STYLE);
+	}
+
+	public String toSimpleString() {
+		NumberFormat format = NumberFormat.getInstance();
+		format.setGroupingUsed(false);
+		format.setMaximumFractionDigits(2);
+		return format.format(lat) + "," + format.format(lon) + "," + unit + ","
+				+ detum;
 	}
 
 	/**
@@ -173,6 +183,28 @@ public class LatLon {
 
 	public Basis getBasis() {
 		return new Basis(unit, detum);
+	}
+
+	/**
+	 * このオブジェクトと引数のtoLatLonの距離を返す．単位と測地系は，このオブジェクトに従う．
+	 *
+	 * @param toLatLon
+	 * @return
+	 */
+	public double distance(LatLon toLatLon) {
+		return Math.abs(lat - toLatLon.getLat(getBasis()) + lon
+				- toLatLon.getLon(getBasis()));
+	}
+
+	/**
+	 * このオブジェクトと引数のtoLatLonの距離を返す．単位は引数に従う．測地系は，このオブジェクトに従う．
+	 *
+	 * @param toLatLon
+	 * @return
+	 */
+	public double distance(LatLon toLatLon, Unit toUnit) {
+		return LatLonUnitConverter.change(distance(toLatLon), getUnit(),
+				toUnit);
 	}
 
 }
