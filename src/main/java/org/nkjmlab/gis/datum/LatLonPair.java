@@ -1,5 +1,8 @@
 package org.nkjmlab.gis.datum;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class LatLonPair {
 	protected final double lat;
 	protected final double lon;
@@ -7,6 +10,10 @@ public class LatLonPair {
 	public LatLonPair(double lat, double lon) {
 		this.lat = lat;
 		this.lon = lon;
+	}
+
+	public LatLonPair(LatLonPair latLon) {
+		this(latLon.getLat(), latLon.getLon());
 	}
 
 	/**
@@ -39,6 +46,12 @@ public class LatLonPair {
 	@Override
 	public int hashCode() {
 		return (int) (lat + lon);
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,
+				ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
 }

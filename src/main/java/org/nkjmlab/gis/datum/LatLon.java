@@ -36,6 +36,17 @@ public class LatLon extends LatLonPair {
 		this(lat, lon, basis.getUnit(), basis.getDetum());
 	}
 
+	public LatLon(LatLonPair latLon, Unit unit, Detum detum) {
+		super(latLon);
+		this.unit = unit;
+		this.detum = detum;
+
+	}
+
+	public LatLon(LatLonPair latLon, Basis basis) {
+		this(latLon, basis.getUnit(), basis.getDetum());
+	}
+
 	public Unit getUnit() {
 		return this.unit;
 	}
@@ -52,11 +63,6 @@ public class LatLon extends LatLonPair {
 		LatLon l = (LatLon) obj;
 		return this.lat == l.lat && this.lon == l.lon && this.unit == l.unit
 				&& this.detum == l.detum;
-	}
-
-	@Override
-	public int hashCode() {
-		return (int) (lat + lon);
 	}
 
 	@Override

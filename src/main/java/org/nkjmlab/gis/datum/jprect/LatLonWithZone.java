@@ -3,6 +3,7 @@ package org.nkjmlab.gis.datum.jprect;
 import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.BasisConverter;
 import org.nkjmlab.gis.datum.LatLon;
+import org.nkjmlab.gis.datum.LatLonPair;
 import org.nkjmlab.gis.datum.LatLonUnitConverter;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
@@ -35,6 +36,17 @@ public class LatLonWithZone extends LatLon {
 
 	public LatLonWithZone(double lat, double lon, BasisWithZone basis) {
 		this(lat, lon, basis.getUnit(), basis.getDetum(), basis.getZoneId());
+	}
+
+	public LatLonWithZone(LatLonPair latLon, Unit unit, Detum detum,
+			ZoneId zoneId) {
+		super(latLon, unit, detum);
+		this.zoneId = zoneId;
+
+	}
+
+	public LatLonWithZone(LatLonPair latLon, BasisWithZone basis) {
+		this(latLon, basis.getUnit(), basis.getDetum(), basis.getZoneId());
 	}
 
 	@Override

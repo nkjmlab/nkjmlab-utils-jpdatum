@@ -5,6 +5,7 @@ import org.nkjmlab.gis.datum.BasisConverter;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.LatLonUnitConverter;
+import org.nkjmlab.gis.datum.jprect.BasisWithZone;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
@@ -43,6 +44,16 @@ public class XY2LatLon {
 	public static double toLon(double x, double y, ZoneId zoneId,
 			Basis toBasis) {
 		return toLon(x, y, zoneId, toBasis.getUnit(), toBasis.getDetum());
+	}
+
+	public static double toLat(double x, double y, BasisWithZone toBasis) {
+		return toLat(x, y, toBasis.getZoneId(), toBasis.getUnit(),
+				toBasis.getDetum());
+	}
+
+	public static double toLon(double x, double y, BasisWithZone toBasis) {
+		return toLon(x, y, toBasis.getZoneId(), toBasis.getUnit(),
+				toBasis.getDetum());
 	}
 
 	/**
