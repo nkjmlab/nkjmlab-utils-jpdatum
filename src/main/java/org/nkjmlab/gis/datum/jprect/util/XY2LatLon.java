@@ -61,7 +61,7 @@ public class XY2LatLon {
 		double lat = XY2LatLonHelper.toLatitude(x, y, origin.getLat(basis),
 				origin.getLon(basis));
 		if (toDetum == Detum.WGS84) {
-			double lon = XY2LatLonHelper.toLongitude(x, y, origin.getLat(basis),
+			double lon = XY2LatLonHelper.toLatitude(x, y, origin.getLat(basis),
 					origin.getLon(basis));
 			return BasisConverter.changeBasisOfLon(lat, lon, basis,
 					new Basis(toUnit, toDetum));
@@ -87,7 +87,7 @@ public class XY2LatLon {
 		double lon = XY2LatLonHelper.toLongitude(x, y, origin.getLat(basis),
 				origin.getLon(basis));
 		if (toDetum == Detum.WGS84) {
-			double lat = XY2LatLonHelper.toLatitude(x, y, origin.getLat(basis),
+			double lat = XY2LatLonHelper.toLongitude(x, y, origin.getLat(basis),
 					origin.getLon(basis));
 			return BasisConverter.changeBasisOfLon(lat, lon, basis,
 					new Basis(toUnit, toDetum));

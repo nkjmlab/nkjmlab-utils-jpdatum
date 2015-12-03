@@ -12,10 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author nkjm
  *
  */
-public class LatLon {
-
-	protected final double lat;
-	protected final double lon;
+public class LatLon extends LatLonPair {
 
 	protected final Unit unit;
 	protected final Detum detum;
@@ -28,9 +25,8 @@ public class LatLon {
 		TOKYO, WGS84
 	}
 
-	protected LatLon(double lat, double lon, Unit unit, Detum detum) {
-		this.lat = lat;
-		this.lon = lon;
+	public LatLon(double lat, double lon, Unit unit, Detum detum) {
+		super(lat, lon);
 		this.unit = unit;
 		this.detum = detum;
 
@@ -75,24 +71,6 @@ public class LatLon {
 		format.setMaximumFractionDigits(2);
 		return format.format(lat) + "," + format.format(lon) + "," + unit + ","
 				+ detum;
-	}
-
-	/**
-	 * 緯度を返す．単位と測地系はインスタンス生成時の引数の値に従う．
-	 *
-	 * @return
-	 */
-	public double getLat() {
-		return lat;
-	}
-
-	/**
-	 * 経度を返す．単位と測地系はインスタンス生成時の引数の値に従う．
-	 *
-	 * @return
-	 */
-	public double getLon() {
-		return lon;
 	}
 
 	/**
@@ -183,28 +161,6 @@ public class LatLon {
 
 	public Basis getBasis() {
 		return new Basis(unit, detum);
-	}
-
-	/**
-	 * このオブジェクトと引数のtoLatLonの距離を返す．単位と測地系は，このオブジェクトに従う．
-	 *
-	 * @param toLatLon
-	 * @return
-	 */
-	public double distance(LatLon toLatLon) {
-		return Math.abs(lat - toLatLon.getLat(getBasis()) + lon
-				- toLatLon.getLon(getBasis()));
-	}
-
-	/**
-	 * このオブジェクトと引数のtoLatLonの距離を返す．単位は引数に従う．測地系は，このオブジェクトに従う．
-	 *
-	 * @param toLatLon
-	 * @return
-	 */
-	public double distance(LatLon toLatLon, Unit toUnit) {
-		return LatLonUnitConverter.change(distance(toLatLon), getUnit(),
-				toUnit);
 	}
 
 }

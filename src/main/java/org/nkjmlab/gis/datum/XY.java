@@ -4,6 +4,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class XY {
+	/**
+	 * 単位[m]
+	 */
 	protected final double x;
 	protected final double y;
 

@@ -3,6 +3,7 @@ package org.nkjmlab.gis.datum.jprect;
 import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.BasisConverter;
 import org.nkjmlab.gis.datum.LatLon;
+import org.nkjmlab.gis.datum.LatLonUnitConverter;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
 
@@ -60,5 +61,27 @@ public class LatLonWithZone extends LatLon {
 		LatLon latLon = BasisConverter.changeBasis(lat, lon, getBasis(),
 				toBasis);
 		return new LatLonWithZone(latLon, zoneId);
+	}
+
+	/**
+	 * このオブジェクトと引数のtoLatLonの距離を返す．単位と測地系は，このオブジェクトに従う．
+	 *
+	 * @param toLatLon
+	 * @return
+	 */
+	public double distance(LatLonWithZone toLatLon) {
+		return Math.sqrt(Math.pow(getX() - toLatLon.getX(), 2)
+				+ Math.pow(getY() - toLatLon.getY(), 2));
+	}
+
+	/**
+	 * このオブジェクトと引数のtoLatLonの距離を返す．単位は引数に従う．測地系は，このオブジェクトに従う．
+	 *
+	 * @param toLatLon
+	 * @return
+	 */
+	public double distance(LatLonWithZone toLatLon, Unit toUnit) {
+		return LatLonUnitConverter.change(distance(toLatLon), getUnit(),
+				toUnit);
 	}
 }
