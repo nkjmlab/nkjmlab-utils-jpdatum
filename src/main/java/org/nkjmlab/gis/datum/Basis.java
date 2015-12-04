@@ -24,6 +24,20 @@ public class Basis {
 	}
 
 	@Override
+	public int hashCode() {
+		return unit.hashCode() + detum.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Basis)) {
+			return false;
+		}
+		Basis xy = (Basis) obj;
+		return unit == xy.unit && detum == xy.detum;
+	}
+
+	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this,
 				ToStringStyle.SHORT_PREFIX_STYLE);

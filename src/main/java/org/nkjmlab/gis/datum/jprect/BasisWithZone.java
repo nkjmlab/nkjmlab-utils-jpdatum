@@ -1,8 +1,8 @@
 package org.nkjmlab.gis.datum.jprect;
 
+import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
-import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 
 /**
@@ -26,6 +26,20 @@ public class BasisWithZone extends Basis {
 
 	public ZoneId getZoneId() {
 		return zoneId;
+	}
+
+	@Override
+	public int hashCode() {
+		return unit.hashCode() + detum.hashCode() + zoneId.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof BasisWithZone)) {
+			return false;
+		}
+		BasisWithZone xy = (BasisWithZone) obj;
+		return super.equals(xy) && zoneId == xy.getZoneId();
 	}
 
 }

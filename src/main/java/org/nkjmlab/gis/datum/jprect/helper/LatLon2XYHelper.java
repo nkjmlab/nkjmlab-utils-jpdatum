@@ -1,5 +1,11 @@
 package org.nkjmlab.gis.datum.jprect.helper;
 
+import org.nkjmlab.gis.datum.LatLon.Unit;
+import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
+import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
+import org.nkjmlab.gis.datum.jprect.XY.DistanceUnit;
+import org.nkjmlab.gis.datum.jprect.XYWithZone;
+
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
  *
@@ -25,7 +31,7 @@ public class LatLon2XYHelper {
 		return false;
 	}
 
-	public static double toXCoord(double latDeg, double lonDeg, double oLatDeg,
+	private static double toXCoord(double latDeg, double lonDeg, double oLatDeg,
 			double oLonDeg) {
 
 		double b = AngleUtil.toRadian(latDeg);
@@ -58,7 +64,7 @@ public class LatLon2XYHelper {
 		return Const.m0 * (arc_gap + x1 + x2 + x3);
 	}
 
-	public static double toYCoord(double latDeg, double lonDeg, double oLatDeg,
+	private static double toYCoord(double latDeg, double lonDeg, double oLatDeg,
 			double oLonDeg) {
 
 		double b = AngleUtil.toRadian(latDeg);
@@ -100,6 +106,25 @@ public class LatLon2XYHelper {
 				* Math.pow(Const.m0, 4));
 
 		return Const.m0 * (1.0 + olive + mac);
+	}
+
+	public static double toXCoord(LatLonWithZone latLon) {
+		LatLonWithZone origin = JapanPlaneRectangular
+				.getOrigin(latLon.getZoneId());
+		return toXCoord(latLon.getLat(Unit.DEGREE), latLon.getLon(Unit.DEGREE),
+				origin.getLat(Unit.DEGREE), origin.getLon(Unit.DEGREE));
+	}
+
+	public static double toYCoord(LatLonWithZone latLon) {
+		LatLonWithZone origin = JapanPlaneRectangular
+				.getOrigin(latLon.getZoneId());
+		return toYCoord(latLon.getLat(Unit.DEGREE), latLon.getLon(Unit.DEGREE),
+				origin.getLat(Unit.DEGREE), origin.getLon(Unit.DEGREE));
+	}
+
+	public static XYWithZone toXY(LatLonWithZone latLon) {
+		return new XYWithZone(toXCoord(latLon), toYCoord(latLon),
+				DistanceUnit.M, latLon.getBasis());
 	}
 
 }

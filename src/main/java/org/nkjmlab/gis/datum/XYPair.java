@@ -2,7 +2,7 @@ package org.nkjmlab.gis.datum;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.nkjmlab.gis.datum.jprect.XYWithZone;
+import org.nkjmlab.gis.datum.jprect.XY;
 
 /**
  * 平面座標系における，XY座標を表すクラス．右方向がX軸正方向，上方向がY軸正方向とする．
@@ -32,10 +32,10 @@ public class XYPair {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof XYWithZone)) {
+		if (!(obj instanceof XY)) {
 			return false;
 		}
-		XYWithZone xy = (XYWithZone) obj;
+		XY xy = (XY) obj;
 		return x == xy.x && y == xy.y;
 	}
 

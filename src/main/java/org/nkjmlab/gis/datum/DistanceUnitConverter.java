@@ -1,23 +1,22 @@
 package org.nkjmlab.gis.datum;
 
+import org.nkjmlab.gis.datum.jprect.XY.DistanceUnit;
+
 public class DistanceUnitConverter {
 
-	public enum Unit {
-		M, KM
-	}
-
-	public static double change(double val, Unit fromUnit, Unit toUnit) {
+	public static double change(double val, DistanceUnit fromUnit,
+			DistanceUnit toUnit) {
 		if (fromUnit == toUnit) {
 			return val;
 		}
 
 		switch (fromUnit) {
 		case M:
-			if (toUnit == Unit.KM) {
+			if (toUnit == DistanceUnit.KM) {
 				return val / 1000;
 			}
 		case KM:
-			if (toUnit == Unit.M) {
+			if (toUnit == DistanceUnit.M) {
 				return val * 1000;
 			}
 

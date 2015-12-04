@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
+import org.nkjmlab.gis.datum.jprect.XY.DistanceUnit;
 import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
 import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
 
@@ -43,36 +44,44 @@ public class LatLon2XYTest {
 	public void test() {
 
 		Map<LatLonWithZone, XYWithZone> qas = new HashMap<>();
+
+		BasisWithZone basis1 = new BasisWithZone(Unit.DEGREE, Detum.TOKYO,
+				ZoneId._9);
+
+		// BasisWithZone basis2 = new BasisWithZone(Unit.MILLI_DEGREE,
+		// Detum.TOKYO,
+		// ZoneId._9);
+		// // 国土地理院 (日本測地系)
+		// qas.put(new LatLonWithZone(36104.583, 140084.583, basis2),
+		// new XYWithZone(11631.3563, 22618.7053, DistanceUnit.M, basis2));
+
 		// 国土地理院 (日本測地系)
-
-		BasisWithZone basis = new BasisWithZone(Unit.DEGREE,
-				Detum.TOKYO, ZoneId._9);
-
-		qas.put(new LatLonWithZone(36.104583, 140.084583, basis),
-				new XYWithZone(11631.3563, 22618.7053, ZoneId._9));
+		qas.put(new LatLonWithZone(36.104583, 140.084583, basis1),
+				new XYWithZone(11631.3563, 22618.7053, DistanceUnit.M, basis1));
 
 		// スカイツリー (日本測地系)
-		qas.put(new LatLonWithZone(35.71004, 139.81070, basis),
-				new XYWithZone(-32166.0244, -2047.6996, ZoneId._9));
+		qas.put(new LatLonWithZone(35.71004, 139.81070, basis1), new XYWithZone(
+				-32166.0244, -2047.6996, DistanceUnit.M, basis1));
 
 		for (LatLonWithZone query : qas.keySet()) {
 			{
 				XYWithZone expected = qas.get(query);
-				XYWithZone actual = LatLon2XY.toXY(query);
+				XYWithZone actual = LatLon2XY.toXYWithZone(query);
 				System.out.println("Expected:" + expected);
 				System.out.println("Actual:" + actual);
 				assertEquals(expected.getX(), actual.getX(), 0.01);
 				assertEquals(expected.getY(), actual.getY(), 0.01);
+				System.out.println(actual.toLatLonWithZone());
+
 			}
 			{
 				LatLonWithZone expected = query;
-				LatLonWithZone actual = XY2LatLon.toLatLon(qas.get(query));
+				LatLonWithZone actual = XY2LatLon
+						.toLatLonWithZone(qas.get(query));
 				System.out.println("Expected:" + expected);
 				System.out.println("Actual:" + actual);
-				assertEquals(expected.getLat(basis), actual.getLat(basis),
-						0.01);
-				assertEquals(expected.getLon(basis), actual.getLon(basis),
-						0.01);
+				assertEquals(expected.getLat(), actual.getLat(), 0.01);
+				assertEquals(expected.getLon(), actual.getLon(), 0.01);
 			}
 		}
 	}

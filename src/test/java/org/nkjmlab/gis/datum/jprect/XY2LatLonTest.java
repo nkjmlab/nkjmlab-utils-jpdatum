@@ -4,10 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nkjmlab.gis.datum.LatLon.Detum;
-import org.nkjmlab.gis.datum.LatLon.Unit;
+import org.nkjmlab.gis.datum.jprect.XY.DistanceUnit;
 import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
-import org.nkjmlab.gis.datum.Basis;
 
 /**
  * 日本平面直角座標系 (Japan Plane Rectangular) に基づくXY座標 から 旧日本測地系 (Tokyo
@@ -30,16 +28,18 @@ public class XY2LatLonTest {
 
 	@Test
 	public void test() {
-		Basis basis = new Basis(Unit.DEGREE, Detum.TOKYO);
 
-		double x = 0;
-		double y = 0;
 		for (JapanPlaneRectangular.ZoneId zoneId : JapanPlaneRectangular.ZoneId
 				.values()) {
 
 			LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
-			LatLonWithZone latLon = XY2LatLon
-					.toLatLon(new XYWithZone(x, y, zoneId));
+
+			BasisWithZone basis = origin.getBasis();
+			double x = 0;
+			double y = 0;
+
+			LatLonWithZone latLon = XY2LatLon.toLatLonWithZone(
+					new XYWithZone(x, y, DistanceUnit.M, basis));
 
 			System.out.println("Origin: " + origin);
 			System.out.println("Calculated: " + latLon);

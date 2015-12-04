@@ -28,7 +28,7 @@ public class JapanPlaneRectangular {
 		switch (zoneId) {
 		case _1:
 			lat = 33.00000;
-			lon = 129.0000;
+			lon = 129.5000;
 			break;
 		case _2:
 			lat = 33.00000;
@@ -36,7 +36,7 @@ public class JapanPlaneRectangular {
 			break;
 		case _3:
 			lat = 36.00000;
-			lon = 132.166666666666667;
+			lon = 132.166666666666669;
 			break;
 		case _4:
 			lat = 33.00000;
@@ -44,7 +44,7 @@ public class JapanPlaneRectangular {
 			break;
 		case _5:
 			lat = 36.00000;
-			lon = 134.333333333333333;
+			lon = 134.333333333333334;
 			break;
 		case _6:
 			lat = 36.00000;
@@ -52,15 +52,15 @@ public class JapanPlaneRectangular {
 			break;
 		case _7:
 			lat = 36.00000;
-			lon = 137.166666666666667;
+			lon = 137.166666666666666;
 			break;
 		case _8:
 			lat = 36.00000;
-			lon = 138.833333333333333;
+			lon = 138.5;
 			break;
 		case _9:
 			lat = 36.00000;
-			lon = 139.833333333333333;
+			lon = 139.833333333333334;
 			break;
 		case _10:
 			lat = 40.00000;
@@ -68,7 +68,7 @@ public class JapanPlaneRectangular {
 			break;
 		case _11:
 			lat = 44.00000;
-			lon = 140.15000;
+			lon = 140.25000;
 			break;
 		case _12:
 			lat = 44.00000;
@@ -109,7 +109,6 @@ public class JapanPlaneRectangular {
 			throw new InvalidParameterException(s);
 
 		}
-		return new LatLonWithZone(lat, lon, Unit.DEGREE, Detum.TOKYO,
-				ZoneId._1);
+		return new LatLonWithZone(lat, lon, Unit.DEGREE, Detum.WGS84, zoneId);
 	}
 }

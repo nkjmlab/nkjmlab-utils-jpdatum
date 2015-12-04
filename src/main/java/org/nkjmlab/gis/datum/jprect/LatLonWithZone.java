@@ -59,13 +59,11 @@ public class LatLonWithZone extends LatLon {
 	}
 
 	public double getX() {
-		Basis basis = new Basis(Unit.DEGREE, Detum.TOKYO);
-		return LatLon2XY.toX(this.getLat(basis), this.getLon(basis), zoneId);
+		return LatLon2XY.toX(this);
 	}
 
 	public double getY() {
-		Basis basis = new Basis(Unit.DEGREE, Detum.TOKYO);
-		return LatLon2XY.toY(this.getLat(basis), this.getLon(basis), zoneId);
+		return LatLon2XY.toY(this);
 	}
 
 	@Override
@@ -97,7 +95,7 @@ public class LatLonWithZone extends LatLon {
 				toUnit);
 	}
 
-	public XYWithZone getXY() {
-		return LatLon2XY.toXY(this);
+	public XYWithZone toXYWithZone() {
+		return LatLon2XY.toXYWithZone(this);
 	}
 }

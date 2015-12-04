@@ -1,7 +1,10 @@
 package org.nkjmlab.gis.datum.jprect;
 
+import org.nkjmlab.gis.datum.LatLon.Detum;
+import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.XYPair;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
+import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
 
 /***
  * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）の系番号付きのXY座標．原則として，単位はメートル．
@@ -9,22 +12,22 @@ import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
  * @author Yuu NAKAJIMA
  *
  */
-public class XYWithZone extends XYPair {
+public class XYWithZone extends XY {
 
-	protected final ZoneId zoneId;
+	protected final BasisWithZone basis;
 
-	public XYWithZone(XYPair xy, ZoneId zoneId) {
-		this(xy.getX(), xy.getY(), zoneId);
+	public XYWithZone(double x, double y, DistanceUnit unit,
+			BasisWithZone basis) {
+		super(x, y, unit);
+		this.basis = basis;
 	}
 
-	public XYWithZone(double x, double y, ZoneId zoneId) {
-		super(x, y);
-		this.zoneId = zoneId;
+	public XYWithZone(XYPair xy, DistanceUnit unit, BasisWithZone basis) {
+		this(xy.getX(), xy.getY(), unit, basis);
 	}
 
-	@Override
-	public int hashCode() {
-		return (int) (x + y + zoneId.ordinal());
+	public XYWithZone(XY xy, BasisWithZone basis) {
+		this(xy.getX(), xy.getY(), xy.getDistanceUnit(), basis);
 	}
 
 	@Override
@@ -33,11 +36,27 @@ public class XYWithZone extends XYPair {
 			return false;
 		}
 		XYWithZone xy = (XYWithZone) obj;
-		return x == xy.x && y == xy.y && zoneId == xy.zoneId;
+		return super.equals(xy) && basis.equals(xy.getBasis());
+	}
+
+	public BasisWithZone getBasis() {
+		return basis;
+	}
+
+	public LatLonWithZone toLatLonWithZone() {
+		return XY2LatLon.toLatLonWithZone(this);
 	}
 
 	public ZoneId getZoneId() {
-		return zoneId;
+		return basis.getZoneId();
+	}
+
+	public Unit getUnit() {
+		return basis.getUnit();
+	}
+
+	public Detum getDetum() {
+		return basis.getDetum();
 	}
 
 }

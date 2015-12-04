@@ -1,5 +1,13 @@
 package org.nkjmlab.gis.datum.jprect.helper;
 
+import org.nkjmlab.gis.datum.Basis;
+import org.nkjmlab.gis.datum.LatLon.Detum;
+import org.nkjmlab.gis.datum.LatLon.Unit;
+import org.nkjmlab.gis.datum.jprect.BasisWithZone;
+import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
+import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
+import org.nkjmlab.gis.datum.jprect.XYWithZone;
+
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
  *
@@ -115,5 +123,27 @@ public class XY2LatLonHelper {
 		double M = Const.ra * (1 - Math.pow(Const.e, 2))
 				/ Math.sqrt(Math.pow(q, 3));
 		return M;
+	}
+
+	private static Basis basisForCalc = new Basis(Unit.DEGREE, Detum.WGS84);
+
+	public static double toLon(XYWithZone xy) {
+		LatLonWithZone origin = JapanPlaneRectangular
+				.getOrigin(xy.getBasis().getZoneId());
+		return toLongitude(xy.getX(), xy.getY(), origin.getLat(basisForCalc),
+				origin.getLon(basisForCalc));
+	}
+
+	public static double toLat(XYWithZone xy) {
+		LatLonWithZone origin = JapanPlaneRectangular
+				.getOrigin(xy.getBasis().getZoneId());
+		return toLatitude(xy.getX(), xy.getY(), origin.getLat(basisForCalc),
+				origin.getLon(basisForCalc));
+	}
+
+	public static LatLonWithZone toLatLonWithZone(XYWithZone xy) {
+		return new LatLonWithZone(toLat(xy), toLon(xy),
+				new BasisWithZone(basisForCalc, xy.getZoneId()))
+						.copyOn(xy.getBasis());
 	}
 }
