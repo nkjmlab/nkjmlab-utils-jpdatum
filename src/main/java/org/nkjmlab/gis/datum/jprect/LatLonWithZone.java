@@ -96,4 +96,8 @@ public class LatLonWithZone extends LatLon {
 		return LatLonUnitConverter.change(distance(toLatLon), getUnit(),
 				toUnit);
 	}
+
+	public XYWithZone getXY() {
+		return LatLon2XY.toXY(this);
+	}
 }

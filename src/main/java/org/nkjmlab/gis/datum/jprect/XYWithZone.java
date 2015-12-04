@@ -1,19 +1,19 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import org.nkjmlab.gis.datum.XY;
+import org.nkjmlab.gis.datum.XYPair;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 
 /***
- * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）の系番号付きのXY
+ * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）の系番号付きのXY座標．原則として，単位はメートル．
  *
  * @author Yuu NAKAJIMA
  *
  */
-public class XYWithZone extends XY {
+public class XYWithZone extends XYPair {
 
 	protected final ZoneId zoneId;
 
-	public XYWithZone(XY xy, ZoneId zoneId) {
+	public XYWithZone(XYPair xy, ZoneId zoneId) {
 		this(xy.getX(), xy.getY(), zoneId);
 	}
 
