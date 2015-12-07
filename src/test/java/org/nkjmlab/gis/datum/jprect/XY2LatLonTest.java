@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nkjmlab.gis.datum.jprect.XY.DistanceUnit;
 import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
 
 /**
@@ -38,8 +37,8 @@ public class XY2LatLonTest {
 			double x = 0;
 			double y = 0;
 
-			LatLonWithZone latLon = XY2LatLon.toLatLonWithZone(
-					new XYWithZone(x, y, DistanceUnit.M, basis));
+			LatLonWithZone latLon = XY2LatLon
+					.toLatLonWithZone(new XYWithZone(x, y, basis));
 
 			System.out.println("Origin: " + origin);
 			System.out.println("Calculated: " + latLon);

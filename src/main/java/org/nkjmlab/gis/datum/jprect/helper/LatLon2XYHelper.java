@@ -1,9 +1,10 @@
 package org.nkjmlab.gis.datum.jprect.helper;
 
+import org.nkjmlab.gis.datum.DistanceUnit;
+import org.nkjmlab.gis.datum.DistanceUnitConverter;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
-import org.nkjmlab.gis.datum.jprect.XY.DistanceUnit;
 import org.nkjmlab.gis.datum.jprect.XYWithZone;
 
 /**
@@ -108,23 +109,29 @@ public class LatLon2XYHelper {
 		return Const.m0 * (1.0 + olive + mac);
 	}
 
-	public static double toXCoord(LatLonWithZone latLon) {
+	public static double toXCoord(LatLonWithZone latLon,
+			DistanceUnit distanceUnit) {
 		LatLonWithZone origin = JapanPlaneRectangular
 				.getOrigin(latLon.getZoneId());
-		return toXCoord(latLon.getLat(Unit.DEGREE), latLon.getLon(Unit.DEGREE),
-				origin.getLat(Unit.DEGREE), origin.getLon(Unit.DEGREE));
+		return DistanceUnitConverter.change(
+				toXCoord(latLon.getLat(Unit.DEGREE), latLon.getLon(Unit.DEGREE),
+						origin.getLat(Unit.DEGREE), origin.getLon(Unit.DEGREE)),
+				DistanceUnit.M, distanceUnit);
 	}
 
-	public static double toYCoord(LatLonWithZone latLon) {
+	public static double toYCoord(LatLonWithZone latLon,
+			DistanceUnit distanceUnit) {
 		LatLonWithZone origin = JapanPlaneRectangular
 				.getOrigin(latLon.getZoneId());
-		return toYCoord(latLon.getLat(Unit.DEGREE), latLon.getLon(Unit.DEGREE),
-				origin.getLat(Unit.DEGREE), origin.getLon(Unit.DEGREE));
+		return DistanceUnitConverter.change(
+				toYCoord(latLon.getLat(Unit.DEGREE), latLon.getLon(Unit.DEGREE),
+						origin.getLat(Unit.DEGREE), origin.getLon(Unit.DEGREE)),
+				DistanceUnit.M, distanceUnit);
 	}
 
 	public static XYWithZone toXY(LatLonWithZone latLon) {
-		return new XYWithZone(toXCoord(latLon), toYCoord(latLon),
-				DistanceUnit.M, latLon.getBasis());
+		return new XYWithZone(toXCoord(latLon, DistanceUnit.M),
+				toYCoord(latLon, DistanceUnit.M), latLon.getBasis());
 	}
 
 }

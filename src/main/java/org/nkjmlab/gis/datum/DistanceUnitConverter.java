@@ -1,8 +1,8 @@
 package org.nkjmlab.gis.datum;
 
-import org.nkjmlab.gis.datum.jprect.XY.DistanceUnit;
-
 public class DistanceUnitConverter {
+
+
 
 	public static double change(double val, DistanceUnit fromUnit,
 			DistanceUnit toUnit) {

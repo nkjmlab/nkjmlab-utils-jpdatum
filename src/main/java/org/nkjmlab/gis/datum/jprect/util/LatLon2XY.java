@@ -1,5 +1,6 @@
 package org.nkjmlab.gis.datum.jprect.util;
 
+import org.nkjmlab.gis.datum.DistanceUnit;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
 import org.nkjmlab.gis.datum.jprect.XYWithZone;
 import org.nkjmlab.gis.datum.jprect.helper.LatLon2XYHelper;
@@ -31,8 +32,8 @@ public class LatLon2XY {
 	 *            にzoneId(系番号)と適用区域が書かれている．
 	 * @return
 	 */
-	public static double toX(LatLonWithZone latLon) {
-		return LatLon2XYHelper.toXCoord(latLon);
+	public static double toX(LatLonWithZone latLon, DistanceUnit distanceUnit) {
+		return LatLon2XYHelper.toXCoord(latLon, distanceUnit);
 	}
 
 	/**
@@ -45,8 +46,8 @@ public class LatLon2XY {
 	 *            にzoneId(系番号)と適用区域が書かれている．
 	 * @return
 	 */
-	public static double toY(LatLonWithZone latLon) {
-		return LatLon2XYHelper.toYCoord(latLon);
+	public static double toY(LatLonWithZone latLon, DistanceUnit distanceUnit) {
+		return LatLon2XYHelper.toYCoord(latLon, distanceUnit);
 	}
 
 }

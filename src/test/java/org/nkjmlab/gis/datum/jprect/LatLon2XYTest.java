@@ -7,10 +7,10 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.nkjmlab.gis.datum.DistanceUnit;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
-import org.nkjmlab.gis.datum.jprect.XY.DistanceUnit;
 import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
 import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
 
@@ -57,11 +57,11 @@ public class LatLon2XYTest {
 
 		// 国土地理院 (日本測地系)
 		qas.put(new LatLonWithZone(36.104583, 140.084583, basis1),
-				new XYWithZone(11631.3563, 22618.7053, DistanceUnit.M, basis1));
+				new XYWithZone(11631.3563, 22618.7053, basis1));
 
 		// スカイツリー (日本測地系)
-		qas.put(new LatLonWithZone(35.71004, 139.81070, basis1), new XYWithZone(
-				-32166.0244, -2047.6996, DistanceUnit.M, basis1));
+		qas.put(new LatLonWithZone(35.71004, 139.81070, basis1),
+				new XYWithZone(-32166.0244, -2047.6996, basis1));
 
 		for (LatLonWithZone query : qas.keySet()) {
 			{

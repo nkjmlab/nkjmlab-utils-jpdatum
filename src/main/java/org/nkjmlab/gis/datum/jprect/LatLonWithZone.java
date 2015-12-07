@@ -1,10 +1,13 @@
 package org.nkjmlab.gis.datum.jprect;
 
+import java.awt.Point;
+
 import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.BasisConverter;
+import org.nkjmlab.gis.datum.DistanceUnit;
+import org.nkjmlab.gis.datum.DistanceUnitConverter;
 import org.nkjmlab.gis.datum.LatLon;
 import org.nkjmlab.gis.datum.LatLonPair;
-import org.nkjmlab.gis.datum.LatLonUnitConverter;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
 
@@ -58,12 +61,12 @@ public class LatLonWithZone extends LatLon {
 		return zoneId;
 	}
 
-	public double getX() {
-		return LatLon2XY.toX(this);
+	public double getX(DistanceUnit distanceUnit) {
+		return LatLon2XY.toX(this, distanceUnit);
 	}
 
-	public double getY() {
-		return LatLon2XY.toY(this);
+	public double getY(DistanceUnit distanceUnit) {
+		return LatLon2XY.toY(this, distanceUnit);
 	}
 
 	@Override
@@ -74,28 +77,25 @@ public class LatLonWithZone extends LatLon {
 	}
 
 	/**
-	 * このオブジェクトと引数のtoLatLonの距離を返す．単位と測地系は，このオブジェクトに従う．
+	 * このオブジェクトと引数のtoLatLonの距離を返す．
 	 *
 	 * @param toLatLon
 	 * @return
 	 */
-	public double distance(LatLonWithZone toLatLon) {
-		return Math.sqrt(Math.pow(getX() - toLatLon.getX(), 2)
-				+ Math.pow(getY() - toLatLon.getY(), 2));
-	}
-
-	/**
-	 * このオブジェクトと引数のtoLatLonの距離を返す．単位は引数に従う．測地系は，このオブジェクトに従う．
-	 *
-	 * @param toLatLon
-	 * @return
-	 */
-	public double distance(LatLonWithZone toLatLon, Unit toUnit) {
-		return LatLonUnitConverter.change(distance(toLatLon), getUnit(),
-				toUnit);
+	public double distance(LatLonWithZone toLatLon, DistanceUnit distanceUnit) {
+		return DistanceUnitConverter.change(Math.sqrt(Math
+				.pow(getX(distanceUnit) - toLatLon.getX(distanceUnit), 2)
+				+ Math.pow(getY(distanceUnit) - toLatLon.getY(distanceUnit),
+						2)),
+				DistanceUnit.M, distanceUnit);
 	}
 
 	public XYWithZone toXYWithZone() {
 		return LatLon2XY.toXYWithZone(this);
+	}
+
+	public Point toScreenCoord(LatLonWithZone origin, Scale scale) {
+		return this.toXYWithZone().toRelativeScreenCoord(origin.toXYWithZone(),
+				scale);
 	}
 }
