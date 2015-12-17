@@ -98,4 +98,12 @@ public class LatLonWithZone extends LatLon {
 		return this.toXYWithZone().toRelativeScreenCoord(origin.toXYWithZone(),
 				scale);
 	}
+
+	public LatLonWithZone innerPoint(LatLonWithZone to, double ratio) {
+		double diffLat = (to.getLat(getBasis()) - getLat(getBasis())) * ratio;
+		double diffLon = (to.getLon(getBasis()) - getLon(getBasis())) * ratio;
+
+		return new LatLonWithZone(getLat() + diffLat, getLon() + diffLon,
+				getBasis());
+	}
 }
