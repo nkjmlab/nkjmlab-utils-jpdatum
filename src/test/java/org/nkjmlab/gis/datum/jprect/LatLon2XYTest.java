@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nkjmlab.gis.datum.DistanceUnit;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
