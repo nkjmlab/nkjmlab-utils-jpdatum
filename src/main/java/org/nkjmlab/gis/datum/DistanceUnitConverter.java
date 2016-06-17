@@ -2,8 +2,6 @@ package org.nkjmlab.gis.datum;
 
 public class DistanceUnitConverter {
 
-
-
 	public static double change(double val, DistanceUnit fromUnit,
 			DistanceUnit toUnit) {
 		if (fromUnit == toUnit) {
@@ -19,8 +17,8 @@ public class DistanceUnitConverter {
 			if (toUnit == DistanceUnit.M) {
 				return val * 1000;
 			}
-
+		default:
+			throw new IllegalArgumentException(fromUnit + " is not suported.");
 		}
-		throw new RuntimeException();
 	}
 }

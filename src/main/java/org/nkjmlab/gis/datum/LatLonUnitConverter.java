@@ -69,7 +69,7 @@ public class LatLonUnitConverter {
 				return secToDms(val);
 			}
 		default:
-			throw new RuntimeException();
+			throw new IllegalArgumentException(fromUnit + " is not supported.");
 		}
 	}
 

@@ -21,13 +21,15 @@ public class DatumConverter {
 
 		switch (toDetum) {
 		case TOKYO:
-			return LatLonUnitConverter.change(changeDetumOfLatFromWgsToTd(latDeg, lonDeg),
-					Unit.DEGREE, fromUnit);
+			return LatLonUnitConverter.change(
+					changeDetumOfLatFromWgsToTd(latDeg, lonDeg), Unit.DEGREE,
+					fromUnit);
 		case WGS84:
-			return LatLonUnitConverter.change(changeDetumOfLatFromTdToWgs(latDeg, lonDeg),
-					Unit.DEGREE, fromUnit);
+			return LatLonUnitConverter.change(
+					changeDetumOfLatFromTdToWgs(latDeg, lonDeg), Unit.DEGREE,
+					fromUnit);
 		default:
-			throw new RuntimeException();
+			throw new IllegalArgumentException(toDetum + " is not suported.");
 		}
 	}
 
@@ -48,13 +50,15 @@ public class DatumConverter {
 
 		switch (toDetum) {
 		case TOKYO:
-			return LatLonUnitConverter.change(changeDetumOfLonFromWgsToTd(latDeg, lonDeg),
-					Unit.DEGREE, fromUnit);
+			return LatLonUnitConverter.change(
+					changeDetumOfLonFromWgsToTd(latDeg, lonDeg), Unit.DEGREE,
+					fromUnit);
 		case WGS84:
-			return LatLonUnitConverter.change(changeDetumOfLonFromTdToWgs(latDeg, lonDeg),
-					Unit.DEGREE, fromUnit);
+			return LatLonUnitConverter.change(
+					changeDetumOfLonFromTdToWgs(latDeg, lonDeg), Unit.DEGREE,
+					fromUnit);
 		default:
-			throw new RuntimeException();
+			throw new IllegalArgumentException(toDetum + " is not suported.");
 		}
 	}
 
@@ -67,22 +71,26 @@ public class DatumConverter {
 	 * <a href="http://www.museum.tokushima-ec.ed.jp/ogawa/map/datumconv/">
 	 * 測地系変換にともなうずれ</a>
 	 */
-	public static double changeDetumOfLatFromWgsToTd(double latDegWgs, double lonDegWgs) {
+	public static double changeDetumOfLatFromWgsToTd(double latDegWgs,
+			double lonDegWgs) {
 		return latDegWgs + latDegWgs * 0.00010696 - lonDegWgs * 0.000017467
 				- 0.0046020;
 	}
 
-	public static double changeDetumOfLonFromWgsToTd(double latDegWgs, double lonDegWgs) {
+	public static double changeDetumOfLonFromWgsToTd(double latDegWgs,
+			double lonDegWgs) {
 		return lonDegWgs + latDegWgs * 0.000046047 + lonDegWgs * 0.000083049
 				- 0.010041;
 	}
 
-	public static double changeDetumOfLatFromTdToWgs(double latDegTD, double lonDegTD) {
+	public static double changeDetumOfLatFromTdToWgs(double latDegTD,
+			double lonDegTD) {
 		return latDegTD - 0.00010695 * latDegTD + 0.000017464 * lonDegTD
 				+ 0.0046017;
 	}
 
-	public static double changeDetumOfLonFromTdToWgs(double latDegTD, double lonDegTD) {
+	public static double changeDetumOfLonFromTdToWgs(double latDegTD,
+			double lonDegTD) {
 		return lonDegTD - 0.000046038 * lonDegTD - 0.000083043 * lonDegTD
 				+ 0.010040;
 	}
