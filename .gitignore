@@ -1,6 +1,9 @@
+/.settings/
 /tmp
 /bin
 *.class
 *.log
 /classes/
 /target/
+/.classpath
+/.project
