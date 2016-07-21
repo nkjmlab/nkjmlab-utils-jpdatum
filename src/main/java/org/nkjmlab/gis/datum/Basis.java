@@ -1,5 +1,7 @@
 package org.nkjmlab.gis.datum;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.nkjmlab.gis.datum.LatLon.Detum;
@@ -25,16 +27,12 @@ public class Basis {
 
 	@Override
 	public int hashCode() {
-		return unit.hashCode() + detum.hashCode();
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof Basis)) {
-			return false;
-		}
-		Basis xy = (Basis) obj;
-		return unit == xy.unit && detum == xy.detum;
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 	@Override

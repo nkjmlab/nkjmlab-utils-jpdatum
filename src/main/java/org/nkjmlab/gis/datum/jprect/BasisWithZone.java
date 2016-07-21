@@ -1,5 +1,7 @@
 package org.nkjmlab.gis.datum.jprect;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
@@ -30,16 +32,12 @@ public class BasisWithZone extends Basis {
 
 	@Override
 	public int hashCode() {
-		return unit.hashCode() + detum.hashCode() + zoneId.hashCode();
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof BasisWithZone)) {
-			return false;
-		}
-		BasisWithZone xy = (BasisWithZone) obj;
-		return super.equals(xy) && zoneId == xy.getZoneId();
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 }

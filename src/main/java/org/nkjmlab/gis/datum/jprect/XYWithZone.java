@@ -2,6 +2,8 @@ package org.nkjmlab.gis.datum.jprect;
 
 import java.awt.Point;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
@@ -29,12 +31,13 @@ public class XYWithZone extends XY {
 	}
 
 	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof XYWithZone)) {
-			return false;
-		}
-		XYWithZone xy = (XYWithZone) obj;
-		return super.equals(xy) && basis.equals(xy.getBasis());
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 	public BasisWithZone getBasis() {

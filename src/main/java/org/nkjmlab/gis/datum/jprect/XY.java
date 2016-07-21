@@ -1,9 +1,10 @@
 package org.nkjmlab.gis.datum.jprect;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.nkjmlab.gis.datum.DistanceUnit;
-
 
 public class XY {
 	protected final double x;
@@ -26,16 +27,12 @@ public class XY {
 
 	@Override
 	public int hashCode() {
-		return (int) (x + y + distanceUnit.hashCode());
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof XY)) {
-			return false;
-		}
-		XY xy = (XY) obj;
-		return x == xy.x && y == xy.y && distanceUnit == xy.distanceUnit;
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 	@Override
