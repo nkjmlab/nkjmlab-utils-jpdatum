@@ -9,6 +9,7 @@ package org.nkjmlab.gis.datum.jprect.helper;
  *
  * @author Miho Nagata
  * @author Yoshinori Nie
+ * @author Yuu NAKAJIMA
  */
 
 class Const {
@@ -16,30 +17,30 @@ class Const {
 	/**
 	 * ベッセル楕円体の長半径 (semi-major axis)
 	 */
-	static double ra = 6377397.155;
+	static final double ra = 6377397.155;
 
 	/**
 	 * ベッセル楕円体の短半径 (semi-minor axis)
 	 */
-	private static double rb = 6356078.9363;
+	private static final double rb = 6356078.9363;
 
 	/**
 	 * 離心率を求める為の変数
 	 */
-	private static double dr = Math.sqrt((Math.pow(ra, 2) - Math.pow(rb, 2)));
+	private static final double dr = Math.sqrt((Math.pow(ra, 2) - Math.pow(rb, 2)));
 
 	/**
 	 * 第一離心率 (eccentricity)
 	 */
-	static double e = dr / ra;
+	static final double e = dr / ra;
 
 	/**
 	 * 第二離心率
 	 */
-	static double e1 = dr / rb;
+	static final double e1 = dr / rb;
 
 	/**
 	 * 縮率 (rate)（19座標系）
 	 */
-	static double m0 = 0.9999;
+	static final double m0 = 0.9999;
 }

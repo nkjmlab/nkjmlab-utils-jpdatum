@@ -12,7 +12,7 @@ import org.nkjmlab.gis.datum.jprect.helper.LatLon2XYHelper;
 public class LatLon2XY {
 
 	/**
-	 * 平面直角座標系の系番号付きの緯度経度(TD座標系，十進法度表記)を，平面直角座標系のXYに変換
+	 * 平面直角座標系の系番号付きの緯度経度を，平面直角座標系のXYに変換
 	 *
 	 * @param latLon
 	 *            平面直角座標系の系番号付きの緯度経度(TD座標系，十進法度表記)

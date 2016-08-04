@@ -1,8 +1,8 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Before;
@@ -10,8 +10,6 @@ import org.junit.Test;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
-import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
-import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
 
 /**
  * 旧日本測地系(Tokyo Datum：2002年3月末までの日本の公式測地系．Bessel楕円体) に基づく緯度経度を日本平面直角座標系(Japan
@@ -42,9 +40,12 @@ public class LatLon2XYTest {
 	@Test
 	public void test() {
 
-		Map<LatLonWithZone, XYWithZone> qas = new HashMap<>();
+		Map<LatLonWithZone, XYWithZone> queries = new LinkedHashMap<>();
 
-		BasisWithZone basis1 = new BasisWithZone(Unit.DEGREE, Detum.TOKYO,
+		BasisWithZone tokyoBasis = new BasisWithZone(Unit.DEGREE, Detum.TOKYO,
+				ZoneId._9);
+
+		BasisWithZone wgsBasis = new BasisWithZone(Unit.DEGREE, Detum.WGS84,
 				ZoneId._9);
 
 		// BasisWithZone basis2 = new BasisWithZone(Unit.MILLI_DEGREE,
@@ -55,32 +56,39 @@ public class LatLon2XYTest {
 		// new XYWithZone(11631.3563, 22618.7053, DistanceUnit.M, basis2));
 
 		// 国土地理院 (日本測地系)
-		qas.put(new LatLonWithZone(36.104583, 140.084583, basis1),
-				new XYWithZone(11631.3563, 22618.7053, basis1));
+		//		qas.put(new LatLonWithZone(36.104583, 140.084583, basis1),
+		//				new XYWithZone(11631.3563, 22618.7053, basis1));
+
+		// 国土地理院 (日本測地系)
+		queries.put(new LatLonWithZone(36.103774791666666, 140.08785504166664, tokyoBasis),
+				new XYWithZone(11542.4611, 22913.5056, tokyoBasis));
+
+		// 国土地理院 (世界測地系)
+		queries.put(new LatLonWithZone(36.103774791666666, 140.08785504166664, wgsBasis),
+				new XYWithZone(11543.6883, 22916.2436, wgsBasis));
 
 		// スカイツリー (日本測地系)
-		qas.put(new LatLonWithZone(35.71004, 139.81070, basis1),
-				new XYWithZone(-32166.0244, -2047.6996, basis1));
+		queries.put(new LatLonWithZone(35.71004, 139.81070, tokyoBasis),
+				new XYWithZone(-32166.0244, -2047.6996, tokyoBasis));
 
-		for (LatLonWithZone query : qas.keySet()) {
+		for (LatLonWithZone query : queries.keySet()) {
 			{
-				XYWithZone expected = qas.get(query);
-				XYWithZone actual = LatLon2XY.toXYWithZone(query);
+				XYWithZone expected = queries.get(query);
+				XYWithZone actual = query.toXYWithZone();
 				System.out.println("Expected:" + expected);
 				System.out.println("Actual:" + actual);
-				assertEquals(expected.getX(), actual.getX(), 0.01);
-				assertEquals(expected.getY(), actual.getY(), 0.01);
+				assertEquals(expected.getX(), actual.getX(), 1);
+				assertEquals(expected.getY(), actual.getY(), 1);
 				System.out.println(actual.toLatLonWithZone());
 
 			}
 			{
 				LatLonWithZone expected = query;
-				LatLonWithZone actual = XY2LatLon
-						.toLatLonWithZone(qas.get(query));
+				LatLonWithZone actual = queries.get(query).toLatLonWithZone();
 				System.out.println("Expected:" + expected);
 				System.out.println("Actual:" + actual);
-				assertEquals(expected.getLat(), actual.getLat(), 0.01);
-				assertEquals(expected.getLon(), actual.getLon(), 0.01);
+				assertEquals(expected.getLat(), actual.getLat(), 1);
+				assertEquals(expected.getLon(), actual.getLon(), 1);
 			}
 		}
 	}

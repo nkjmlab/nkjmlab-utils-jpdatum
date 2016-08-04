@@ -20,7 +20,7 @@ import org.nkjmlab.gis.datum.jprect.XYWithZone;
  */
 public class XY2LatLonHelper {
 
-	private static double rho = 180.0 / Math.PI;
+	private static final double rho = 180.0 / Math.PI;
 
 	public static double toLatitude(double x, double y, double latDegOfOrigin,
 			double lonDegOfOrigin) {
@@ -128,15 +128,15 @@ public class XY2LatLonHelper {
 	private static Basis basisForCalc = new Basis(Unit.DEGREE, Detum.WGS84);
 
 	public static double toLon(XYWithZone xy) {
-		LatLonWithZone origin = JapanPlaneRectangular
-				.getOrigin(xy.getBasis().getZoneId());
+		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(xy.getBasis().getZoneId(),
+				xy.getDetum());
 		return toLongitude(xy.getX(), xy.getY(), origin.getLat(basisForCalc),
 				origin.getLon(basisForCalc));
 	}
 
 	public static double toLat(XYWithZone xy) {
-		LatLonWithZone origin = JapanPlaneRectangular
-				.getOrigin(xy.getBasis().getZoneId());
+		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(xy.getBasis().getZoneId(),
+				xy.getDetum());
 		return toLatitude(xy.getX(), xy.getY(), origin.getLat(basisForCalc),
 				origin.getLon(basisForCalc));
 	}

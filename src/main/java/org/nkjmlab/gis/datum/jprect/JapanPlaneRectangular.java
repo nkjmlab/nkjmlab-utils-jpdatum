@@ -1,7 +1,5 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import java.security.InvalidParameterException;
-
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 
@@ -18,97 +16,28 @@ import org.nkjmlab.gis.datum.LatLon.Unit;
  */
 public class JapanPlaneRectangular {
 
-	public enum ZoneId {
-		_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19,
+	public static enum ZoneId {
+		_1(0), _2(1), _3(2), _4(3), _5(4), _6(5), _7(6), _8(7), _9(8), _10(9), _11(
+				10), _12(11), _13(12), _14(13), _15(14), _16(15), _17(16), _18(17), _19(18);
+
+		private int index;
+
+		private ZoneId(int index) {
+			this.index = index;
+		}
 	}
 
-	public static LatLonWithZone getOrigin(ZoneId zoneId) {
-		double lat;
-		double lon;
-		switch (zoneId) {
-		case _1:
-			lat = 33.00000;
-			lon = 129.5000;
-			break;
-		case _2:
-			lat = 33.00000;
-			lon = 131.00000;
-			break;
-		case _3:
-			lat = 36.00000;
-			lon = 132.166666666666669;
-			break;
-		case _4:
-			lat = 33.00000;
-			lon = 133.50000;
-			break;
-		case _5:
-			lat = 36.00000;
-			lon = 134.333333333333334;
-			break;
-		case _6:
-			lat = 36.00000;
-			lon = 136.00000;
-			break;
-		case _7:
-			lat = 36.00000;
-			lon = 137.166666666666666;
-			break;
-		case _8:
-			lat = 36.00000;
-			lon = 138.5;
-			break;
-		case _9:
-			lat = 36.00000;
-			lon = 139.833333333333334;
-			break;
-		case _10:
-			lat = 40.00000;
-			lon = 140.833333333333333;
-			break;
-		case _11:
-			lat = 44.00000;
-			lon = 140.25000;
-			break;
-		case _12:
-			lat = 44.00000;
-			lon = 142.25000;
-			break;
-		case _13:
-			lat = 44.00000;
-			lon = 144.25000;
-			break;
-		case _14:
-			lat = 26.00000;
-			lon = 142.00000;
-			break;
-		case _15:
-			lat = 26.00000;
-			lon = 127.50000;
-			break;
-		case _16:
-			lat = 26.00000;
-			lon = 124.00000;
-			break;
-		case _17:
-			lat = 26.00000;
-			lon = 131.00000;
-			break;
-		case _18:
-			lat = 20.00000;
-			lon = 136.00000;
-			break;
-		case _19:
-			lat = 26.00000;
-			lon = 154.00000;
-			break;
-		default:
-			String s = "zoneId=" + zoneId
-					+ " is invalid. The zone id range from 1 to 19.";
-			System.err.println(s);
-			throw new InvalidParameterException(s);
+	private static final double[] lats = { 33.00000, 33.00000, 36.00000, 33.00000, 36.00000,
+			36.00000, 36.00000, 36.00000, 36.00000, 40.00000, 44.00000, 44.00000, 44.00000,
+			26.00000, 26.00000, 26.00000, 26.00000, 20.00000, 26.00000 };
 
-		}
-		return new LatLonWithZone(lat, lon, Unit.DEGREE, Detum.WGS84, zoneId);
+	private static final double[] lons = { 129.5000, 131.00000, 132.166666666666669, 133.50000,
+			134.333333333333334, 136.00000, 137.166666666666666, 138.5, 139.833333333333334,
+			140.833333333333333, 140.25000, 142.25000, 144.25000, 142.00000, 127.50000, 124.00000,
+			131.00000, 136.00000, 154.00000 };
+
+	public static final LatLonWithZone getOrigin(ZoneId zoneId, Detum detum) {
+		return new LatLonWithZone(lats[zoneId.index], lons[zoneId.index], Unit.DEGREE, detum,
+				zoneId);
 	}
 }

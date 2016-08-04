@@ -2,6 +2,7 @@ package org.nkjmlab.gis.datum.jprect.helper;
 
 import org.nkjmlab.gis.datum.DistanceUnit;
 import org.nkjmlab.gis.datum.DistanceUnitConverter;
+import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
@@ -32,8 +33,7 @@ public class LatLon2XYHelper {
 		return false;
 	}
 
-	private static double toXCoord(double latDeg, double lonDeg, double oLatDeg,
-			double oLonDeg) {
+	private static double toXCoord(double latDeg, double lonDeg, double oLatDeg, double oLonDeg) {
 
 		double b = AngleUtil.toRadian(latDeg);
 		double l = AngleUtil.toRadian(lonDeg);
@@ -109,23 +109,25 @@ public class LatLon2XYHelper {
 		return Const.m0 * (1.0 + olive + mac);
 	}
 
-	public static double toXCoord(LatLonWithZone latLon,
-			DistanceUnit distanceUnit) {
-		LatLonWithZone origin = JapanPlaneRectangular
-				.getOrigin(latLon.getZoneId());
-		return DistanceUnitConverter.change(
-				toXCoord(latLon.getLat(Unit.DEGREE), latLon.getLon(Unit.DEGREE),
-						origin.getLat(Unit.DEGREE), origin.getLon(Unit.DEGREE)),
-				DistanceUnit.M, distanceUnit);
+	public static double toXCoord(LatLonWithZone latLon, DistanceUnit distanceUnit) {
+		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(),
+				latLon.getDetum());
+		return DistanceUnitConverter
+				.change(toXCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO),
+						latLon.getLon(Unit.DEGREE, Detum.TOKYO),
+						origin.getLat(Unit.DEGREE, Detum.TOKYO),
+						origin.getLon(Unit.DEGREE, Detum.TOKYO)),
+						DistanceUnit.M, distanceUnit);
 	}
 
-	public static double toYCoord(LatLonWithZone latLon,
-			DistanceUnit distanceUnit) {
-		LatLonWithZone origin = JapanPlaneRectangular
-				.getOrigin(latLon.getZoneId());
+	public static double toYCoord(LatLonWithZone latLon, DistanceUnit distanceUnit) {
+		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(),
+				latLon.getDetum());
 		return DistanceUnitConverter.change(
-				toYCoord(latLon.getLat(Unit.DEGREE), latLon.getLon(Unit.DEGREE),
-						origin.getLat(Unit.DEGREE), origin.getLon(Unit.DEGREE)),
+				toYCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO),
+						latLon.getLon(Unit.DEGREE, Detum.TOKYO),
+						origin.getLat(Unit.DEGREE, Detum.TOKYO),
+						origin.getLon(Unit.DEGREE, Detum.TOKYO)),
 				DistanceUnit.M, distanceUnit);
 	}
 

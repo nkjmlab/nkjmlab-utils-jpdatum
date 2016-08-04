@@ -30,8 +30,7 @@ public class LatLonWithZone extends LatLon {
 				latLon.getDetum(), zoneId);
 	}
 
-	public LatLonWithZone(double lat, double lon, Unit unit, Detum detum,
-			ZoneId zoneId) {
+	public LatLonWithZone(double lat, double lon, Unit unit, Detum detum, ZoneId zoneId) {
 		super(lat, lon, unit, detum);
 		this.zoneId = zoneId;
 
@@ -41,8 +40,7 @@ public class LatLonWithZone extends LatLon {
 		this(lat, lon, basis.getUnit(), basis.getDetum(), basis.getZoneId());
 	}
 
-	public LatLonWithZone(LatLonPair latLon, Unit unit, Detum detum,
-			ZoneId zoneId) {
+	public LatLonWithZone(LatLonPair latLon, Unit unit, Detum detum, ZoneId zoneId) {
 		super(latLon, unit, detum);
 		this.zoneId = zoneId;
 

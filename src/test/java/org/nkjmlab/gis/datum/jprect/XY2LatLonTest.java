@@ -1,9 +1,10 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
 
 /**
@@ -31,14 +32,13 @@ public class XY2LatLonTest {
 		for (JapanPlaneRectangular.ZoneId zoneId : JapanPlaneRectangular.ZoneId
 				.values()) {
 
-			LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId);
+			LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId, Detum.TOKYO);
 
 			BasisWithZone basis = origin.getBasis();
 			double x = 0;
 			double y = 0;
 
-			LatLonWithZone latLon = XY2LatLon
-					.toLatLonWithZone(new XYWithZone(x, y, basis));
+			LatLonWithZone latLon = XY2LatLon.toLatLonWithZone(new XYWithZone(x, y, basis));
 
 			System.out.println("Origin: " + origin);
 			System.out.println("Calculated: " + latLon);

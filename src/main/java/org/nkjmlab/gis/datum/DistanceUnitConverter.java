@@ -2,8 +2,7 @@ package org.nkjmlab.gis.datum;
 
 public class DistanceUnitConverter {
 
-	public static double change(double val, DistanceUnit fromUnit,
-			DistanceUnit toUnit) {
+	public static double change(double val, DistanceUnit fromUnit, DistanceUnit toUnit) {
 		if (fromUnit == toUnit) {
 			return val;
 		}
