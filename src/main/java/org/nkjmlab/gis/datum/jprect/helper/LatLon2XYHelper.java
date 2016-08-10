@@ -1,13 +1,5 @@
 package org.nkjmlab.gis.datum.jprect.helper;
 
-import org.nkjmlab.gis.datum.DistanceUnit;
-import org.nkjmlab.gis.datum.DistanceUnitConverter;
-import org.nkjmlab.gis.datum.LatLon.Detum;
-import org.nkjmlab.gis.datum.LatLon.Unit;
-import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
-import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
-import org.nkjmlab.gis.datum.jprect.XYWithZone;
-
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
  *
@@ -33,7 +25,7 @@ public class LatLon2XYHelper {
 		return false;
 	}
 
-	private static double toXCoord(double latDeg, double lonDeg, double oLatDeg, double oLonDeg) {
+	public static double toXCoord(double latDeg, double lonDeg, double oLatDeg, double oLonDeg) {
 
 		double b = AngleUtil.toRadian(latDeg);
 		double l = AngleUtil.toRadian(lonDeg);
@@ -61,7 +53,7 @@ public class LatLon2XYHelper {
 		return Const.m0 * (arc_gap + x1 + x2 + x3);
 	}
 
-	private static double toYCoord(double latDeg, double lonDeg, double oLatDeg, double oLonDeg) {
+	public static double toYCoord(double latDeg, double lonDeg, double oLatDeg, double oLonDeg) {
 
 		double b = AngleUtil.toRadian(latDeg);
 		double l = AngleUtil.toRadian(lonDeg);
@@ -97,26 +89,6 @@ public class LatLon2XYHelper {
 		double mac = Math.pow(y, 4) / (24 * Math.pow(mrc, 2) * Math.pow(prc, 2) * Math.pow(Const.m0, 4));
 
 		return Const.m0 * (1.0 + olive + mac);
-	}
-
-	public static double toXCoord(LatLonWithZone latLon, DistanceUnit distanceUnit) {
-		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(), latLon.getDetum());
-		return DistanceUnitConverter.change(
-				toXCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO), latLon.getLon(Unit.DEGREE, Detum.TOKYO),
-						origin.getLat(Unit.DEGREE, Detum.TOKYO), origin.getLon(Unit.DEGREE, Detum.TOKYO)),
-				DistanceUnit.M, distanceUnit);
-	}
-
-	public static double toYCoord(LatLonWithZone latLon, DistanceUnit distanceUnit) {
-		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(), latLon.getDetum());
-		return DistanceUnitConverter.change(
-				toYCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO), latLon.getLon(Unit.DEGREE, Detum.TOKYO),
-						origin.getLat(Unit.DEGREE, Detum.TOKYO), origin.getLon(Unit.DEGREE, Detum.TOKYO)),
-				DistanceUnit.M, distanceUnit);
-	}
-
-	public static XYWithZone toXY(LatLonWithZone latLon) {
-		return new XYWithZone(toXCoord(latLon, DistanceUnit.M), toYCoord(latLon, DistanceUnit.M), latLon.getBasis());
 	}
 
 }

@@ -1,6 +1,10 @@
 package org.nkjmlab.gis.datum.jprect.util;
 
 import org.nkjmlab.gis.datum.DistanceUnit;
+import org.nkjmlab.gis.datum.DistanceUnitConverter;
+import org.nkjmlab.gis.datum.LatLon.Detum;
+import org.nkjmlab.gis.datum.LatLon.Unit;
+import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
 import org.nkjmlab.gis.datum.jprect.XYWithZone;
 import org.nkjmlab.gis.datum.jprect.helper.LatLon2XYHelper;
@@ -19,7 +23,7 @@ public class LatLon2XY {
 	 * @return 平面直角座標系の系番号付きの平面直角座標系XY
 	 */
 	public static XYWithZone toXYWithZone(LatLonWithZone latLon) {
-		return LatLon2XYHelper.toXY(latLon);
+		return new XYWithZone(toX(latLon, DistanceUnit.M), toY(latLon, DistanceUnit.M), latLon.getBasis());
 	}
 
 	/**
@@ -33,7 +37,10 @@ public class LatLon2XY {
 	 * @return
 	 */
 	public static double toX(LatLonWithZone latLon, DistanceUnit distanceUnit) {
-		return LatLon2XYHelper.toXCoord(latLon, distanceUnit);
+		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(), latLon.getDetum());
+		return DistanceUnitConverter.change(LatLon2XYHelper.toXCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO),
+				latLon.getLon(Unit.DEGREE, Detum.TOKYO), origin.getLat(Unit.DEGREE, Detum.TOKYO),
+				origin.getLon(Unit.DEGREE, Detum.TOKYO)), DistanceUnit.M, distanceUnit);
 	}
 
 	/**
@@ -47,7 +54,10 @@ public class LatLon2XY {
 	 * @return
 	 */
 	public static double toY(LatLonWithZone latLon, DistanceUnit distanceUnit) {
-		return LatLon2XYHelper.toYCoord(latLon, distanceUnit);
+		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(), latLon.getDetum());
+		return DistanceUnitConverter.change(LatLon2XYHelper.toYCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO),
+				latLon.getLon(Unit.DEGREE, Detum.TOKYO), origin.getLat(Unit.DEGREE, Detum.TOKYO),
+				origin.getLon(Unit.DEGREE, Detum.TOKYO)), DistanceUnit.M, distanceUnit);
 	}
 
 }

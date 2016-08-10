@@ -1,9 +1,5 @@
 package org.nkjmlab.gis.datum.jprect.helper;
 
-import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
-import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
-import org.nkjmlab.gis.datum.jprect.XYWithZone;
-
 /**
  * このクラスはジャスミンソフトがApache License 2.0に基づいて公開しているscalcに由来します．
  *
@@ -105,17 +101,4 @@ public class XY2LatLonHelper {
 		return M;
 	}
 
-	public static double toLon(XYWithZone xy) {
-		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(xy.getBasis().getZoneId(), xy.getDetum());
-		return toLongitude(xy.getX(), xy.getY(), origin.getLat(), origin.getLon());
-	}
-
-	public static double toLat(XYWithZone xy) {
-		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(xy.getBasis().getZoneId(), xy.getDetum());
-		return toLatitude(xy.getX(), xy.getY(), origin.getLat(), origin.getLon());
-	}
-
-	public static LatLonWithZone toLatLonWithZone(XYWithZone xy) {
-		return new LatLonWithZone(toLat(xy), toLon(xy), xy.getBasis());
-	}
 }
