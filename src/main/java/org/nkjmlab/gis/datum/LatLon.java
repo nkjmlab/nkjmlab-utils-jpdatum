@@ -76,8 +76,7 @@ public class LatLon extends LatLonPair {
 		NumberFormat format = NumberFormat.getInstance();
 		format.setGroupingUsed(false);
 		format.setMaximumFractionDigits(2);
-		return format.format(lat) + "," + format.format(lon) + "," + unit + ","
-				+ detum;
+		return format.format(lat) + "," + format.format(lon) + "," + unit + "," + detum;
 	}
 
 	/**
@@ -108,8 +107,7 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLat(Unit toUnit, Detum toDetum) {
-		return BasisConverter.changeBasisOfLat(lat, lon, this.unit, this.detum,
-				toUnit, toDetum);
+		return BasisConverter.changeBasisOfLat(lat, lon, this.unit, this.detum, toUnit, toDetum);
 	}
 
 	/**
@@ -118,8 +116,7 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLon(Unit toUnit, Detum toDetum) {
-		return BasisConverter.changeBasisOfLon(lat, lon, this.unit, this.detum,
-				toUnit, toDetum);
+		return BasisConverter.changeBasisOfLon(lat, lon, this.unit, this.detum, toUnit, toDetum);
 	}
 
 	/**
@@ -128,8 +125,7 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLon(Unit toUnit) {
-		return BasisConverter.changeBasisOfLon(lat, lon, this.unit, this.detum,
-				toUnit, this.detum);
+		return BasisConverter.changeBasisOfLon(lat, lon, this.unit, this.detum, toUnit, this.detum);
 	}
 
 	/**
@@ -138,8 +134,7 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLat(Unit toUnit) {
-		return BasisConverter.changeBasisOfLat(lat, lon, this.unit, this.detum,
-				toUnit, this.detum);
+		return BasisConverter.changeBasisOfLat(lat, lon, this.unit, this.detum, toUnit, this.detum);
 	}
 
 	/**
@@ -148,8 +143,7 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLat(Detum toDetum) {
-		return BasisConverter.changeBasisOfLat(lat, lon, this.unit, this.detum,
-				this.unit, toDetum);
+		return BasisConverter.changeBasisOfLat(lat, lon, this.unit, this.detum, this.unit, toDetum);
 	}
 
 	/**
@@ -158,8 +152,7 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLon(Detum toDetum) {
-		return BasisConverter.changeBasisOfLon(lat, lon, this.unit, this.detum,
-				this.unit, toDetum);
+		return BasisConverter.changeBasisOfLon(lat, lon, this.unit, this.detum, this.unit, toDetum);
 	}
 
 	public LatLon copyOn(Basis toBasis) {
@@ -167,7 +160,7 @@ public class LatLon extends LatLonPair {
 	}
 
 	public Basis getBasis() {
-		return new Basis(unit, detum);
+		return Basis.create(unit, detum);
 	}
 
 }

@@ -42,11 +42,9 @@ public class LatLon2XYTest {
 
 		Map<LatLonWithZone, XYWithZone> queries = new LinkedHashMap<>();
 
-		BasisWithZone tokyoBasis = new BasisWithZone(Unit.DEGREE, Detum.TOKYO,
-				ZoneId._9);
+		BasisWithZone tokyoBasis = BasisWithZone.create(Unit.DEGREE, Detum.TOKYO, ZoneId._9);
 
-		BasisWithZone wgsBasis = new BasisWithZone(Unit.DEGREE, Detum.WGS84,
-				ZoneId._9);
+		BasisWithZone wgsBasis = BasisWithZone.create(Unit.DEGREE, Detum.WGS84, ZoneId._9);
 
 		// BasisWithZone basis2 = new BasisWithZone(Unit.MILLI_DEGREE,
 		// Detum.TOKYO,
@@ -56,8 +54,8 @@ public class LatLon2XYTest {
 		// new XYWithZone(11631.3563, 22618.7053, DistanceUnit.M, basis2));
 
 		// 国土地理院 (日本測地系)
-		//		qas.put(new LatLonWithZone(36.104583, 140.084583, basis1),
-		//				new XYWithZone(11631.3563, 22618.7053, basis1));
+		// qas.put(new LatLonWithZone(36.104583, 140.084583, basis1),
+		// new XYWithZone(11631.3563, 22618.7053, basis1));
 
 		// 国土地理院 (日本測地系)
 		queries.put(new LatLonWithZone(36.103774791666666, 140.08785504166664, tokyoBasis),

@@ -26,8 +26,7 @@ public class LatLonWithZone extends LatLon {
 	 * @param zoneId
 	 */
 	public LatLonWithZone(LatLon latLon, ZoneId zoneId) {
-		this(latLon.getLat(), latLon.getLon(), latLon.getUnit(),
-				latLon.getDetum(), zoneId);
+		this(latLon.getLat(), latLon.getLon(), latLon.getUnit(), latLon.getDetum(), zoneId);
 	}
 
 	public LatLonWithZone(double lat, double lon, Unit unit, Detum detum, ZoneId zoneId) {
@@ -52,7 +51,7 @@ public class LatLonWithZone extends LatLon {
 
 	@Override
 	public BasisWithZone getBasis() {
-		return new BasisWithZone(super.getBasis(), zoneId);
+		return BasisWithZone.create(super.getBasis(), zoneId);
 	}
 
 	public ZoneId getZoneId() {
@@ -69,8 +68,7 @@ public class LatLonWithZone extends LatLon {
 
 	@Override
 	public LatLonWithZone copyOn(Basis toBasis) {
-		LatLon latLon = BasisConverter.changeBasis(lat, lon, getBasis(),
-				toBasis);
+		LatLon latLon = BasisConverter.changeBasis(lat, lon, getBasis(), toBasis);
 		return new LatLonWithZone(latLon, zoneId);
 	}
 
@@ -81,11 +79,8 @@ public class LatLonWithZone extends LatLon {
 	 * @return
 	 */
 	public double distance(LatLonWithZone toLatLon, DistanceUnit distanceUnit) {
-		return DistanceUnitConverter.change(Math.sqrt(Math
-				.pow(getX(distanceUnit) - toLatLon.getX(distanceUnit), 2)
-				+ Math.pow(getY(distanceUnit) - toLatLon.getY(distanceUnit),
-						2)),
-				DistanceUnit.M, distanceUnit);
+		return DistanceUnitConverter.change(Math.sqrt(Math.pow(getX(distanceUnit) - toLatLon.getX(distanceUnit), 2)
+				+ Math.pow(getY(distanceUnit) - toLatLon.getY(distanceUnit), 2)), DistanceUnit.M, distanceUnit);
 	}
 
 	public XYWithZone toXYWithZone() {
@@ -93,15 +88,13 @@ public class LatLonWithZone extends LatLon {
 	}
 
 	public Point toScreenCoord(LatLonWithZone origin, Scale scale) {
-		return this.toXYWithZone().toRelativeScreenCoord(origin.toXYWithZone(),
-				scale);
+		return this.toXYWithZone().toRelativeScreenCoord(origin.toXYWithZone(), scale);
 	}
 
 	public LatLonWithZone innerPoint(LatLonWithZone to, double ratio) {
 		double diffLat = (to.getLat(getBasis()) - getLat(getBasis())) * ratio;
 		double diffLon = (to.getLon(getBasis()) - getLon(getBasis())) * ratio;
 
-		return new LatLonWithZone(getLat() + diffLat, getLon() + diffLon,
-				getBasis());
+		return new LatLonWithZone(getLat() + diffLat, getLon() + diffLon, getBasis());
 	}
 }

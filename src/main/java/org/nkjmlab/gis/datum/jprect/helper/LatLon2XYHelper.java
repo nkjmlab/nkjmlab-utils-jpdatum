@@ -47,26 +47,21 @@ public class LatLon2XYHelper {
 
 		double q = 1.0 - Math.pow(Const.e * Math.sin(b), 2);
 		double prc = Const.ra / Math.sqrt(q);
-		double arc_gap = ArcLength.calcArcLength(b)
-				- ArcLength.calcArcLength(gentenB);
+		double arc_gap = ArcLength.calcArcLength(b) - ArcLength.calcArcLength(gentenB);
 
 		double x1 = Math.pow(lam, 2) * prc * Math.sin(b) * Math.cos(b) / 2.0;
 
-		double x2 = Math.pow(lam, 4) * prc * Math.sin(b)
-				* Math.pow(Math.cos(b), 3) / 24.0 * (5.0 - Math.pow(t, 2)
-						+ 9.0 * Math.pow(eta, 2) + 4.0 * Math.pow(eta, 4));
+		double x2 = Math.pow(lam, 4) * prc * Math.sin(b) * Math.pow(Math.cos(b), 3) / 24.0
+				* (5.0 - Math.pow(t, 2) + 9.0 * Math.pow(eta, 2) + 4.0 * Math.pow(eta, 4));
 
-		double x3 = Math.pow(lam, 6) * prc * Math.sin(b)
-				* Math.pow(Math.cos(b), 5) / 720.0
-				* (61.0 - 58.0 * Math.pow(t, 2) + Math.pow(t, 4)
-						+ 270.0 * Math.pow(eta, 2)
+		double x3 = Math.pow(lam, 6) * prc * Math.sin(b) * Math.pow(Math.cos(b), 5) / 720.0
+				* (61.0 - 58.0 * Math.pow(t, 2) + Math.pow(t, 4) + 270.0 * Math.pow(eta, 2)
 						- 330.0 * Math.pow(t, 2) * Math.pow(eta, 2));
 
 		return Const.m0 * (arc_gap + x1 + x2 + x3);
 	}
 
-	private static double toYCoord(double latDeg, double lonDeg, double oLatDeg,
-			double oLonDeg) {
+	private static double toYCoord(double latDeg, double lonDeg, double oLatDeg, double oLonDeg) {
 
 		double b = AngleUtil.toRadian(latDeg);
 		double l = AngleUtil.toRadian(lonDeg);
@@ -81,13 +76,10 @@ public class LatLon2XYHelper {
 		double prc = Const.ra / Math.sqrt(q);
 
 		double y1 = lam * prc * Math.cos(b)
-				+ Math.pow(lam, 3) * Math.pow(Math.cos(b), 3) * prc / 6.0
-						* (1.0 - Math.pow(t, 2) + Math.pow(eta, 2));
+				+ Math.pow(lam, 3) * Math.pow(Math.cos(b), 3) * prc / 6.0 * (1.0 - Math.pow(t, 2) + Math.pow(eta, 2));
 
-		double y2 = Math.pow(lam, 5) * Math.pow(Math.cos(b), 5) * prc / 120.0
-				* (5.0 - 18.0 * Math.pow(t, 2) + Math.pow(t, 4)
-						+ 14.0 * Math.pow(eta, 2)
-						- 58.0 * Math.pow(t, 2) * Math.pow(eta, 2));
+		double y2 = Math.pow(lam, 5) * Math.pow(Math.cos(b), 5) * prc / 120.0 * (5.0 - 18.0 * Math.pow(t, 2)
+				+ Math.pow(t, 4) + 14.0 * Math.pow(eta, 2) - 58.0 * Math.pow(t, 2) * Math.pow(eta, 2));
 
 		return Const.m0 * (y1 + y2);
 	}
@@ -99,41 +91,32 @@ public class LatLon2XYHelper {
 
 		double q = 1.0 - Math.pow(Const.e * Math.sin(b), 2);
 		double prc = Const.ra / Math.sqrt(q);
-		double mrc = Const.ra * (1 - Math.pow(Const.e, 2))
-				/ Math.sqrt(Math.pow(q, 3));
+		double mrc = Const.ra * (1 - Math.pow(Const.e, 2)) / Math.sqrt(Math.pow(q, 3));
 
 		double olive = Math.pow(y, 2) / (2 * mrc * prc * Math.pow(Const.m0, 2));
-		double mac = Math.pow(y, 4) / (24 * Math.pow(mrc, 2) * Math.pow(prc, 2)
-				* Math.pow(Const.m0, 4));
+		double mac = Math.pow(y, 4) / (24 * Math.pow(mrc, 2) * Math.pow(prc, 2) * Math.pow(Const.m0, 4));
 
 		return Const.m0 * (1.0 + olive + mac);
 	}
 
 	public static double toXCoord(LatLonWithZone latLon, DistanceUnit distanceUnit) {
-		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(),
-				latLon.getDetum());
-		return DistanceUnitConverter
-				.change(toXCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO),
-						latLon.getLon(Unit.DEGREE, Detum.TOKYO),
-						origin.getLat(Unit.DEGREE, Detum.TOKYO),
-						origin.getLon(Unit.DEGREE, Detum.TOKYO)),
-						DistanceUnit.M, distanceUnit);
+		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(), latLon.getDetum());
+		return DistanceUnitConverter.change(
+				toXCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO), latLon.getLon(Unit.DEGREE, Detum.TOKYO),
+						origin.getLat(Unit.DEGREE, Detum.TOKYO), origin.getLon(Unit.DEGREE, Detum.TOKYO)),
+				DistanceUnit.M, distanceUnit);
 	}
 
 	public static double toYCoord(LatLonWithZone latLon, DistanceUnit distanceUnit) {
-		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(),
-				latLon.getDetum());
+		LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(), latLon.getDetum());
 		return DistanceUnitConverter.change(
-				toYCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO),
-						latLon.getLon(Unit.DEGREE, Detum.TOKYO),
-						origin.getLat(Unit.DEGREE, Detum.TOKYO),
-						origin.getLon(Unit.DEGREE, Detum.TOKYO)),
+				toYCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO), latLon.getLon(Unit.DEGREE, Detum.TOKYO),
+						origin.getLat(Unit.DEGREE, Detum.TOKYO), origin.getLon(Unit.DEGREE, Detum.TOKYO)),
 				DistanceUnit.M, distanceUnit);
 	}
 
 	public static XYWithZone toXY(LatLonWithZone latLon) {
-		return new XYWithZone(toXCoord(latLon, DistanceUnit.M),
-				toYCoord(latLon, DistanceUnit.M), latLon.getBasis());
+		return new XYWithZone(toXCoord(latLon, DistanceUnit.M), toYCoord(latLon, DistanceUnit.M), latLon.getBasis());
 	}
 
 }

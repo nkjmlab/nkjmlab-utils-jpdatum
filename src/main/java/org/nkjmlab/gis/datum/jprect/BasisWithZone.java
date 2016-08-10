@@ -1,5 +1,8 @@
 package org.nkjmlab.gis.datum.jprect;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.nkjmlab.gis.datum.Basis;
@@ -17,11 +20,11 @@ public class BasisWithZone extends Basis {
 
 	protected final ZoneId zoneId;
 
-	public BasisWithZone(Basis basis, ZoneId zoneId) {
+	protected BasisWithZone(Basis basis, ZoneId zoneId) {
 		this(basis.getUnit(), basis.getDetum(), zoneId);
 	}
 
-	public BasisWithZone(Unit unit, Detum detum, ZoneId zoneId) {
+	protected BasisWithZone(Unit unit, Detum detum, ZoneId zoneId) {
 		super(unit, detum);
 		this.zoneId = zoneId;
 	}
@@ -38,6 +41,22 @@ public class BasisWithZone extends Basis {
 	@Override
 	public boolean equals(Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+
+	private static Map<ZoneId, BasisWithZone> map = new HashMap<>();
+
+	public static BasisWithZone create(Basis basis, ZoneId zoneId) {
+		return create(basis.getUnit(), basis.getDetum(), zoneId);
+	}
+
+	public static BasisWithZone create(Unit unit, Detum detum, ZoneId zoneId) {
+		BasisWithZone b = map.get(zoneId);
+		if (b != null) {
+			return b;
+		}
+		b = new BasisWithZone(create(unit, detum), zoneId);
+		map.put(zoneId, b);
+		return b;
 	}
 
 }
