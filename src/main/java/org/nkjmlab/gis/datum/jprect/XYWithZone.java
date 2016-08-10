@@ -19,7 +19,7 @@ import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
 
 public class XYWithZone extends XY {
 
-	protected final BasisWithZone basis;
+	private final BasisWithZone basis;
 
 	public XYWithZone(double x, double y, BasisWithZone basis) {
 		super(x, y);
@@ -73,7 +73,7 @@ public class XYWithZone extends XY {
 	}
 
 	private XY toRelativeCoord(XYWithZone origin) {
-		return new XY(x - origin.getX(), y - origin.getY());
+		return new XY(getX() - origin.getX(), getY() - origin.getY());
 	}
 
 }

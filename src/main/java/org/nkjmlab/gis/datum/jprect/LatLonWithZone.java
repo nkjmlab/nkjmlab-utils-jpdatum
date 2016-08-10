@@ -2,8 +2,6 @@ package org.nkjmlab.gis.datum.jprect;
 
 import java.awt.Point;
 
-import org.nkjmlab.gis.datum.Basis;
-import org.nkjmlab.gis.datum.BasisConverter;
 import org.nkjmlab.gis.datum.DistanceUnit;
 import org.nkjmlab.gis.datum.DistanceUnitConverter;
 import org.nkjmlab.gis.datum.LatLon;
@@ -19,43 +17,35 @@ import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
  */
 public class LatLonWithZone extends LatLon {
 
-	protected final ZoneId zoneId;
-
-	/**
-	 *
-	 * @param zoneId
-	 */
 	public LatLonWithZone(LatLon latLon, ZoneId zoneId) {
-		this(latLon.getLat(), latLon.getLon(), latLon.getUnit(), latLon.getDetum(), zoneId);
+		super(latLon.getLat(), latLon.getLon(), BasisWithZone.of(latLon.getUnit(), latLon.getDetum(), zoneId));
 	}
 
 	public LatLonWithZone(double lat, double lon, Unit unit, Detum detum, ZoneId zoneId) {
-		super(lat, lon, unit, detum);
-		this.zoneId = zoneId;
+		super(lat, lon, BasisWithZone.of(unit, detum, zoneId));
 
 	}
 
 	public LatLonWithZone(double lat, double lon, BasisWithZone basis) {
-		this(lat, lon, basis.getUnit(), basis.getDetum(), basis.getZoneId());
+		super(lat, lon, basis);
 	}
 
 	public LatLonWithZone(LatLonPair latLon, Unit unit, Detum detum, ZoneId zoneId) {
-		super(latLon, unit, detum);
-		this.zoneId = zoneId;
+		super(latLon, BasisWithZone.of(unit, detum, zoneId));
 
 	}
 
 	public LatLonWithZone(LatLonPair latLon, BasisWithZone basis) {
-		this(latLon, basis.getUnit(), basis.getDetum(), basis.getZoneId());
+		super(latLon, basis);
 	}
 
 	@Override
 	public BasisWithZone getBasis() {
-		return BasisWithZone.create(super.getBasis(), zoneId);
+		return (BasisWithZone) basis;
 	}
 
 	public ZoneId getZoneId() {
-		return zoneId;
+		return getBasis().getZoneId();
 	}
 
 	public double getX(DistanceUnit distanceUnit) {
@@ -64,12 +54,6 @@ public class LatLonWithZone extends LatLon {
 
 	public double getY(DistanceUnit distanceUnit) {
 		return LatLon2XY.toY(this, distanceUnit);
-	}
-
-	@Override
-	public LatLonWithZone copyOn(Basis toBasis) {
-		LatLon latLon = BasisConverter.changeBasis(lat, lon, getBasis(), toBasis);
-		return new LatLonWithZone(latLon, zoneId);
 	}
 
 	/**

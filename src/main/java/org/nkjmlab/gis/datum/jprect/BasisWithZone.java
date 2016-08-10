@@ -18,7 +18,7 @@ import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
  */
 public class BasisWithZone extends Basis {
 
-	protected final ZoneId zoneId;
+	private final ZoneId zoneId;
 
 	protected BasisWithZone(Basis basis, ZoneId zoneId) {
 		this(basis.getUnit(), basis.getDetum(), zoneId);
@@ -43,20 +43,27 @@ public class BasisWithZone extends Basis {
 		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
-	private static Map<ZoneId, BasisWithZone> map = new HashMap<>();
+	private static final Map<ZoneId, Map<Basis, BasisWithZone>> map = new HashMap<>();
 
-	public static BasisWithZone create(Basis basis, ZoneId zoneId) {
-		return create(basis.getUnit(), basis.getDetum(), zoneId);
+	public static BasisWithZone of(Basis basis, ZoneId zoneId) {
+		return of(basis.getUnit(), basis.getDetum(), zoneId);
 	}
 
-	public static BasisWithZone create(Unit unit, Detum detum, ZoneId zoneId) {
-		BasisWithZone b = map.get(zoneId);
-		if (b != null) {
-			return b;
+	public static BasisWithZone of(Unit unit, Detum detum, ZoneId zoneId) {
+		Map<Basis, BasisWithZone> m = map.get(zoneId);
+		if (m == null) {
+			m = new HashMap<>();
+			map.put(zoneId, m);
 		}
-		b = new BasisWithZone(create(unit, detum), zoneId);
-		map.put(zoneId, b);
-		return b;
+		Basis b = of(unit, detum);
+		BasisWithZone bz = m.get(b);
+		if (bz != null) {
+			return bz;
+		}
+
+		bz = new BasisWithZone(b, zoneId);
+		m.put(of(unit, detum), bz);
+		return bz;
 	}
 
 }

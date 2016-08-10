@@ -42,9 +42,9 @@ public class LatLon2XYTest {
 
 		Map<LatLonWithZone, XYWithZone> queries = new LinkedHashMap<>();
 
-		BasisWithZone tokyoBasis = BasisWithZone.create(Unit.DEGREE, Detum.TOKYO, ZoneId._9);
+		BasisWithZone tokyoBasis = BasisWithZone.of(Unit.DEGREE, Detum.TOKYO, ZoneId._9);
 
-		BasisWithZone wgsBasis = BasisWithZone.create(Unit.DEGREE, Detum.WGS84, ZoneId._9);
+		BasisWithZone wgsBasis = BasisWithZone.of(Unit.DEGREE, Detum.WGS84, ZoneId._9);
 
 		// BasisWithZone basis2 = new BasisWithZone(Unit.MILLI_DEGREE,
 		// Detum.TOKYO,

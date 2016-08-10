@@ -1,8 +1,5 @@
 package org.nkjmlab.gis.datum.jprect.helper;
 
-import org.nkjmlab.gis.datum.LatLon.Detum;
-import org.nkjmlab.gis.datum.LatLon.Unit;
-import org.nkjmlab.gis.datum.jprect.BasisWithZone;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
 import org.nkjmlab.gis.datum.jprect.XYWithZone;
@@ -119,7 +116,6 @@ public class XY2LatLonHelper {
 	}
 
 	public static LatLonWithZone toLatLonWithZone(XYWithZone xy) {
-		return new LatLonWithZone(toLat(xy), toLon(xy), BasisWithZone.create(Unit.DEGREE, Detum.TOKYO, xy.getZoneId()))
-				.copyOn(xy.getBasis());
+		return new LatLonWithZone(toLat(xy), toLon(xy), xy.getBasis());
 	}
 }

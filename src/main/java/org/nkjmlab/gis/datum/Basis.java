@@ -12,8 +12,8 @@ import org.nkjmlab.gis.datum.LatLon.Unit;
 
 public class Basis {
 
-	protected final Unit unit;
-	protected final Detum detum;
+	private final Unit unit;
+	private final Detum detum;
 
 	protected Basis(Unit unit, Detum detum) {
 		this.unit = unit;
@@ -50,7 +50,7 @@ public class Basis {
 		map.put(Detum.WGS84, new HashMap<>());
 	}
 
-	public static Basis create(Unit unit, Detum detum) {
+	public static Basis of(Unit unit, Detum detum) {
 		Basis b = map.get(detum).get(unit);
 		if (b != null) {
 			return b;

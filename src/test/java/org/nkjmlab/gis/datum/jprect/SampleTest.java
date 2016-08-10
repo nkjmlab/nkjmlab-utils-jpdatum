@@ -22,17 +22,17 @@ public class SampleTest {
 
 		for (double i = 0; i < 1; i += 0.0000001) {
 			LatLonWithZone tokyoLatLon = new LatLonWithZone(lat + i, lon + i,
-					BasisWithZone.create(Unit.DEGREE, Detum.TOKYO, ZoneId._9));
+					BasisWithZone.of(Unit.DEGREE, Detum.TOKYO, ZoneId._9));
 			XYWithZone tokyoXy = tokyoLatLon.toXYWithZone();
 		}
 
 		System.out.println(System.currentTimeMillis() - start);
 
 		LatLonWithZone tokyoLatLon = new LatLonWithZone(36.103774791666666, 140.08785504166664,
-				BasisWithZone.create(Unit.DEGREE, Detum.TOKYO, ZoneId._9));
+				BasisWithZone.of(Unit.DEGREE, Detum.TOKYO, ZoneId._9));
 
 		LatLonWithZone wgsLatLon = new LatLonWithZone(36.103774791666666, 140.08785504166664,
-				BasisWithZone.create(Unit.DEGREE, Detum.WGS84, ZoneId._9));
+				BasisWithZone.of(Unit.DEGREE, Detum.WGS84, ZoneId._9));
 
 		XYWithZone tokyoXy = tokyoLatLon.toXYWithZone();
 		System.out.println(tokyoXy);

@@ -7,8 +7,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.nkjmlab.gis.datum.DistanceUnit;
 
 public class XY {
-	protected final double x;
-	protected final double y;
+	private final double x;
+	private final double y;
 
 	private final DistanceUnit distanceUnit = DistanceUnit.M;
 

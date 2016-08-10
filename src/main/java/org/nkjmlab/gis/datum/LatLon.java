@@ -16,8 +16,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class LatLon extends LatLonPair {
 
-	protected final Unit unit;
-	protected final Detum detum;
+	protected final Basis basis;
 
 	public enum Unit {
 		DEGREE, MILLI_DEGREE, DMS, SECOND
@@ -29,32 +28,31 @@ public class LatLon extends LatLonPair {
 
 	public LatLon(double lat, double lon, Unit unit, Detum detum) {
 		super(lat, lon);
-		this.unit = unit;
-		this.detum = detum;
+		this.basis = Basis.of(unit, detum);
 
 	}
 
 	public LatLon(double lat, double lon, Basis basis) {
-		this(lat, lon, basis.getUnit(), basis.getDetum());
+		super(lat, lon);
+		this.basis = basis;
 	}
 
 	public LatLon(LatLonPair latLon, Unit unit, Detum detum) {
 		super(latLon);
-		this.unit = unit;
-		this.detum = detum;
-
+		this.basis = Basis.of(unit, detum);
 	}
 
 	public LatLon(LatLonPair latLon, Basis basis) {
-		this(latLon, basis.getUnit(), basis.getDetum());
+		super(latLon);
+		this.basis = basis;
 	}
 
 	public Unit getUnit() {
-		return this.unit;
+		return basis.getUnit();
 	}
 
 	public Detum getDetum() {
-		return this.detum;
+		return basis.getDetum();
 	}
 
 	@Override
@@ -76,7 +74,7 @@ public class LatLon extends LatLonPair {
 		NumberFormat format = NumberFormat.getInstance();
 		format.setGroupingUsed(false);
 		format.setMaximumFractionDigits(2);
-		return format.format(lat) + "," + format.format(lon) + "," + unit + "," + detum;
+		return format.format(lat) + "," + format.format(lon) + "," + basis.getUnit() + "," + basis.getDetum();
 	}
 
 	/**
@@ -107,7 +105,7 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLat(Unit toUnit, Detum toDetum) {
-		return BasisConverter.changeBasisOfLat(lat, lon, this.unit, this.detum, toUnit, toDetum);
+		return BasisConverter.changeBasisOfLat(lat, lon, this.basis.getUnit(), this.basis.getDetum(), toUnit, toDetum);
 	}
 
 	/**
@@ -116,7 +114,7 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLon(Unit toUnit, Detum toDetum) {
-		return BasisConverter.changeBasisOfLon(lat, lon, this.unit, this.detum, toUnit, toDetum);
+		return BasisConverter.changeBasisOfLon(lat, lon, this.basis.getUnit(), this.basis.getDetum(), toUnit, toDetum);
 	}
 
 	/**
@@ -125,7 +123,8 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLon(Unit toUnit) {
-		return BasisConverter.changeBasisOfLon(lat, lon, this.unit, this.detum, toUnit, this.detum);
+		return BasisConverter.changeBasisOfLon(lat, lon, this.basis.getUnit(), this.basis.getDetum(), toUnit,
+				this.basis.getDetum());
 	}
 
 	/**
@@ -134,7 +133,8 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLat(Unit toUnit) {
-		return BasisConverter.changeBasisOfLat(lat, lon, this.unit, this.detum, toUnit, this.detum);
+		return BasisConverter.changeBasisOfLat(lat, lon, this.basis.getUnit(), this.basis.getDetum(), toUnit,
+				this.basis.getDetum());
 	}
 
 	/**
@@ -143,7 +143,8 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLat(Detum toDetum) {
-		return BasisConverter.changeBasisOfLat(lat, lon, this.unit, this.detum, this.unit, toDetum);
+		return BasisConverter.changeBasisOfLat(lat, lon, this.basis.getUnit(), this.basis.getDetum(),
+				this.basis.getUnit(), toDetum);
 	}
 
 	/**
@@ -152,15 +153,12 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLon(Detum toDetum) {
-		return BasisConverter.changeBasisOfLon(lat, lon, this.unit, this.detum, this.unit, toDetum);
-	}
-
-	public LatLon copyOn(Basis toBasis) {
-		return BasisConverter.changeBasis(lat, lon, getBasis(), toBasis);
+		return BasisConverter.changeBasisOfLon(lat, lon, this.basis.getUnit(), this.basis.getDetum(),
+				this.basis.getUnit(), toDetum);
 	}
 
 	public Basis getBasis() {
-		return Basis.create(unit, detum);
+		return basis;
 	}
 
 }
