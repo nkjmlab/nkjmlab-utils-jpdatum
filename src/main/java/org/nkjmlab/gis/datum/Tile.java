@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.nkjmlab.gis.datum.jprect.util.Tile2LatLonBox;
 
 public class Tile {
 
@@ -11,9 +12,9 @@ public class Tile {
 	private int y;
 	private int zoom;
 
-	public Tile(int xTile, int yTile, int zoom) {
-		this.x = xTile;
-		this.y = yTile;
+	public Tile(int x, int y, int zoom) {
+		this.x = x;
+		this.y = y;
 		this.zoom = zoom;
 	}
 
@@ -27,6 +28,10 @@ public class Tile {
 
 	public int getZoom() {
 		return zoom;
+	}
+
+	public LatLonBox toLatLonBox(Basis basis) {
+		return Tile2LatLonBox.toLatLonBox(this, basis);
 	}
 
 	@Override

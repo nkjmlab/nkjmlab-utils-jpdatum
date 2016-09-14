@@ -12,8 +12,16 @@ import org.nkjmlab.gis.datum.LatLon.Unit;
 
 public class Basis {
 
+	public static final Basis DEGREE_WGS;
 	private final Unit unit;
 	private final Detum detum;
+	private static Map<Detum, Map<Unit, Basis>> map = new HashMap<>();
+
+	static {
+		map.put(Detum.TOKYO, new HashMap<>());
+		map.put(Detum.WGS84, new HashMap<>());
+		DEGREE_WGS = of(Unit.DEGREE, Detum.WGS84);
+	}
 
 	protected Basis(Unit unit, Detum detum) {
 		this.unit = unit;
@@ -41,13 +49,6 @@ public class Basis {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
-
-	private static Map<Detum, Map<Unit, Basis>> map = new HashMap<>();
-
-	static {
-		map.put(Detum.TOKYO, new HashMap<>());
-		map.put(Detum.WGS84, new HashMap<>());
 	}
 
 	public static Basis of(Unit unit, Detum detum) {
