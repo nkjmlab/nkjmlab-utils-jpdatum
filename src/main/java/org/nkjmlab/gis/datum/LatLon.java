@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.nkjmlab.gis.datum.jprect.util.LatLon2Tile;
 
 /**
  * 緯度経度を表現するクラス．緯度経度は，作成時に指定された単位と測地系で保存される．呼び出し時に指定した単位および座標系で取り出すことができる．
@@ -74,7 +75,8 @@ public class LatLon extends LatLonPair {
 		NumberFormat format = NumberFormat.getInstance();
 		format.setGroupingUsed(false);
 		format.setMaximumFractionDigits(2);
-		return format.format(lat) + "," + format.format(lon) + "," + basis.getUnit() + "," + basis.getDetum();
+		return format.format(lat) + "," + format.format(lon) + "," + basis.getUnit() + ","
+				+ basis.getDetum();
 	}
 
 	/**
@@ -105,7 +107,8 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLat(Unit toUnit, Detum toDetum) {
-		return BasisConverter.changeBasisOfLat(lat, lon, this.basis.getUnit(), this.basis.getDetum(), toUnit, toDetum);
+		return BasisConverter.changeBasisOfLat(lat, lon, this.basis.getUnit(),
+				this.basis.getDetum(), toUnit, toDetum);
 	}
 
 	/**
@@ -114,7 +117,8 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLon(Unit toUnit, Detum toDetum) {
-		return BasisConverter.changeBasisOfLon(lat, lon, this.basis.getUnit(), this.basis.getDetum(), toUnit, toDetum);
+		return BasisConverter.changeBasisOfLon(lat, lon, this.basis.getUnit(),
+				this.basis.getDetum(), toUnit, toDetum);
 	}
 
 	/**
@@ -123,7 +127,8 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLon(Unit toUnit) {
-		return BasisConverter.changeBasisOfLon(lat, lon, this.basis.getUnit(), this.basis.getDetum(), toUnit,
+		return BasisConverter.changeBasisOfLon(lat, lon, this.basis.getUnit(),
+				this.basis.getDetum(), toUnit,
 				this.basis.getDetum());
 	}
 
@@ -133,7 +138,8 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLat(Unit toUnit) {
-		return BasisConverter.changeBasisOfLat(lat, lon, this.basis.getUnit(), this.basis.getDetum(), toUnit,
+		return BasisConverter.changeBasisOfLat(lat, lon, this.basis.getUnit(),
+				this.basis.getDetum(), toUnit,
 				this.basis.getDetum());
 	}
 
@@ -143,7 +149,8 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLat(Detum toDetum) {
-		return BasisConverter.changeBasisOfLat(lat, lon, this.basis.getUnit(), this.basis.getDetum(),
+		return BasisConverter.changeBasisOfLat(lat, lon, this.basis.getUnit(),
+				this.basis.getDetum(),
 				this.basis.getUnit(), toDetum);
 	}
 
@@ -153,12 +160,21 @@ public class LatLon extends LatLonPair {
 	 * @return
 	 */
 	public double getLon(Detum toDetum) {
-		return BasisConverter.changeBasisOfLon(lat, lon, this.basis.getUnit(), this.basis.getDetum(),
+		return BasisConverter.changeBasisOfLon(lat, lon, this.basis.getUnit(),
+				this.basis.getDetum(),
 				this.basis.getUnit(), toDetum);
 	}
 
 	public Basis getBasis() {
 		return basis;
+	}
+
+	public LatLon copyInto(Basis basis) {
+		return new LatLon(getLat(basis), getLon(basis), basis);
+	}
+
+	public Tile getTile(int zoom) {
+		return LatLon2Tile.toTile(this, zoom);
 	}
 
 }

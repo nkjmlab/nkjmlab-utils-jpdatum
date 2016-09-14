@@ -69,6 +69,10 @@ public class BasisConverter {
 				toBasis.getDetum());
 	}
 
+	public static LatLonWithZone changeBasis(LatLonWithZone latLon, BasisWithZone toBasis) {
+		return changeBasis(latLon.getLat(), latLon.getLon(), latLon.getBasis(), toBasis);
+	}
+
 	public static LatLon changeBasis(double lat, double lon, Basis fromBasis, Basis toBasis) {
 		return new LatLon(changeBasisOfLat(lat, lon, fromBasis, toBasis),
 				changeBasisOfLon(lat, lon, fromBasis, toBasis), toBasis);

@@ -2,6 +2,7 @@ package org.nkjmlab.gis.datum.jprect;
 
 import java.awt.Point;
 
+import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.DistanceUnit;
 import org.nkjmlab.gis.datum.DistanceUnitConverter;
 import org.nkjmlab.gis.datum.LatLon;
@@ -18,7 +19,8 @@ import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
 public class LatLonWithZone extends LatLon {
 
 	public LatLonWithZone(LatLon latLon, ZoneId zoneId) {
-		super(latLon.getLat(), latLon.getLon(), BasisWithZone.of(latLon.getUnit(), latLon.getDetum(), zoneId));
+		super(latLon.getLat(), latLon.getLon(),
+				BasisWithZone.of(latLon.getUnit(), latLon.getDetum(), zoneId));
 	}
 
 	public LatLonWithZone(double lat, double lon, Unit unit, Detum detum, ZoneId zoneId) {
@@ -63,8 +65,10 @@ public class LatLonWithZone extends LatLon {
 	 * @return
 	 */
 	public double distance(LatLonWithZone toLatLon, DistanceUnit distanceUnit) {
-		return DistanceUnitConverter.change(Math.sqrt(Math.pow(getX(distanceUnit) - toLatLon.getX(distanceUnit), 2)
-				+ Math.pow(getY(distanceUnit) - toLatLon.getY(distanceUnit), 2)), DistanceUnit.M, distanceUnit);
+		return DistanceUnitConverter
+				.change(Math.sqrt(Math.pow(getX(distanceUnit) - toLatLon.getX(distanceUnit), 2)
+						+ Math.pow(getY(distanceUnit) - toLatLon.getY(distanceUnit), 2)),
+						DistanceUnit.M, distanceUnit);
 	}
 
 	public XYWithZone toXYWithZone() {
@@ -81,4 +85,11 @@ public class LatLonWithZone extends LatLon {
 
 		return new LatLonWithZone(getLat() + diffLat, getLon() + diffLon, getBasis());
 	}
+
+	@Override
+	public LatLonWithZone copyInto(Basis basis) {
+		return new LatLonWithZone(getLat(basis), getLon(basis),
+				BasisWithZone.of(basis, getZoneId()));
+	}
+
 }
