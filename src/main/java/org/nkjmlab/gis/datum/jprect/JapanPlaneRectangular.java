@@ -1,7 +1,18 @@
 package org.nkjmlab.gis.datum.jprect;
 
+import java.net.URI;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.nkjmlab.gis.datum.Basis;
+import org.nkjmlab.gis.datum.LatLon;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
+import org.nkjmlab.util.http.HttpDownloader;
+import org.nkjmlab.util.lang.MessageUtils;
 
 /**
  *
@@ -11,14 +22,17 @@ import org.nkjmlab.gis.datum.LatLon.Unit;
  * 測量法（昭和二十四年法律第百八十八号。以下「法」という。)第十一条第一項第一号の規定を実施するため、
  * 直角座標で位置を表示する場合の平面直角座標系を次のように定める。
  *
+ * http://vldb.gsi.go.jp/sokuchi/patchjgd/download/Help/jpc/jpcmap1_19.htm
+ *
  * @author Yuu NAKAJIMA
  *
  */
 public class JapanPlaneRectangular {
+	protected static Logger log = LogManager.getLogger();
 
 	public static enum ZoneId {
-		_1(0), _2(1), _3(2), _4(3), _5(4), _6(5), _7(6), _8(7), _9(8), _10(9), _11(10), _12(11), _13(12), _14(13), _15(
-				14), _16(15), _17(16), _18(17), _19(18);
+		_1(0), _2(1), _3(2), _4(3), _5(4), _6(5), _7(6), _8(7), _9(8), _10(9), _11(10), _12(
+				11), _13(12), _14(13), _15(14), _16(15), _17(16), _18(17), _19(18);
 
 		private int index;
 
@@ -27,13 +41,14 @@ public class JapanPlaneRectangular {
 		}
 	}
 
-	private static final double[] lats = { 33.00000, 33.00000, 36.00000, 33.00000, 36.00000, 36.00000, 36.00000,
-			36.00000, 36.00000, 40.00000, 44.00000, 44.00000, 44.00000, 26.00000, 26.00000, 26.00000, 26.00000,
-			20.00000, 26.00000 };
+	private static final double[] lats = { 33.00000, 33.00000, 36.00000, 33.00000, 36.00000,
+			36.00000, 36.00000, 36.00000, 36.00000, 40.00000, 44.00000, 44.00000, 44.00000,
+			26.00000, 26.00000, 26.00000, 26.00000, 20.00000, 26.00000 };
 
-	private static final double[] lons = { 129.5000, 131.00000, 132.166666666666669, 133.50000, 134.333333333333334,
-			136.00000, 137.166666666666666, 138.5, 139.833333333333334, 140.833333333333333, 140.25000, 142.25000,
-			144.25000, 142.00000, 127.50000, 124.00000, 131.00000, 136.00000, 154.00000 };
+	private static final double[] lons = { 129.5000, 131.00000, 132.166666666666669, 133.50000,
+			134.333333333333334, 136.00000, 137.166666666666666, 138.5, 139.833333333333334,
+			140.833333333333333, 140.25000, 142.25000, 144.25000, 142.00000, 127.50000, 124.00000,
+			131.00000, 136.00000, 154.00000 };
 
 	private static final LatLonWithZone[] tokyos = {
 			new LatLonWithZone(lats[0], lons[0], Unit.DEGREE, Detum.TOKYO, ZoneId._1),
@@ -85,6 +100,136 @@ public class JapanPlaneRectangular {
 			return wgs84s[zoneId.index];
 		default:
 			throw new IllegalArgumentException();
+		}
+	}
+
+	public static ZoneId estimate(LatLon latLon) {
+		Map<String, Object> json = new HashMap<>();
+		latLon = latLon.copyInto(Basis.DEGREE_WGS);
+		try {
+			json = new HttpDownloader().getAsJson(URI.create(
+					MessageUtils.format(
+							"http://nominatim.openstreetmap.org/reverse?format=json&lat={}&lon={}",
+							latLon.getLat(), latLon.getLon())));
+		} catch (Exception e) {
+			log.error("state is null");
+			return ZoneId._9;
+		}
+		Map<String, Object> addressObj = (Map<String, Object>) json.get("address");
+		if (addressObj == null) {
+			log.error("state is null");
+			return ZoneId._9;
+		}
+		String address = addressObj.toString();
+		log.debug(address);
+		String state = (String) addressObj.get("state");
+		if (state == null) {
+			log.error("state is null");
+			return ZoneId._9;
+		}
+		log.debug(state);
+		switch (state) {
+		case "長崎県":
+		case "鹿児島県":
+			return ZoneId._1;
+		case "福岡県":
+		case "佐賀県":
+		case "熊本県":
+		case "大分県":
+		case "宮崎県":
+			return ZoneId._2;
+		case "山口県":
+		case "島根県":
+		case "広島県":
+			return ZoneId._3;
+		case "香川県":
+		case "愛媛県":
+		case "徳島県":
+		case "高知県":
+			return ZoneId._4;
+		case "兵庫県":
+		case "鳥取県":
+		case "岡山県":
+			return ZoneId._5;
+		case "京都府":
+		case "大阪府":
+		case "福井県":
+		case "滋賀県":
+		case "三重県":
+		case "奈良県":
+		case "和歌山県":
+			return ZoneId._6;
+		case "石川県":
+		case "富山県":
+		case "岐阜県":
+		case "愛知県":
+			return ZoneId._7;
+		case "新潟県":
+		case "長野県":
+		case "山梨県":
+		case "静岡県":
+			return ZoneId._8;
+		case "東京都":
+			if (address.contains("沖ノ鳥島")) {
+				return ZoneId._18;
+			}
+			if (address.contains("南鳥島")) {
+				return ZoneId._19;
+			}
+
+			for (String city : Arrays.asList("小笠原村", "聟島列島", "父島列島", "母島列島", "硫黄島")) {
+				if (address.contains(city)) {
+					return ZoneId._14;
+				}
+			}
+			return ZoneId._9;
+		case "福島県":
+		case "栃木県":
+		case "茨城県":
+		case "埼玉県":
+		case "千葉県":
+		case "群馬県":
+		case "神奈川県":
+			return ZoneId._9;
+		case "青森県":
+		case "秋田県":
+		case "山形県":
+		case "岩手県":
+		case "宮城県":
+			return ZoneId._10;
+		case "北海道":
+			for (String city : Arrays.asList("小樽市", "函館市", "伊達市", "北斗市", "豊浦町", "壮瞥町", "洞爺湖町",
+					"奥尻島", "渡島大島", "松前小島")) {
+				if (address.contains(city)) {
+					return ZoneId._11;
+				}
+			}
+			for (String city : Arrays.asList("北見市", "帯広市", "釧路市", "網走市", "根室市", "美幌町", "津別町",
+					"斜里町", "清里町", "小清水町", "訓子府町", "置戸町", "佐呂間町", "大空町", "択捉島", "国後島", "色丹島",
+					"歯舞群島")) {
+				if (address.contains(city)) {
+					return ZoneId._13;
+				}
+			}
+			return ZoneId._12;
+		case "沖縄県":
+			for (String city : Arrays.asList("平良市", "石垣市", "城辺町", "下地町", "上野村", "伊良部町", "多良間村",
+					"竹富町", "与那国町", "宮古諸島", "多良間島", "水納島", "与那国島", "石垣島", "竹富島", "西表島")) {
+				if (address.contains(city)) {
+					return ZoneId._16;
+				}
+			}
+
+			for (String city : Arrays.asList("南大東村", "北大東村", "北大東島", "南大東島")) {
+				if (address.contains(city)) {
+					return ZoneId._17;
+				}
+			}
+			return ZoneId._15;
+
+		default:
+			log.error("state is not match");
+			return ZoneId._9;
 		}
 	}
 }

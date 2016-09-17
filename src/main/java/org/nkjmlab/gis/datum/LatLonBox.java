@@ -32,7 +32,7 @@ public class LatLonBox {
 		return southEast;
 	}
 
-	private LatLon getSouthWest() {
+	public LatLon getSouthWest() {
 		return southWest;
 	}
 

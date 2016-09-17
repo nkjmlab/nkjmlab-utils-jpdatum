@@ -48,4 +48,12 @@ public class Tile {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
+
+	public Tile getNextX() {
+		return new Tile(x + 1, y, zoom);
+	}
+
+	public Tile getNextY() {
+		return new Tile(x, y + 1, zoom);
+	}
 }

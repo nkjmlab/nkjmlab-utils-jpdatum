@@ -173,7 +173,7 @@ public class LatLon extends LatLonPair {
 		return new LatLon(getLat(basis), getLon(basis), basis);
 	}
 
-	public Tile getTile(int zoom) {
+	public Tile toTile(int zoom) {
 		return LatLon2Tile.toTile(this, zoom);
 	}
 

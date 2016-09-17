@@ -60,14 +60,13 @@ public class XYWithZone extends XY {
 		return basis.getDetum();
 	}
 
-	public Point toRelativeScreenCoord(XYWithZone origin, Scale scale) {
-		XY relativeCoord = this.toRelativeCoord(origin);
-		return toPoint(relativeCoord, scale);
+	public Point toRelativeScreenCoord(XYWithZone origin, ScreenSizeBasis screenSizeBasis) {
+		return toPoint(toRelativeCoord(origin), screenSizeBasis);
 	}
 
-	private Point toPoint(XY relativeCoord, Scale scale) {
-		int x = scale.toPixcel(getY());
-		int y = scale.toPixcel(getX()) * -1;
+	private static Point toPoint(XY relativeCoord, ScreenSizeBasis screenSizeBasis) {
+		int x = (int) screenSizeBasis.toPixel(relativeCoord.getY());
+		int y = (int) screenSizeBasis.toPixel(relativeCoord.getX()) * -1;
 		Point p = new Point(x, y);
 		return p;
 	}

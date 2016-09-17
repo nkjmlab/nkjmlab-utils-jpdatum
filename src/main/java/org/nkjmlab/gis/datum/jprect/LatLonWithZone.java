@@ -75,8 +75,8 @@ public class LatLonWithZone extends LatLon {
 		return LatLon2XY.toXYWithZone(this);
 	}
 
-	public Point toScreenCoord(LatLonWithZone origin, Scale scale) {
-		return this.toXYWithZone().toRelativeScreenCoord(origin.toXYWithZone(), scale);
+	public Point toScreenCoord(LatLonWithZone origin, ScreenSizeBasis screenSizeBasis) {
+		return this.toXYWithZone().toRelativeScreenCoord(origin.toXYWithZone(), screenSizeBasis);
 	}
 
 	public LatLonWithZone innerPoint(LatLonWithZone to, double ratio) {
