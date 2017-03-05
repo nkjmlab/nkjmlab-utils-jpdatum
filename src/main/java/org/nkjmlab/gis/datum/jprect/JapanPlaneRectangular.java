@@ -1,18 +1,14 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import java.net.URI;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.nkjmlab.gis.datum.Basis;
+import org.nkjmlab.gis.datum.DistanceUnit;
 import org.nkjmlab.gis.datum.LatLon;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
-import org.nkjmlab.util.http.HttpDownloader;
-import org.nkjmlab.util.lang.MessageUtils;
 
 /**
  *
@@ -39,12 +35,18 @@ public class JapanPlaneRectangular {
 		private ZoneId(int index) {
 			this.index = index;
 		}
+
+		public static ZoneId get(int index) {
+			return values()[index];
+		}
 	}
 
+	//UNIT.DEGREE, Detum.WGS84
 	private static final double[] lats = { 33.00000, 33.00000, 36.00000, 33.00000, 36.00000,
 			36.00000, 36.00000, 36.00000, 36.00000, 40.00000, 44.00000, 44.00000, 44.00000,
 			26.00000, 26.00000, 26.00000, 26.00000, 20.00000, 26.00000 };
 
+	//UNIT.DEGREE, Detum.WGS84
 	private static final double[] lons = { 129.5000, 131.00000, 132.166666666666669, 133.50000,
 			134.333333333333334, 136.00000, 137.166666666666666, 138.5, 139.833333333333334,
 			140.833333333333333, 140.25000, 142.25000, 144.25000, 142.00000, 127.50000, 124.00000,
@@ -103,31 +105,29 @@ public class JapanPlaneRectangular {
 		}
 	}
 
-	public static ZoneId estimate(LatLon latLon) {
-		Map<String, Object> json = new HashMap<>();
-		latLon = latLon.copyInto(Basis.DEGREE_WGS);
-		try {
-			json = new HttpDownloader().getAsJson(URI.create(
-					MessageUtils.format(
-							"http://nominatim.openstreetmap.org/reverse?format=json&lat={}&lon={}",
-							latLon.getLat(), latLon.getLon())));
-		} catch (Exception e) {
-			log.error("state is null");
-			return ZoneId._9;
+	public static void main(String[] args) {
+		System.out.println(
+				getNearestOriginZoneId(new LatLon(35.010348, 135.768738, Basis.DEGREE_WGS)));
+	}
+
+	public static ZoneId getNearestOriginZoneId(LatLon latLon) {
+		LatLonWithZone l = new LatLonWithZone(latLon, ZoneId._7);
+		int minIndex = 0;
+		double minVal = Double.MAX_VALUE;
+		for (int i = 0; i < wgs84s.length; i++) {
+			double dist = new LatLonWithZone(wgs84s[i], ZoneId._7).distance(l, DistanceUnit.M);
+			if (dist < minVal) {
+				minIndex = i;
+				minVal = dist;
+			}
 		}
-		Map<String, Object> addressObj = (Map<String, Object>) json.get("address");
-		if (addressObj == null) {
-			log.error("state is null");
-			return ZoneId._9;
-		}
-		String address = addressObj.toString();
-		log.debug(address);
-		String state = (String) addressObj.get("state");
-		if (state == null) {
-			log.error("state is null");
-			return ZoneId._9;
-		}
-		log.debug(state);
+		log.info(minIndex);
+		ZoneId z = ZoneId.get(minIndex);
+		log.info(z);
+		return z;
+	}
+
+	public static ZoneId estimateZoneIdBasedOnAddress(String state, String address) {
 		switch (state) {
 		case "長崎県":
 		case "鹿児島県":
@@ -232,4 +232,5 @@ public class JapanPlaneRectangular {
 			return ZoneId._9;
 		}
 	}
+
 }

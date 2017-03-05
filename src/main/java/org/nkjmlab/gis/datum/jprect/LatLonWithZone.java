@@ -18,6 +18,11 @@ import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
  */
 public class LatLonWithZone extends LatLon {
 
+	public static LatLonWithZone createWithNearestOrigin(LatLon latLon) {
+		ZoneId zoneId = JapanPlaneRectangular.getNearestOriginZoneId(latLon);
+		return new LatLonWithZone(latLon, zoneId);
+	}
+
 	public LatLonWithZone(LatLon latLon, ZoneId zoneId) {
 		super(latLon.getLat(), latLon.getLon(),
 				BasisWithZone.of(latLon.getUnit(), latLon.getDetum(), zoneId));
