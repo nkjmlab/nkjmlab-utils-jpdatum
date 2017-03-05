@@ -121,9 +121,7 @@ public class JapanPlaneRectangular {
 				minVal = dist;
 			}
 		}
-		log.info(minIndex);
 		ZoneId z = ZoneId.get(minIndex);
-		log.info(z);
 		return z;
 	}
 
