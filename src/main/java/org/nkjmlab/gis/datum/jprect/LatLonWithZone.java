@@ -8,7 +8,7 @@ import org.nkjmlab.gis.datum.DistanceUnitConverter;
 import org.nkjmlab.gis.datum.LatLon;
 import org.nkjmlab.gis.datum.LatLonPair;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
-import org.nkjmlab.gis.datum.jprect.util.LatLon2XY;
+import org.nkjmlab.gis.datum.jprect.util.LatLonUtils;
 
 /**
  * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）の系番号付きの緯度経度
@@ -56,11 +56,11 @@ public class LatLonWithZone extends LatLon {
 	}
 
 	public double getX(DistanceUnit distanceUnit) {
-		return LatLon2XY.toX(this, distanceUnit);
+		return LatLonUtils.toX(this, distanceUnit);
 	}
 
 	public double getY(DistanceUnit distanceUnit) {
-		return LatLon2XY.toY(this, distanceUnit);
+		return LatLonUtils.toY(this, distanceUnit);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class LatLonWithZone extends LatLon {
 	}
 
 	public XYWithZone toXYWithZone() {
-		return LatLon2XY.toXYWithZone(this);
+		return LatLonUtils.toXYWithZone(this);
 	}
 
 	public Point toScreenCoord(LatLonWithZone origin, ScreenSizeBasis screenSizeBasis) {

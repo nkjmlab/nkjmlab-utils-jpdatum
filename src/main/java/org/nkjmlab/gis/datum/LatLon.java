@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.nkjmlab.gis.datum.jprect.util.LatLon2Tile;
+import org.nkjmlab.gis.datum.jprect.util.LatLonUtils;
 
 /**
  * 緯度経度を表現するクラス．緯度経度は，作成時に指定された単位と測地系で保存される．呼び出し時に指定した単位および座標系で取り出すことができる．
@@ -174,7 +174,7 @@ public class LatLon extends LatLonPair {
 	}
 
 	public Tile toTile(int zoom) {
-		return LatLon2Tile.toTile(this, zoom);
+		return LatLonUtils.toTile(this, zoom);
 	}
 
 }

@@ -10,7 +10,7 @@ import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.LatLonBox;
 import org.nkjmlab.gis.datum.Tile;
-import org.nkjmlab.gis.datum.jprect.util.LatLon2Tile;
+import org.nkjmlab.gis.datum.jprect.util.LatLonUtils;
 
 public class TileUtilsTest {
 
@@ -25,7 +25,7 @@ public class TileUtilsTest {
 	}
 
 	private void testLatLonToTile(double lat, double lon, int zoom, int x, int y) {
-		Tile tile = LatLon2Tile.toTile(new LatLon(lat, lon, Basis.of(Unit.DEGREE, Detum.WGS84)),
+		Tile tile = LatLonUtils.toTile(new LatLon(lat, lon, Basis.of(Unit.DEGREE, Detum.WGS84)),
 				zoom);
 
 		System.out.println(tile);

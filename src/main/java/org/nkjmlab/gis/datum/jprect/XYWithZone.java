@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
-import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
+import org.nkjmlab.gis.datum.jprect.util.XYUtils;
 
 /***
  * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）の系番号付きのXY座標．原則として，単位はメートル．
@@ -45,7 +45,7 @@ public class XYWithZone extends XY {
 	}
 
 	public LatLonWithZone toLatLonWithZone() {
-		return XY2LatLon.toLatLonWithZone(this);
+		return XYUtils.toLatLonWithZone(this);
 	}
 
 	public ZoneId getZoneId() {

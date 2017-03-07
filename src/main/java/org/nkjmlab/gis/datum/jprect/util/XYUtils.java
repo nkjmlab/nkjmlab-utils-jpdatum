@@ -9,7 +9,7 @@ import org.nkjmlab.gis.datum.jprect.helper.XY2LatLonHelper;
  *
  * @author Yuu NAKAJIMA
  */
-public class XY2LatLon {
+public class XYUtils {
 
 	/**
 	 *

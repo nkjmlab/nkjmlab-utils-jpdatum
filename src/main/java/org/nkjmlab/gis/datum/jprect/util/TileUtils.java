@@ -12,7 +12,7 @@ import org.nkjmlab.gis.datum.Tile;
  * @author nkjm
  *
  */
-public final class Tile2LatLonBox {
+public final class TileUtils {
 
 	public static double toLon(int x, int z) {
 		return x / Math.pow(2.0, z) * 360.0 - 180;

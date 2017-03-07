@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.nkjmlab.gis.datum.LatLon.Detum;
-import org.nkjmlab.gis.datum.jprect.util.XY2LatLon;
+import org.nkjmlab.gis.datum.jprect.util.XYUtils;
 
 /**
  * 日本平面直角座標系 (Japan Plane Rectangular) に基づくXY座標 から 旧日本測地系 (Tokyo
@@ -38,7 +38,7 @@ public class XY2LatLonTest {
 			double x = 0;
 			double y = 0;
 
-			LatLonWithZone latLon = XY2LatLon.toLatLonWithZone(new XYWithZone(x, y, basis));
+			LatLonWithZone latLon = XYUtils.toLatLonWithZone(new XYWithZone(x, y, basis));
 
 			System.out.println("Origin: " + origin);
 			System.out.println("Calculated: " + latLon);

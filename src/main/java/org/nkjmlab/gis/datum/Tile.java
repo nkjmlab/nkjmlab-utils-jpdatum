@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.nkjmlab.gis.datum.jprect.util.Tile2LatLonBox;
+import org.nkjmlab.gis.datum.jprect.util.TileUtils;
 
 public class Tile {
 
@@ -31,7 +31,7 @@ public class Tile {
 	}
 
 	public LatLonBox toLatLonBox(Basis basis) {
-		return Tile2LatLonBox.toLatLonBox(this, basis);
+		return TileUtils.toLatLonBox(this, basis);
 	}
 
 	@Override
