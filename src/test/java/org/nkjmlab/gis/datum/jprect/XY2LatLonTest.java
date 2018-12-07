@@ -29,7 +29,7 @@ public class XY2LatLonTest {
 	@Test
 	public void test() {
 
-		for (JapanPlaneRectangular.ZoneId zoneId : JapanPlaneRectangular.ZoneId
+		for (ZoneId zoneId : ZoneId
 				.values()) {
 
 			LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId, Detum.TOKYO);

@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
-import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 
 /**
  * 旧日本測地系(Tokyo Datum：2002年3月末までの日本の公式測地系．Bessel楕円体) に基づく緯度経度を日本平面直角座標系(Japan

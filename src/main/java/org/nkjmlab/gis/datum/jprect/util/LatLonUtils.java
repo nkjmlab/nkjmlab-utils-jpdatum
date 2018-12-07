@@ -8,9 +8,9 @@ import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.Tile;
 import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular;
-import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
 import org.nkjmlab.gis.datum.jprect.XYWithZone;
+import org.nkjmlab.gis.datum.jprect.ZoneId;
 import org.nkjmlab.gis.datum.jprect.helper.LatLon2XYHelper;
 
 public class LatLonUtils {

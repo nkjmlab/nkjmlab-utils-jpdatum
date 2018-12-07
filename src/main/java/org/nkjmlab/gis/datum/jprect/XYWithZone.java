@@ -6,7 +6,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
-import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.util.XYUtils;
 
 /***

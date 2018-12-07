@@ -7,7 +7,6 @@ import org.nkjmlab.gis.datum.DistanceUnit;
 import org.nkjmlab.gis.datum.DistanceUnitConverter;
 import org.nkjmlab.gis.datum.LatLon;
 import org.nkjmlab.gis.datum.LatLonPair;
-import org.nkjmlab.gis.datum.jprect.JapanPlaneRectangular.ZoneId;
 import org.nkjmlab.gis.datum.jprect.util.LatLonUtils;
 
 /**
