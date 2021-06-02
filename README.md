@@ -2,24 +2,6 @@ jpdatum
 ======
 日本測地系(Tokyo Datum)または世界測地系(WGS84)に基づく緯度経度と，日本平面直角座標系(Japan Plane Rectangular) に基づくXY座標を相互に変換するパッケージです．地理に関する用語には間違いがあるかもしれませんので，注意して下さい．
 
-バイナリはmavenを使ってダウンロードできます．
-
-```xml
-    <repositories>
-        <repository>
-            <id>nkjmlab-public</id>
-            <url>http://maven.nkjmlab.org/nexus/content/groups/public</url>
-        </repository>
-    </repositories>
-    <dependencies>
-        <dependency>
-            <groupId>org.nkjmlab</groupId>
-            <artifactId>nkjmlab-jpdatum</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-```
-
 ---
 ## Sample codes
 ```java
@@ -70,4 +52,4 @@ WGS84 (actual)  ：lat=36.10378578916159,  lon=140.0878854906632
 本ソフトウエアの平面直角座標-緯度経度変換の計算部分は，株式会社ジャスミンソフト (https://www.jasminesoft.co.jp/product/scalc.html) がApache License 2.0に基づいて公開している平面直角座標-緯度経度変換クラスライブラリ (https://www.jasminesoft.co.jp/product/scalc.html) に由来します．
 
 ## ライセンス
-The MIT License (MIT)です．詳細は同梱のLICENSEを参照してください．
+Apache License Version 2.0

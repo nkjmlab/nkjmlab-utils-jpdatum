@@ -1,35 +1,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<version>0.0.2-SNAPSHOT</version>
-	<artifactId>nkjmlab-utils-jpdatum</artifactId>
-	<parent>
-		<groupId>org.nkjmlab</groupId>
-		<artifactId>nkjmlab-parent</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
-	</parent>
-	<repositories>
-		<repository>
-			<id>nkjmlab-public</id>
-			<url>https://maven.nkjmlab.org/nexus/content/groups/public</url>
-		</repository>
-	</repositories>
-	<scm>
-		<connection>scm:git:git@github.com:nkjmlab/nkjmlab-utils-jpdatum.git</connection>
-		<url>https://github.com/nkjmlab/nkjmlab-utils-jpdatum</url>
-		<tag>HEAD</tag>
-	</scm>
-	<dependencies>
-		<dependency>
-			<groupId>org.nkjmlab</groupId>
-			<artifactId>nkjmlab-utils</artifactId>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${commons-lang3-version}</version>
-		</dependency>
-	</dependencies>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>nkjmlab-utils-jpdatum</artifactId>
+  <version>0.0.4</version>
+  <parent>
+    <groupId>org.nkjmlab</groupId>
+    <artifactId>nkjmlab-utils-misc-parent</artifactId>
+    <version>0.0.4-SNAPSHOT</version>
+  </parent>
+  <properties>
+    <junit4-version>4.13.2</junit4-version>
+  </properties>
+  <scm>
+    <connection>scm:git:git@github.com:nkjmlab/nkjmlab-utils-jpdatum.git</connection>
+    <url>https://github.com/nkjmlab/nkjmlab-utils-jpdatum</url>
+    <tag>HEAD</tag>
+  </scm>
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang3-version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/junit/junit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit4-version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
 </project>
