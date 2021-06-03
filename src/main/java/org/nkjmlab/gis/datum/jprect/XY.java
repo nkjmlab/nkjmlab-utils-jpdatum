@@ -7,41 +7,41 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.nkjmlab.gis.datum.DistanceUnit;
 
 public class XY {
-	private final double x;
-	private final double y;
+  private final double x;
+  private final double y;
 
-	private final DistanceUnit distanceUnit = DistanceUnit.M;
+  private final DistanceUnit distanceUnit = DistanceUnit.M;
 
-	public XY(double x, double y) {
-		this.x = x;
-		this.y = y;
-	}
+  public XY(double x, double y) {
+    this.x = x;
+    this.y = y;
+  }
 
-	public double getX() {
-		return x;
-	}
+  public double getX() {
+    return x;
+  }
 
-	public double getY() {
-		return y;
-	}
+  public double getY() {
+    return y;
+  }
 
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
+  @Override
+  public int hashCode() {
+    return HashCodeBuilder.reflectionHashCode(this);
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
-	}
+  @Override
+  public boolean equals(Object obj) {
+    return EqualsBuilder.reflectionEquals(this, obj);
+  }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+  }
 
-	public DistanceUnit getDistanceUnit() {
-		return distanceUnit;
-	}
+  public DistanceUnit getDistanceUnit() {
+    return distanceUnit;
+  }
 
 }

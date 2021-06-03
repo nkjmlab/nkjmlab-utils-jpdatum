@@ -17,34 +17,31 @@ import org.nkjmlab.gis.datum.jprect.util.XYUtils;
 
 public class XY2LatLonTest {
 
-	@Before
-	public void setUp() throws Exception {
-	}
+  @Before
+  public void setUp() throws Exception {}
 
-	/**
-	 * 各ゾーンの原点で確認．
-	 * http://vldb.gsi.go.jp/sokuchi/surveycalc/surveycalc/xy2blf.html
-	 */
+  /**
+   * 各ゾーンの原点で確認． http://vldb.gsi.go.jp/sokuchi/surveycalc/surveycalc/xy2blf.html
+   */
 
-	@Test
-	public void test() {
+  @Test
+  public void test() {
 
-		for (ZoneId zoneId : ZoneId
-				.values()) {
+    for (ZoneId zoneId : ZoneId.values()) {
 
-			LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId, Detum.TOKYO);
+      LatLonWithZone origin = JapanPlaneRectangular.getOrigin(zoneId, Detum.TOKYO);
 
-			BasisWithZone basis = origin.getBasis();
-			double x = 0;
-			double y = 0;
+      BasisWithZone basis = origin.getBasis();
+      double x = 0;
+      double y = 0;
 
-			LatLonWithZone latLon = XYUtils.toLatLonWithZone(new XYWithZone(x, y, basis));
+      LatLonWithZone latLon = XYUtils.toLatLonWithZone(new XYWithZone(x, y, basis));
 
-			System.out.println("Origin: " + origin);
-			System.out.println("Calculated: " + latLon);
-			assertEquals(origin.getLat(basis), latLon.getLat(basis), 0.01);
-			assertEquals(origin.getLon(basis), latLon.getLon(basis), 0.01);
-		}
+      System.out.println("Origin: " + origin);
+      System.out.println("Calculated: " + latLon);
+      assertEquals(origin.getLat(basis), latLon.getLat(basis), 0.01);
+      assertEquals(origin.getLon(basis), latLon.getLon(basis), 0.01);
+    }
 
-	}
+  }
 }
