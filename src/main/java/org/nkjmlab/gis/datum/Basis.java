@@ -2,11 +2,7 @@ package org.nkjmlab.gis.datum;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import java.util.Objects;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 
@@ -36,21 +32,6 @@ public class Basis {
     return detum;
   }
 
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-  }
-
   public static Basis of(Unit unit, Detum detum) {
     Basis b = map.get(detum).get(unit);
     if (b != null) {
@@ -59,6 +40,21 @@ public class Basis {
     b = new Basis(unit, detum);
     map.get(detum).put(unit, b);
     return b;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(detum, unit);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Basis))
+      return false;
+    Basis other = (Basis) obj;
+    return detum == other.detum && unit == other.unit;
   }
 
 }
