@@ -3,14 +3,30 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>nkjmlab-utils-jpdatum</artifactId>
-  <version>0.0.4</version>
-  <parent>
-    <groupId>org.nkjmlab</groupId>
-    <artifactId>nkjmlab-utils-misc-parent</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
-  </parent>
+  <name>nkjmlab-utils-jpdatum</name>
+  <groupId>org.nkjmlab</groupId>
+  <version>0.0.2</version>
+  <description>Simple micro Object-Relation Mapper for Java</description>
+  <url>https://github.com/yuu-nkjm/sorm4j</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Yuu Nakajima</name>
+      <email>yuu.nkjm.pub@gmail.com</email>
+      <organization>nkjmlab.org</organization>
+      <organizationUrl>https://github.com/nkjmlab</organizationUrl>
+    </developer>
+  </developers>
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit4-version>4.13.2</junit4-version>
+    <commons-lang3-version>3.11</commons-lang3-version>
+    <log4j-version>2.14.1</log4j-version>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:nkjmlab/nkjmlab-utils-jpdatum.git</connection>
@@ -18,6 +34,13 @@
     <tag>HEAD</tag>
   </scm>
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j-version}</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -32,6 +55,90 @@
       <version>${junit4-version}</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <compilerVersion>11</compilerVersion>
+          <source>11</source>
+          <target>11</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <!-- ********** for Deployment to remote mvn server START ******* -->
+      <!-- from https://central.sonatype.org/pages/apache-maven.html#javadoc-and-sources-attachments -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <quiet>true</quiet>
+          <doclint>none</doclint>
+          <additionalOptions>--frames</additionalOptions>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>false</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+      <!-- ********** for Deployment to remote mvn server END ******* -->
+      <!-- ********** for Maven central START ******* -->
+      <!-- from https://central.sonatype.org/pages/apache-maven.html#gpg-signed-components -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- ********** for Maven central END ******* -->
+    </plugins>
+  </build>
+
 </project>
