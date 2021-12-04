@@ -115,16 +115,24 @@
           </execution>
         </executions>
       </plugin>
+      <!-- from https://central.sonatype.org/pages/apache-maven.html#distribution-management-and-authentication -->
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.7</version>
+        <version>1.6.8</version>
         <extensions>true</extensions>
         <configuration>
           <serverId>ossrh</serverId>
           <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>false</autoReleaseAfterClose>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.15</version>
+          </dependency>
+        </dependencies>
       </plugin>
       <!-- ********** for Deployment to remote mvn server END ******* -->
       <!-- ********** for Maven central START ******* -->
@@ -146,5 +154,4 @@
       <!-- ********** for Maven central END ******* -->
     </plugins>
   </build>
-
 </project>
