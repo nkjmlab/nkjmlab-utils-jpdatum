@@ -46,8 +46,6 @@ public class XY2LatLonHelper {
   /**
    * Y座標を経度に変換するメソッド
    *
-   * @param gentenL2
-   *
    * @return 経度
    */
   public static double toLongitude(double x, double y, double latDegOfOrigin,

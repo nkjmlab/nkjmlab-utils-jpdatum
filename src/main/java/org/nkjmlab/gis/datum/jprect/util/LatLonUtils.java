@@ -56,10 +56,6 @@ public class LatLonUtils {
 
   /**
    *
-   * @param latDegTD
-   * @param lonDegTD
-   * @param zoneId 平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院 http://www.gsi.go.jp/LAW/heimencho.html
-   *        にzoneId(系番号)と適用区域が書かれている．
    * @return
    */
   public static double toX(LatLonWithZone latLon, DistanceUnit distanceUnit) {
@@ -70,14 +66,6 @@ public class LatLonUtils {
             origin.getLon(Unit.DEGREE, Detum.TOKYO)), DistanceUnit.M, distanceUnit);
   }
 
-  /**
-   *
-   * @param latDegTD
-   * @param lonDegTD
-   * @param zoneId 平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院 http://www.gsi.go.jp/LAW/heimencho.html
-   *        にzoneId(系番号)と適用区域が書かれている．
-   * @return
-   */
   public static double toY(LatLonWithZone latLon, DistanceUnit distanceUnit) {
     LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(), latLon.getDetum());
     return DistanceUnitConverter

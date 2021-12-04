@@ -1,7 +1,6 @@
 package org.nkjmlab.gis.datum.jprect;
 
 import java.awt.Point;
-
 import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.DistanceUnit;
 import org.nkjmlab.gis.datum.DistanceUnitConverter;
@@ -22,6 +21,11 @@ public class LatLonWithZone extends LatLon {
     return new LatLonWithZone(latLon, zoneId);
   }
 
+  /**
+   * @param latLon
+   * @param zoneId 平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院 http://www.gsi.go.jp/LAW/heimencho.html
+   *        にzoneId(系番号)と適用区域が書かれている．
+   */
   public LatLonWithZone(LatLon latLon, ZoneId zoneId) {
     super(latLon.getLat(), latLon.getLon(),
         BasisWithZone.of(latLon.getUnit(), latLon.getDetum(), zoneId));
