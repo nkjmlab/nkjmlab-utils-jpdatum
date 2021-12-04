@@ -1,8 +1,5 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 /**
  * pixcel/meter
  *
@@ -11,8 +8,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class ScreenSizeBasis {
 
-  private double pixel;
-  private double meter;
+  private final double pixel;
+  private final double meter;
 
   public ScreenSizeBasis(double pixel, double meter) {
     this.pixel = pixel;
@@ -30,7 +27,8 @@ public class ScreenSizeBasis {
 
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    return "ScreenSizeBasis [pixel=" + pixel + ", meter=" + meter + "]";
   }
+
 
 }

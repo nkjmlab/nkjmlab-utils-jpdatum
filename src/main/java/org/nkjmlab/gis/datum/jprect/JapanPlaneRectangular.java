@@ -1,9 +1,6 @@
 package org.nkjmlab.gis.datum.jprect;
 
 import java.util.Arrays;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.DistanceUnit;
 import org.nkjmlab.gis.datum.LatLon;
@@ -23,7 +20,6 @@ import org.nkjmlab.gis.datum.LatLon.Unit;
  *
  */
 public class JapanPlaneRectangular {
-  protected static Logger log = LogManager.getLogger();
 
   // UNIT.DEGREE, Detum.WGS84
   private static final double[] lats = {33.00000, 33.00000, 36.00000, 33.00000, 36.00000, 36.00000,
@@ -208,8 +204,7 @@ public class JapanPlaneRectangular {
         return ZoneId._15;
 
       default:
-        log.error("state is not match");
-        return ZoneId._9;
+        throw new IllegalArgumentException("適切なZoneIdを見つけられませんでした．");
     }
   }
 

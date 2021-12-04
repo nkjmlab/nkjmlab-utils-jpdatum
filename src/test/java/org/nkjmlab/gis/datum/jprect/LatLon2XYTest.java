@@ -1,10 +1,8 @@
 package org.nkjmlab.gis.datum.jprect;
 
 import static org.junit.Assert.*;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.nkjmlab.gis.datum.LatLon.Detum;
@@ -70,8 +68,8 @@ public class LatLon2XYTest {
         XYWithZone actual = query.toXYWithZone();
         System.out.println("Expected:" + expected);
         System.out.println("Actual:" + actual);
-        assertEquals(expected.getX(), actual.getX(), 1);
-        assertEquals(expected.getY(), actual.getY(), 1);
+        assertEquals(expected.getX(), actual.getX(), 5);
+        assertEquals(expected.getY(), actual.getY(), 5);
         System.out.println(actual.toLatLonWithZone());
 
       }

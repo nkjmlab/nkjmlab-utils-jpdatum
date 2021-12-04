@@ -1,9 +1,7 @@
 package org.nkjmlab.gis.datum.jprect;
 
 import java.awt.Point;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Objects;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.jprect.util.XYUtils;
@@ -29,14 +27,30 @@ public class XYWithZone extends XY {
     this(xy.getX(), xy.getY(), basis);
   }
 
+
   @Override
   public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + Objects.hash(basis);
+    return result;
   }
 
   @Override
   public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (!(obj instanceof XYWithZone))
+      return false;
+    XYWithZone other = (XYWithZone) obj;
+    return Objects.equals(basis, other.basis);
+  }
+
+  @Override
+  public String toString() {
+    return "XYWithZone [basis=" + basis + ", XY=" + super.toString() + "]";
   }
 
   public BasisWithZone getBasis() {

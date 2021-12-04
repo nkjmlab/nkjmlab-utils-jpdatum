@@ -1,11 +1,7 @@
 package org.nkjmlab.gis.datum;
 
 import java.text.NumberFormat;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import java.util.Objects;
 import org.nkjmlab.gis.datum.jprect.util.LatLonUtils;
 
 /**
@@ -54,21 +50,6 @@ public class LatLon extends LatLonPair {
 
   public Detum getDetum() {
     return basis.getDetum();
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
   }
 
   public String toSimpleString() {
@@ -171,6 +152,31 @@ public class LatLon extends LatLonPair {
 
   public Tile toTile(int zoom) {
     return LatLonUtils.toTile(this, zoom);
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + Objects.hash(basis);
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (!(obj instanceof LatLon))
+      return false;
+    LatLon other = (LatLon) obj;
+    return Objects.equals(basis, other.basis);
+  }
+
+  @Override
+  public String toString() {
+    return "LatLon [basis=" + basis + ", lat=" + lat + ", lon=" + lon + "]";
   }
 
 }

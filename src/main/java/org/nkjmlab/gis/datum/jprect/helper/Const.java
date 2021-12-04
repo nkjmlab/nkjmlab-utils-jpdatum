@@ -12,7 +12,7 @@ package org.nkjmlab.gis.datum.jprect.helper;
  * @author Yuu NAKAJIMA
  */
 
-class Const {
+public class Const {
 
   /**
    * ベッセル楕円体の長半径 (semi-major axis)

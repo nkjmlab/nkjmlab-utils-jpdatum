@@ -1,9 +1,6 @@
 package org.nkjmlab.gis.datum;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import java.util.Objects;
 
 public class LatLonPair {
   protected final double lat;
@@ -38,17 +35,24 @@ public class LatLonPair {
 
   @Override
   public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
+    return Objects.hash(lat, lon);
   }
 
   @Override
   public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
+    if (this == obj)
+      return true;
+    if (!(obj instanceof LatLonPair))
+      return false;
+    LatLonPair other = (LatLonPair) obj;
+    return Double.doubleToLongBits(lat) == Double.doubleToLongBits(other.lat)
+        && Double.doubleToLongBits(lon) == Double.doubleToLongBits(other.lon);
   }
 
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    return "LatLonPair [lat=" + lat + ", lon=" + lon + "]";
   }
+
 
 }

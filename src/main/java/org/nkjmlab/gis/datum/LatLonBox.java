@@ -1,9 +1,6 @@
 package org.nkjmlab.gis.datum;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import java.util.Objects;
 import org.nkjmlab.gis.datum.jprect.LatLonWithZone;
 import org.nkjmlab.gis.datum.jprect.ZoneId;
 
@@ -11,11 +8,11 @@ public class LatLonBox {
 
   public static final double PIXEL = 256;
 
-  private LatLon northWest;
-  private LatLon southEast;
+  private final LatLon northWest;
+  private final LatLon southEast;
 
-  private LatLon southWest;
-  private LatLon northEast;
+  private final LatLon southWest;
+  private final LatLon northEast;
 
   public LatLonBox(LatLon northWest, LatLon southEast) {
     this.northWest = northWest;
@@ -58,17 +55,24 @@ public class LatLonBox {
 
   @Override
   public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
+    return Objects.hash(northEast, northWest, southEast, southWest);
   }
 
   @Override
   public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
+    if (this == obj)
+      return true;
+    if (!(obj instanceof LatLonBox))
+      return false;
+    LatLonBox other = (LatLonBox) obj;
+    return Objects.equals(northEast, other.northEast) && Objects.equals(northWest, other.northWest)
+        && Objects.equals(southEast, other.southEast) && Objects.equals(southWest, other.southWest);
   }
 
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    return "LatLonBox [northWest=" + northWest + ", southEast=" + southEast + ", southWest="
+        + southWest + ", northEast=" + northEast + "]";
   }
 
   public double getLatDistance(Basis basis) {

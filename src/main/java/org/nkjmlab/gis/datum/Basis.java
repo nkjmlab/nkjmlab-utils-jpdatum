@@ -11,7 +11,7 @@ public class Basis {
   public static final Basis DEGREE_WGS;
   private final Unit unit;
   private final Detum detum;
-  private static Map<Detum, Map<Unit, Basis>> map = new HashMap<>();
+  private static final Map<Detum, Map<Unit, Basis>> map = new HashMap<>();
 
   static {
     map.put(Detum.TOKYO, new HashMap<>());

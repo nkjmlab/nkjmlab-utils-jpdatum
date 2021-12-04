@@ -1,16 +1,13 @@
 package org.nkjmlab.gis.datum;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import java.util.Objects;
 import org.nkjmlab.gis.datum.jprect.util.TileUtils;
 
 public class Tile {
 
-  private int x;
-  private int y;
-  private int zoom;
+  private final int x;
+  private final int y;
+  private final int zoom;
 
   public Tile(int x, int y, int zoom) {
     this.x = x;
@@ -34,19 +31,25 @@ public class Tile {
     return TileUtils.toLatLonBox(this, basis);
   }
 
+
   @Override
   public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
+    return Objects.hash(x, y, zoom);
   }
 
   @Override
   public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Tile))
+      return false;
+    Tile other = (Tile) obj;
+    return x == other.x && y == other.y && zoom == other.zoom;
   }
 
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    return "Tile [x=" + x + ", y=" + y + ", zoom=" + zoom + "]";
   }
 
   public Tile getNextX() {

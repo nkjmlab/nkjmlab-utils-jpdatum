@@ -3,11 +3,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>nkjmlab-utils-jpdatum</artifactId>
-  <name>nkjmlab-utils-jpdatum</name>
+  <name>${project.artifactId}</name>
   <groupId>org.nkjmlab</groupId>
-  <version>0.0.2</version>
-  <description>Simple micro Object-Relation Mapper for Java</description>
-  <url>https://github.com/yuu-nkjm/sorm4j</url>
+  <version>0.1.0</version>
+  <description>Utilitiesfor Tokyo Datum</description>
+  <url>https://github.com/nkjmlab/nkjmlab-utils-jpdatum</url>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -39,13 +39,7 @@
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
       <version>${log4j-version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>${commons-lang3-version}</version>
+      <scope>test</scope>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -61,7 +55,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>3.8.1</version>
         <configuration>
           <compilerVersion>11</compilerVersion>
           <source>11</source>

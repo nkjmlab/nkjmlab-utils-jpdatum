@@ -2,9 +2,7 @@ package org.nkjmlab.gis.datum.jprect;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Objects;
 import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
@@ -32,15 +30,33 @@ public class BasisWithZone extends Basis {
     return zoneId;
   }
 
+
   @Override
   public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + Objects.hash(zoneId);
+    return result;
   }
 
   @Override
   public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (!(obj instanceof BasisWithZone))
+      return false;
+    BasisWithZone other = (BasisWithZone) obj;
+    return zoneId == other.zoneId;
   }
+
+
+  @Override
+  public String toString() {
+    return "BasisWithZone [zoneId=" + zoneId + ", Basis=" + super.toString() + "]";
+  }
+
 
   private static final Map<ZoneId, Map<Basis, BasisWithZone>> map = new HashMap<>();
 

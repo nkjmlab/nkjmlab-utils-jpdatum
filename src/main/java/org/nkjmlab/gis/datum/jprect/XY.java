@@ -1,9 +1,6 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import java.util.Objects;
 import org.nkjmlab.gis.datum.DistanceUnit;
 
 public class XY {
@@ -25,23 +22,32 @@ public class XY {
     return y;
   }
 
+  public DistanceUnit getDistanceUnit() {
+    return distanceUnit;
+  }
+
   @Override
   public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
+    return Objects.hash(distanceUnit, x, y);
   }
 
   @Override
   public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
+    if (this == obj)
+      return true;
+    if (!(obj instanceof XY))
+      return false;
+    XY other = (XY) obj;
+    return distanceUnit == other.distanceUnit
+        && Double.doubleToLongBits(x) == Double.doubleToLongBits(other.x)
+        && Double.doubleToLongBits(y) == Double.doubleToLongBits(other.y);
   }
 
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    return "XY [x=" + x + ", y=" + y + ", distanceUnit=" + distanceUnit + "]";
   }
 
-  public DistanceUnit getDistanceUnit() {
-    return distanceUnit;
-  }
+
 
 }

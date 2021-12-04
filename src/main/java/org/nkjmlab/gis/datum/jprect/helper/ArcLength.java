@@ -13,7 +13,7 @@ package org.nkjmlab.gis.datum.jprect.helper;
  * @author Yuu NAKAJIMA
  */
 
-class ArcLength {
+public class ArcLength {
   private static final double k1 =
       1.0 + 3.0 / 4.0 * Math.pow(Const.e, 2) + 45.0 / 64.0 * Math.pow(Const.e, 4)
           + 175.0 / 256.0 * Math.pow(Const.e, 6) + 11025.0 / 16384.0 * Math.pow(Const.e, 8)
