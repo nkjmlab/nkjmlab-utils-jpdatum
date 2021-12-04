@@ -17,6 +17,8 @@ import org.nkjmlab.gis.datum.LatLon.Unit;
  */
 
 public class LatLon2XYTest {
+  private static final org.apache.logging.log4j.Logger log =
+      org.apache.logging.log4j.LogManager.getLogger();
 
   /**
    * 平面直角座標への換算 http://vldb.gsi.go.jp/sokuchi/surveycalc/surveycalc/bl2xyf.html
@@ -62,18 +64,18 @@ public class LatLon2XYTest {
       {
         XYWithZone expected = queries.get(query);
         XYWithZone actual = query.toXYWithZone();
-        System.out.println("Expected:" + expected);
-        System.out.println("Actual:" + actual);
+        log.debug("Expected:" + expected);
+        log.debug("Actual:" + actual);
         assertEquals(expected.getX(), actual.getX(), 5);
         assertEquals(expected.getY(), actual.getY(), 5);
-        System.out.println(actual.toLatLonWithZone());
+        log.debug(actual.toLatLonWithZone());
 
       }
       {
         LatLonWithZone expected = query;
         LatLonWithZone actual = queries.get(query).toLatLonWithZone();
-        System.out.println("Expected:" + expected);
-        System.out.println("Actual:" + actual);
+        log.debug("Expected:" + expected);
+        log.debug("Actual:" + actual);
         assertEquals(expected.getLat(), actual.getLat(), 1);
         assertEquals(expected.getLon(), actual.getLon(), 1);
       }

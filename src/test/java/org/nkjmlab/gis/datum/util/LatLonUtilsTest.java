@@ -9,6 +9,8 @@ import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.LatLonUnitConverter;
 
 public class LatLonUtilsTest {
+  private static final org.apache.logging.log4j.Logger log =
+      org.apache.logging.log4j.LogManager.getLogger();
 
 
   @Test
@@ -19,8 +21,8 @@ public class LatLonUtilsTest {
   }
 
   private void testDmsDeg(double dms, double deg) {
-    System.out.println(LatLonUnitConverter.change(deg, Unit.DEGREE, Unit.DMS));
-    System.out.println(LatLonUnitConverter.change(dms, Unit.DMS, Unit.DEGREE));
+    log.debug(LatLonUnitConverter.change(deg, Unit.DEGREE, Unit.DMS));
+    log.debug(LatLonUnitConverter.change(dms, Unit.DMS, Unit.DEGREE));
 
     assertEquals(dms, LatLonUnitConverter.change(deg, Unit.DEGREE, Unit.DMS), 0.01);
     assertEquals(deg, LatLonUnitConverter.change(dms, Unit.DMS, Unit.DEGREE), 0.01);

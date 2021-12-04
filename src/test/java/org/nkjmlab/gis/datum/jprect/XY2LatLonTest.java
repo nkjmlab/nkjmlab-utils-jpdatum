@@ -14,6 +14,8 @@ import org.nkjmlab.gis.datum.jprect.util.XYUtils;
  */
 
 public class XY2LatLonTest {
+  private static final org.apache.logging.log4j.Logger log =
+      org.apache.logging.log4j.LogManager.getLogger();
 
 
   /**
@@ -33,8 +35,8 @@ public class XY2LatLonTest {
 
       LatLonWithZone latLon = XYUtils.toLatLonWithZone(new XYWithZone(x, y, basis));
 
-      System.out.println("Origin: " + origin);
-      System.out.println("Calculated: " + latLon);
+      log.debug("Origin: " + origin);
+      log.debug("Calculated: " + latLon);
       assertEquals(origin.getLat(basis), latLon.getLat(basis), 0.01);
       assertEquals(origin.getLon(basis), latLon.getLon(basis), 0.01);
     }
