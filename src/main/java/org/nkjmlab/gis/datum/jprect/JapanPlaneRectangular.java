@@ -1,6 +1,7 @@
 package org.nkjmlab.gis.datum.jprect;
 
 import java.util.Arrays;
+import java.util.List;
 import org.nkjmlab.gis.datum.Basis;
 import org.nkjmlab.gis.datum.DistanceUnit;
 import org.nkjmlab.gis.datum.LatLon;
@@ -73,6 +74,21 @@ public class JapanPlaneRectangular {
           new LatLonWithZone(lats[16], lons[16], Unit.DEGREE, Detum.WGS84, ZoneId._17),
           new LatLonWithZone(lats[17], lons[17], Unit.DEGREE, Detum.WGS84, ZoneId._18),
           new LatLonWithZone(lats[18], lons[18], Unit.DEGREE, Detum.WGS84, ZoneId._19)};
+
+  private static final List<String> ZONE_14_CITIES =
+      Arrays.asList("小笠原村", "聟島列島", "父島列島", "母島列島", "硫黄島");
+
+  private static final List<String> ZONE_11_CITIES =
+      Arrays.asList("小樽市", "函館市", "伊達市", "北斗市", "豊浦町", "壮瞥町", "洞爺湖町", "奥尻島", "渡島大島", "松前小島");
+
+  private static final List<String> ZONE_13_CITIES =
+      Arrays.asList("北見市", "帯広市", "釧路市", "網走市", "根室市", "美幌町", "津別町", "斜里町", "清里町", "小清水町", "訓子府町",
+          "置戸町", "佐呂間町", "大空町", "択捉島", "国後島", "色丹島", "歯舞群島");
+
+  private static final List<String> ZONE_16_CITIES = Arrays.asList("平良市", "石垣市", "城辺町", "下地町",
+      "上野村", "伊良部町", "多良間村", "竹富町", "与那国町", "宮古諸島", "多良間島", "水納島", "与那国島", "石垣島", "竹富島", "西表島");
+
+  private static final List<String> ZONE_17_CITIES = Arrays.asList("南大東村", "北大東村", "北大東島", "南大東島");
 
   public static final LatLonWithZone getOrigin(ZoneId zoneId, Detum detum) {
     switch (detum) {
@@ -154,7 +170,7 @@ public class JapanPlaneRectangular {
           return ZoneId._19;
         }
 
-        for (String city : Arrays.asList("小笠原村", "聟島列島", "父島列島", "母島列島", "硫黄島")) {
+        for (String city : ZONE_14_CITIES) {
           if (address.contains(city)) {
             return ZoneId._14;
           }
@@ -175,28 +191,25 @@ public class JapanPlaneRectangular {
       case "宮城県":
         return ZoneId._10;
       case "北海道":
-        for (String city : Arrays.asList("小樽市", "函館市", "伊達市", "北斗市", "豊浦町", "壮瞥町", "洞爺湖町", "奥尻島",
-            "渡島大島", "松前小島")) {
+        for (String city : ZONE_11_CITIES) {
           if (address.contains(city)) {
             return ZoneId._11;
           }
         }
-        for (String city : Arrays.asList("北見市", "帯広市", "釧路市", "網走市", "根室市", "美幌町", "津別町", "斜里町",
-            "清里町", "小清水町", "訓子府町", "置戸町", "佐呂間町", "大空町", "択捉島", "国後島", "色丹島", "歯舞群島")) {
+        for (String city : ZONE_13_CITIES) {
           if (address.contains(city)) {
             return ZoneId._13;
           }
         }
         return ZoneId._12;
       case "沖縄県":
-        for (String city : Arrays.asList("平良市", "石垣市", "城辺町", "下地町", "上野村", "伊良部町", "多良間村", "竹富町",
-            "与那国町", "宮古諸島", "多良間島", "水納島", "与那国島", "石垣島", "竹富島", "西表島")) {
+        for (String city : ZONE_16_CITIES) {
           if (address.contains(city)) {
             return ZoneId._16;
           }
         }
 
-        for (String city : Arrays.asList("南大東村", "北大東村", "北大東島", "南大東島")) {
+        for (String city : ZONE_17_CITIES) {
           if (address.contains(city)) {
             return ZoneId._17;
           }
