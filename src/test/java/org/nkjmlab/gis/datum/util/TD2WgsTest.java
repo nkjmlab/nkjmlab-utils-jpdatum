@@ -1,15 +1,10 @@
 package org.nkjmlab.gis.datum.util;
 
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 import org.nkjmlab.gis.datum.DatumConverter;
 
 public class TD2WgsTest {
-
-  @Before
-  public void setUp() throws Exception {}
 
   @Test
   public void testToWgs() {

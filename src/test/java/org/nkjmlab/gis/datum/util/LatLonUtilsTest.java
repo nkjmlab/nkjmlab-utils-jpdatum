@@ -1,19 +1,15 @@
 package org.nkjmlab.gis.datum.util;
 
+import static org.junit.jupiter.api.Assertions.*;
 /***
  * @author Yuu NAKAJIMA
  */
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 import org.nkjmlab.gis.datum.LatLonUnitConverter;
 
 public class LatLonUtilsTest {
 
-  @Before
-  public void setUp() throws Exception {}
 
   @Test
   public void test() {

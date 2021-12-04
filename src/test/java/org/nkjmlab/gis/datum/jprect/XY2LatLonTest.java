@@ -1,9 +1,7 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.jprect.util.XYUtils;
 
@@ -17,8 +15,6 @@ import org.nkjmlab.gis.datum.jprect.util.XYUtils;
 
 public class XY2LatLonTest {
 
-  @Before
-  public void setUp() throws Exception {}
 
   /**
    * 各ゾーンの原点で確認． http://vldb.gsi.go.jp/sokuchi/surveycalc/surveycalc/xy2blf.html

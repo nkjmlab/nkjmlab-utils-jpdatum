@@ -9,7 +9,7 @@ nkjmlab-utils-jpdatum
  <dependency>
    <groupId>org.nkjmlab</groupId>
    <artifactId>nkjmlab-utils-jpdatum</artifactId>
-   <version>0.0.2</version>
+   <version>0.1.0</version>
  </dependency>
 ```
 

@@ -1,10 +1,9 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 
@@ -18,9 +17,6 @@ import org.nkjmlab.gis.datum.LatLon.Unit;
  */
 
 public class LatLon2XYTest {
-
-  @Before
-  public void setUp() throws Exception {}
 
   /**
    * 平面直角座標への換算 http://vldb.gsi.go.jp/sokuchi/surveycalc/surveycalc/bl2xyf.html

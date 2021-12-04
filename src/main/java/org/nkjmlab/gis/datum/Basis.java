@@ -57,4 +57,9 @@ public class Basis {
     return detum == other.detum && unit == other.unit;
   }
 
+  @Override
+  public String toString() {
+    return "Basis [unit=" + unit + ", detum=" + detum + "]";
+  }
+
 }

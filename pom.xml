@@ -24,9 +24,6 @@
   </developers>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <junit4-version>4.13.2</junit4-version>
-    <commons-lang3-version>3.11</commons-lang3-version>
-    <log4j-version>2.14.1</log4j-version>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:nkjmlab/nkjmlab-utils-jpdatum.git</connection>
@@ -34,19 +31,25 @@
     <tag>HEAD</tag>
   </scm>
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
     <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>${log4j-version}</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.7.2</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- https://mvnrepository.com/artifact/junit/junit -->
+    <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit4-version}</version>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.20.2</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.14.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

@@ -1,14 +1,11 @@
 package org.nkjmlab.gis.datum.jprect;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.nkjmlab.gis.datum.LatLon.Detum;
 import org.nkjmlab.gis.datum.LatLon.Unit;
 
 public class SampleTest {
 
-  @Before
-  public void setUp() throws Exception {}
 
   @Test
   public void test() {
