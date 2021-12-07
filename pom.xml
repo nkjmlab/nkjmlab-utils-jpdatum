@@ -3,7 +3,7 @@
   <artifactId>nkjmlab-utils-jpdatum</artifactId>
   <name>${project.artifactId}</name>
   <groupId>org.nkjmlab</groupId>
-  <version>0.1.0</version>
+  <version>0.9.0</version>
   <description>Utilities for Tokyo Datum, WGS84 and Japan Plane Rectangular</description>
   <url>https://github.com/nkjmlab/nkjmlab-utils-jpdatum</url>
   <licenses>
@@ -128,7 +128,7 @@
           <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>[1.4.18,)</version>
+            <version>1.4.15</version>
           </dependency>
         </dependencies>
       </plugin>

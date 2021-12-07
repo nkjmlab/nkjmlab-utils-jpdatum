@@ -1,5 +1,7 @@
 nkjmlab-utils-jpdatum
 ======
+[![Maven Central](https://img.shields.io/maven-central/v/org.nkjmlab/nkjmlab-utils-jpdatum.svg)](http://mvnrepository.com/artifact/org.nkjmlab/nkjmlab-utils-jpdatum) [![javadoc](https://javadoc.io/badge2/org.nkjmlab/nkjmlab-utils/javadoc.svg)](https://javadoc.io/doc/org.nkjmlab/nkjmlab-utils-jpdatum) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 日本測地系(Tokyo Datum)または世界測地系(WGS84)に基づく緯度経度と，日本平面直角座標系(Japan Plane Rectangular) に基づくXY座標を相互に変換するパッケージです．地理に関する用語には間違いがあるかもしれませんので，注意して下さい．Java 11 以降で動作します．
 
 ## 使用方法
@@ -9,7 +11,7 @@ nkjmlab-utils-jpdatum
  <dependency>
    <groupId>org.nkjmlab</groupId>
    <artifactId>nkjmlab-utils-jpdatum</artifactId>
-   <version>0.1.0</version>
+   <version>0.9.0</version>
  </dependency>
 ```
 
