@@ -21,7 +21,7 @@ public class Example {
     for (double i = 0; i < 1; i += 0.0000001) {
       LatLonWithZone tokyoLatLon = new LatLonWithZone(lat + i, lon + i,
           BasisWithZone.of(Unit.DEGREE, Detum.TOKYO, ZoneId._9));
-      XYWithZone tokyoXy = tokyoLatLon.toXYWithZone();
+      tokyoLatLon.toXYWithZone();
     }
 
     log.debug("{} times convertion latlon to xy in {} msec", 1 / 0.0000001,
@@ -42,5 +42,7 @@ public class Example {
     log.debug(rTokyoLatLon);
     // =>
     // LatLonWithZone[zoneId=_9,unit=DEGREE,detum=TOKYO,lat=36.1037814806522,lon=140.08311062649173]
+
+    log.debug(wgsLatLon);
   }
 }
