@@ -4,7 +4,7 @@
   <name>${project.artifactId}</name>
   <groupId>org.nkjmlab</groupId>
   <version>0.1.0</version>
-  <description>Utilitiesfor Tokyo Datum</description>
+  <description>Utilities for Tokyo Datum, WGS84 and Japan Plane Rectangular</description>
   <url>https://github.com/nkjmlab/nkjmlab-utils-jpdatum</url>
   <licenses>
     <license>
