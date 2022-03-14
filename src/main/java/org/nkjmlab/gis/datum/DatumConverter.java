@@ -59,7 +59,7 @@ public class DatumConverter {
   }
 
   /***
-   * 簡易的な世界測地系=>旧日本測地系変換(TD: Tokyo Datum) をする．
+   * 簡易的な世界測地系 → 旧日本測地系変換(TD: Tokyo Datum) をする．
    *
    * 参考ページ1：<a href=
    * "https://web.archive.org/web/20140710182621/http://homepage3.nifty.com/Nowral/02_DATUM/02_DATUM.html">

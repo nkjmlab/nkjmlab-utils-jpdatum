@@ -74,8 +74,8 @@ public class LatLonWithZone extends LatLon {
    */
   public double distance(LatLonWithZone toLatLon, DistanceUnit distanceUnit) {
     return DistanceUnitConverter.change(
-        Math.sqrt(Math.pow(getX(distanceUnit) - toLatLon.getX(distanceUnit), 2)
-            + Math.pow(getY(distanceUnit) - toLatLon.getY(distanceUnit), 2)),
+        Math.sqrt(Math.pow(getX(DistanceUnit.M) - toLatLon.getX(DistanceUnit.M), 2)
+            + Math.pow(getY(DistanceUnit.M) - toLatLon.getY(DistanceUnit.M), 2)),
         DistanceUnit.M, distanceUnit);
   }
 

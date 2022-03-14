@@ -11,7 +11,7 @@ nkjmlab-utils-jpdatum
  <dependency>
    <groupId>org.nkjmlab</groupId>
    <artifactId>nkjmlab-utils-jpdatum</artifactId>
-   <version>0.9.0</version>
+   <version>0.9.1</version>
  </dependency>
 ```
 
@@ -25,7 +25,7 @@ public class Sample {
     public static void main(String[] args){
 
         LatLonWithZone tokyoLatLon = new LatLonWithZone(36.103774791666666, 140.08785504166664,
-                new BasisWithZone(Unit.DEGREE, Detum.TOKYO, ZoneId._9));
+                BasisWithZone.of(Unit.DEGREE, Detum.TOKYO, ZoneId._9));
 
         XYWithZone tokyoXy = tokyoLatLon.toXYWithZone();
         System.out.println(tokyoXy);
