@@ -3,7 +3,7 @@
   <artifactId>nkjmlab-utils-jpdatum</artifactId>
   <name>${project.artifactId}</name>
   <groupId>org.nkjmlab</groupId>
-  <version>0.9.0</version>
+  <version>0.9.1</version>
   <description>Utilities for Tokyo Datum, WGS84 and Japan Plane Rectangular</description>
   <url>https://github.com/nkjmlab/nkjmlab-utils-jpdatum</url>
   <licenses>
@@ -33,21 +33,21 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.7.2</version>
+      <version>5.8.2</version>
       <scope>test</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.20.2</version>
+      <version>3.22.0</version>
       <scope>test</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
-      <version>2.14.1</version>
+      <version>2.17.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -59,8 +59,7 @@
         <version>3.8.1</version>
         <configuration>
           <compilerVersion>11</compilerVersion>
-          <source>11</source>
-          <target>11</target>
+          <release>11</release>
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
@@ -74,8 +73,6 @@
           </additionalClasspathElements>
         </configuration>
       </plugin>
-      <!-- ********** for Deployment to remote mvn server START ******* -->
-      <!-- from https://central.sonatype.org/pages/apache-maven.html#javadoc-and-sources-attachments -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
@@ -113,27 +110,6 @@
           </execution>
         </executions>
       </plugin>
-      <!-- from https://central.sonatype.org/pages/apache-maven.html#distribution-management-and-authentication -->
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.8</version>
-        <extensions>true</extensions>
-        <configuration>
-          <serverId>ossrh</serverId>
-          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-          <autoReleaseAfterClose>false</autoReleaseAfterClose>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.4.15</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-      <!-- ********** for Deployment to remote mvn server END ******* -->
-      <!-- ********** for Maven central START ******* -->
       <!-- from https://central.sonatype.org/pages/apache-maven.html#gpg-signed-components -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -149,7 +125,57 @@
           </execution>
         </executions>
       </plugin>
-      <!-- ********** for Maven central END ******* -->
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>ossrh</id>
+      <build>
+        <plugins>
+          <!-- from https://central.sonatype.org/pages/apache-maven.html#distribution-management-and-authentication -->
+          <!-- https://mvnrepository.com/artifact/org.sonatype.plugins/nexus-staging-maven-plugin -->
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.8</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>false</autoReleaseAfterClose>
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>1.4.15</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>nkjmlab-maven</id>
+      <distributionManagement>
+        <repository>
+          <id>maven-releases</id>
+          <url>https://maven.nkjmlab.org/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+          <id>maven-snapshots</id>
+          <url>https://maven.nkjmlab.org/repository/maven-snapshots/</url>
+        </snapshotRepository>
+      </distributionManagement>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <version>2.8.2</version>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
