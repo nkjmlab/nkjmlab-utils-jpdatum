@@ -3,7 +3,7 @@
   <artifactId>nkjmlab-utils-jpdatum</artifactId>
   <name>${project.artifactId}</name>
   <groupId>org.nkjmlab</groupId>
-  <version>0.9.1</version>
+  <version>0.9.2</version>
   <description>Utilities for Tokyo Datum, WGS84 and Japan Plane Rectangular</description>
   <url>https://github.com/nkjmlab/nkjmlab-utils-jpdatum</url>
   <licenses>
@@ -33,21 +33,21 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.8.2</version>
+      <version>5.9.0-RC1</version>
       <scope>test</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.22.0</version>
+      <version>3.23.1</version>
       <scope>test</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
-      <version>2.17.2</version>
+      <version>2.18.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -58,7 +58,6 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <compilerVersion>11</compilerVersion>
           <release>11</release>
           <encoding>UTF-8</encoding>
         </configuration>
