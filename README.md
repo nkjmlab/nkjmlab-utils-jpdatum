@@ -11,7 +11,7 @@ nkjmlab-utils-jpdatum
  <dependency>
    <groupId>org.nkjmlab</groupId>
    <artifactId>nkjmlab-utils-jpdatum</artifactId>
-   <version>0.9.2</version>
+   <version>0.9.3</version>
  </dependency>
 ```
 
