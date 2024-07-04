@@ -37,5 +37,4 @@ public class TileUtilsTest {
     assertEquals(lat, latLon.getNorthEdgeLat(basis), 0.01);
     assertEquals(lon, latLon.getWestEdgeLon(basis), 0.01);
   }
-
 }

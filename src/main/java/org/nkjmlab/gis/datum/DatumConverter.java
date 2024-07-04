@@ -14,18 +14,18 @@ public class DatumConverter {
    * @param toDetum
    * @return
    */
-  public static double changeDetumOfLat(double lat, double lon, Unit fromUnit, Detum fromDetum,
-      Detum toDetum) {
+  public static double changeDetumOfLat(
+      double lat, double lon, Unit fromUnit, Detum fromDetum, Detum toDetum) {
     double latDeg = LatLonUnitConverter.change(lat, fromUnit, Unit.DEGREE);
     double lonDeg = LatLonUnitConverter.change(lon, fromUnit, Unit.DEGREE);
 
     switch (toDetum) {
       case TOKYO:
-        return LatLonUnitConverter.change(changeDetumOfLatFromWgsToTd(latDeg, lonDeg), Unit.DEGREE,
-            fromUnit);
+        return LatLonUnitConverter.change(
+            changeDetumOfLatFromWgsToTd(latDeg, lonDeg), Unit.DEGREE, fromUnit);
       case WGS84:
-        return LatLonUnitConverter.change(changeDetumOfLatFromTdToWgs(latDeg, lonDeg), Unit.DEGREE,
-            fromUnit);
+        return LatLonUnitConverter.change(
+            changeDetumOfLatFromTdToWgs(latDeg, lonDeg), Unit.DEGREE, fromUnit);
       default:
         throw new IllegalArgumentException(toDetum + " is not suported.");
     }
@@ -41,18 +41,18 @@ public class DatumConverter {
    * @param toDetum
    * @return
    */
-  public static double changeDetumOfLon(double lat, double lon, Unit fromUnit, Detum fromDetum,
-      Detum toDetum) {
+  public static double changeDetumOfLon(
+      double lat, double lon, Unit fromUnit, Detum fromDetum, Detum toDetum) {
     double latDeg = LatLonUnitConverter.change(lat, fromUnit, Unit.DEGREE);
     double lonDeg = LatLonUnitConverter.change(lon, fromUnit, Unit.DEGREE);
 
     switch (toDetum) {
       case TOKYO:
-        return LatLonUnitConverter.change(changeDetumOfLonFromWgsToTd(latDeg, lonDeg), Unit.DEGREE,
-            fromUnit);
+        return LatLonUnitConverter.change(
+            changeDetumOfLonFromWgsToTd(latDeg, lonDeg), Unit.DEGREE, fromUnit);
       case WGS84:
-        return LatLonUnitConverter.change(changeDetumOfLonFromTdToWgs(latDeg, lonDeg), Unit.DEGREE,
-            fromUnit);
+        return LatLonUnitConverter.change(
+            changeDetumOfLonFromTdToWgs(latDeg, lonDeg), Unit.DEGREE, fromUnit);
       default:
         throw new IllegalArgumentException(toDetum + " is not suported.");
     }
@@ -81,5 +81,4 @@ public class DatumConverter {
   public static double changeDetumOfLonFromTdToWgs(double latDegTD, double lonDegTD) {
     return lonDegTD - 0.000046038 * lonDegTD - 0.000083043 * lonDegTD + 0.010040;
   }
-
 }

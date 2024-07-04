@@ -7,8 +7,8 @@ public class LatLonUnitConverter {
   public static void main(String[] args) {
 
     // System.out.println(Dms2Sec.toSec(1.0));
-    System.out.println(dmsToSec(1.30));// 3600+1800=5400
-    System.out.println(dmsToSec(1.3030));// 3600+1800+30=5430
+    System.out.println(dmsToSec(1.30)); // 3600+1800=5400
+    System.out.println(dmsToSec(1.3030)); // 3600+1800+30=5430
     System.out.println(secToDms(1));
     System.out.println(secToDms(3600));
     System.out.println(secToDms(3601));
@@ -19,7 +19,6 @@ public class LatLonUnitConverter {
     System.out.println(secToDms(3720));
     System.out.println(secToDms(4800));
     System.out.println(secToDms(5400));
-
   }
 
   /**
@@ -73,10 +72,7 @@ public class LatLonUnitConverter {
     }
   }
 
-  /**
-   * 度分秒単位(dddmmss.s)を秒に変換
-   */
-
+  /** 度分秒単位(dddmmss.s)を秒に変換 */
   public static double dmsToSec(double dddmmss_s) {
     double ddd_mmsss = dddmmss_s / 10000;
     int d = (int) ddd_mmsss;
@@ -85,9 +81,7 @@ public class LatLonUnitConverter {
     return d * 3600 + m * 60 + s;
   }
 
-  /**
-   * 度分秒単位(dddmmss.s)を10進法度単位(ddd.ddddd)に変換
-   */
+  /** 度分秒単位(dddmmss.s)を10進法度単位(ddd.ddddd)に変換 */
   public static double dmsToDeg(double dddmmss_s) {
     double ddd_mmsss = dddmmss_s / 10000;
     int ddd = (int) ddd_mmsss;
@@ -97,9 +91,7 @@ public class LatLonUnitConverter {
     return ddd + min / 60 + sec / 3600;
   }
 
-  /**
-   * 十進法度単位(ddd.ddddd)を度分秒単位(dddmmss.s)に変換
-   */
+  /** 十進法度単位(ddd.ddddd)を度分秒単位(dddmmss.s)に変換 */
   public static double degToDms(double ddd_ddddd) {
     int ddd = (int) ddd_ddddd;
     double min = (ddd_ddddd - ddd) * 60.0;
@@ -107,7 +99,6 @@ public class LatLonUnitConverter {
     double _s = sec % 1;
 
     return carry(ddd * 10000 + (int) min * 100 + (int) sec + _s);
-
   }
 
   private static double carry(double dddmmss_s) {

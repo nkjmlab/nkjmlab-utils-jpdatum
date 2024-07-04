@@ -19,19 +19,28 @@ public class Example {
     double lon = 140.08785504166664;
 
     for (double i = 0; i < 1; i += 0.0000001) {
-      LatLonWithZone tokyoLatLon = new LatLonWithZone(lat + i, lon + i,
-          BasisWithZone.of(Unit.DEGREE, Detum.TOKYO, ZoneId._9));
+      LatLonWithZone tokyoLatLon =
+          new LatLonWithZone(
+              lat + i, lon + i, BasisWithZone.of(Unit.DEGREE, Detum.TOKYO, ZoneId._9));
       tokyoLatLon.toXYWithZone();
     }
 
-    log.debug("{} times convertion latlon to xy in {} msec", 1 / 0.0000001,
+    log.debug(
+        "{} times convertion latlon to xy in {} msec",
+        1 / 0.0000001,
         System.currentTimeMillis() - start);
 
-    LatLonWithZone tokyoLatLon = new LatLonWithZone(36.103774791666666, 140.08785504166664,
-        BasisWithZone.of(Unit.DEGREE, Detum.TOKYO, ZoneId._9));
+    LatLonWithZone tokyoLatLon =
+        new LatLonWithZone(
+            36.103774791666666,
+            140.08785504166664,
+            BasisWithZone.of(Unit.DEGREE, Detum.TOKYO, ZoneId._9));
 
-    LatLonWithZone wgsLatLon = new LatLonWithZone(36.103774791666666, 140.08785504166664,
-        BasisWithZone.of(Unit.DEGREE, Detum.WGS84, ZoneId._9));
+    LatLonWithZone wgsLatLon =
+        new LatLonWithZone(
+            36.103774791666666,
+            140.08785504166664,
+            BasisWithZone.of(Unit.DEGREE, Detum.WGS84, ZoneId._9));
 
     XYWithZone tokyoXy = tokyoLatLon.toXYWithZone();
     log.debug(tokyoXy);

@@ -49,10 +49,8 @@ public class Basis {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (!(obj instanceof Basis))
-      return false;
+    if (this == obj) return true;
+    if (!(obj instanceof Basis)) return false;
     Basis other = (Basis) obj;
     return detum == other.detum && unit == other.unit;
   }
@@ -61,5 +59,4 @@ public class Basis {
   public String toString() {
     return "Basis [unit=" + unit + ", detum=" + detum + "]";
   }
-
 }

@@ -4,7 +4,6 @@ package org.nkjmlab.gis.datum.jprect;
  * pixcel/meter
  *
  * @author nkjm
- *
  */
 public class ScreenSizeBasis {
 
@@ -17,7 +16,6 @@ public class ScreenSizeBasis {
   }
 
   /**
-   *
    * @param meter
    * @return
    */
@@ -29,6 +27,4 @@ public class ScreenSizeBasis {
   public String toString() {
     return "ScreenSizeBasis [pixel=" + pixel + ", meter=" + meter + "]";
   }
-
-
 }

@@ -15,19 +15,25 @@ import org.nkjmlab.gis.datum.jprect.helper.LatLon2XYHelper;
 
 public class LatLonUtils {
 
-  /**
-   * http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
-   *
-   */
+  /** http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames */
   public static Tile toTile(LatLon latLon, int zoom) {
-    int xtile = (int) Math
-        .floor((latLon.getLon(Basis.of(Unit.DEGREE, Detum.WGS84)) + 180) / 360 * (1 << zoom));
+    int xtile =
+        (int)
+            Math.floor(
+                (latLon.getLon(Basis.of(Unit.DEGREE, Detum.WGS84)) + 180) / 360 * (1 << zoom));
     int ytile =
-        (int) Math
-            .floor((1 - Math
-                .log(Math.tan(Math.toRadians(latLon.getLat(Unit.DEGREE, Detum.WGS84)))
-                    + 1 / Math.cos(Math.toRadians(latLon.getLat(Unit.DEGREE, Detum.WGS84))))
-                / Math.PI) / 2 * (1 << zoom));
+        (int)
+            Math.floor(
+                (1
+                        - Math.log(
+                                Math.tan(Math.toRadians(latLon.getLat(Unit.DEGREE, Detum.WGS84)))
+                                    + 1
+                                        / Math.cos(
+                                            Math.toRadians(
+                                                latLon.getLat(Unit.DEGREE, Detum.WGS84))))
+                            / Math.PI)
+                    / 2
+                    * (1 << zoom));
     if (xtile < 0) {
       xtile = 0;
     }
@@ -50,28 +56,37 @@ public class LatLonUtils {
    * @return 平面直角座標系の系番号付きの平面直角座標系XY
    */
   public static XYWithZone toXYWithZone(LatLonWithZone latLon) {
-    return new XYWithZone(LatLonUtils.toX(latLon, DistanceUnit.M),
-        LatLonUtils.toY(latLon, DistanceUnit.M), latLon.getBasis());
+    return new XYWithZone(
+        LatLonUtils.toX(latLon, DistanceUnit.M),
+        LatLonUtils.toY(latLon, DistanceUnit.M),
+        latLon.getBasis());
   }
 
   /**
-   *
    * @return
    */
   public static double toX(LatLonWithZone latLon, DistanceUnit distanceUnit) {
     LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(), latLon.getDetum());
-    return DistanceUnitConverter
-        .change(LatLon2XYHelper.toXCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO),
-            latLon.getLon(Unit.DEGREE, Detum.TOKYO), origin.getLat(Unit.DEGREE, Detum.TOKYO),
-            origin.getLon(Unit.DEGREE, Detum.TOKYO)), DistanceUnit.M, distanceUnit);
+    return DistanceUnitConverter.change(
+        LatLon2XYHelper.toXCoord(
+            latLon.getLat(Unit.DEGREE, Detum.TOKYO),
+            latLon.getLon(Unit.DEGREE, Detum.TOKYO),
+            origin.getLat(Unit.DEGREE, Detum.TOKYO),
+            origin.getLon(Unit.DEGREE, Detum.TOKYO)),
+        DistanceUnit.M,
+        distanceUnit);
   }
 
   public static double toY(LatLonWithZone latLon, DistanceUnit distanceUnit) {
     LatLonWithZone origin = JapanPlaneRectangular.getOrigin(latLon.getZoneId(), latLon.getDetum());
-    return DistanceUnitConverter
-        .change(LatLon2XYHelper.toYCoord(latLon.getLat(Unit.DEGREE, Detum.TOKYO),
-            latLon.getLon(Unit.DEGREE, Detum.TOKYO), origin.getLat(Unit.DEGREE, Detum.TOKYO),
-            origin.getLon(Unit.DEGREE, Detum.TOKYO)), DistanceUnit.M, distanceUnit);
+    return DistanceUnitConverter.change(
+        LatLon2XYHelper.toYCoord(
+            latLon.getLat(Unit.DEGREE, Detum.TOKYO),
+            latLon.getLon(Unit.DEGREE, Detum.TOKYO),
+            origin.getLat(Unit.DEGREE, Detum.TOKYO),
+            origin.getLon(Unit.DEGREE, Detum.TOKYO)),
+        DistanceUnit.M,
+        distanceUnit);
   }
 
   public static double toDistance(LatLon from, LatLon to, DistanceUnit distanceUnit) {
@@ -82,5 +97,4 @@ public class LatLonUtils {
     ZoneId zoneId = JapanPlaneRectangular.getNearestOriginZoneId(midPoint);
     return new LatLonWithZone(f, zoneId).distance(new LatLonWithZone(t, zoneId), distanceUnit);
   }
-
 }

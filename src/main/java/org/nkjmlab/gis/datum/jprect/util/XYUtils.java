@@ -6,13 +6,11 @@ import org.nkjmlab.gis.datum.jprect.XYWithZone;
 import org.nkjmlab.gis.datum.jprect.helper.XY2LatLonHelper;
 
 /**
- *
  * @author Yuu NAKAJIMA
  */
 public class XYUtils {
 
   /**
-   *
    * @param xy 平面直角座標系の系番号付きの平面直角座標系XY
    * @return 平面直角座標系の系番号付きの緯度経度
    */
@@ -31,5 +29,4 @@ public class XYUtils {
         JapanPlaneRectangular.getOrigin(xy.getBasis().getZoneId(), xy.getDetum());
     return XY2LatLonHelper.toLongitude(xy.getX(), xy.getY(), origin.getLat(), origin.getLon());
   }
-
 }

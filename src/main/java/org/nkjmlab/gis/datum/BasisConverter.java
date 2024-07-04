@@ -18,8 +18,8 @@ public class BasisConverter {
    * @param toDetum 出力の測地系
    * @return toUnit，toDetumで指定された単位・測地系による経度
    */
-  public static double changeBasisOfLat(double lat, double lon, Unit fromUnit, Detum fromDetum,
-      Unit toUnit, Detum toDetum) {
+  public static double changeBasisOfLat(
+      double lat, double lon, Unit fromUnit, Detum fromDetum, Unit toUnit, Detum toDetum) {
     if (fromDetum == toDetum) {
       return LatLonUnitConverter.change(lat, fromUnit, toUnit);
     }
@@ -28,8 +28,8 @@ public class BasisConverter {
   }
 
   public static double changeBasisOfLat(double lat, double lon, Basis fromBasis, Basis toBasis) {
-    return changeBasisOfLat(lat, lon, fromBasis.getUnit(), fromBasis.getDetum(), toBasis.getUnit(),
-        toBasis.getDetum());
+    return changeBasisOfLat(
+        lat, lon, fromBasis.getUnit(), fromBasis.getDetum(), toBasis.getUnit(), toBasis.getDetum());
   }
 
   /**
@@ -43,8 +43,8 @@ public class BasisConverter {
    * @param toDetum 出力の測地系
    * @return toUnit，toDetumで指定された単位・測地系による経度
    */
-  public static double changeBasisOfLon(double lat, double lon, Unit fromUnit, Detum fromDetum,
-      Unit toUnit, Detum toDetum) {
+  public static double changeBasisOfLon(
+      double lat, double lon, Unit fromUnit, Detum fromDetum, Unit toUnit, Detum toDetum) {
     if (fromDetum == toDetum) {
       return LatLonUnitConverter.change(lon, fromUnit, toUnit);
     }
@@ -53,8 +53,8 @@ public class BasisConverter {
   }
 
   public static double changeBasisOfLon(double lat, double lon, Basis fromBasis, Basis toBasis) {
-    return changeBasisOfLon(lat, lon, fromBasis.getUnit(), fromBasis.getDetum(), toBasis.getUnit(),
-        toBasis.getDetum());
+    return changeBasisOfLon(
+        lat, lon, fromBasis.getUnit(), fromBasis.getDetum(), toBasis.getUnit(), toBasis.getDetum());
   }
 
   public static LatLonWithZone changeBasis(LatLonWithZone latLon, BasisWithZone toBasis) {
@@ -62,14 +62,17 @@ public class BasisConverter {
   }
 
   public static LatLon changeBasis(double lat, double lon, Basis fromBasis, Basis toBasis) {
-    return new LatLon(changeBasisOfLat(lat, lon, fromBasis, toBasis),
-        changeBasisOfLon(lat, lon, fromBasis, toBasis), toBasis);
+    return new LatLon(
+        changeBasisOfLat(lat, lon, fromBasis, toBasis),
+        changeBasisOfLon(lat, lon, fromBasis, toBasis),
+        toBasis);
   }
 
-  public static LatLonWithZone changeBasis(double lat, double lon, BasisWithZone fromBasis,
-      BasisWithZone toBasis) {
-    return new LatLonWithZone(changeBasisOfLat(lat, lon, fromBasis, toBasis),
-        changeBasisOfLon(lat, lon, fromBasis, toBasis), toBasis);
+  public static LatLonWithZone changeBasis(
+      double lat, double lon, BasisWithZone fromBasis, BasisWithZone toBasis) {
+    return new LatLonWithZone(
+        changeBasisOfLat(lat, lon, fromBasis, toBasis),
+        changeBasisOfLon(lat, lon, fromBasis, toBasis),
+        toBasis);
   }
-
 }

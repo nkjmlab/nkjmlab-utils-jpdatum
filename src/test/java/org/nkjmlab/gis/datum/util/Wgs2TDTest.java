@@ -6,7 +6,6 @@ import org.nkjmlab.gis.datum.DatumConverter;
 
 public class Wgs2TDTest {
 
-
   @Test
   public void testToWGS() {
     double latDegTD = 35.71004;
@@ -15,7 +14,5 @@ public class Wgs2TDTest {
     double lonDegWgs = 139.80746187;
     assertEquals(latDegWgs, DatumConverter.changeDetumOfLatFromTdToWgs(latDegTD, lonDegTD), 0.01);
     assertEquals(lonDegWgs, DatumConverter.changeDetumOfLonFromTdToWgs(latDegTD, lonDegTD), 0.01);
-
   }
-
 }

@@ -12,7 +12,6 @@ import org.nkjmlab.gis.datum.jprect.util.LatLonUtils;
  * Japan Plane Rectangular 平面直角座標系（平成十四年国土交通省告示第九号）の系番号付きの緯度経度
  *
  * @author Yuu NAKAJIMA
- *
  */
 public class LatLonWithZone extends LatLon {
 
@@ -24,16 +23,17 @@ public class LatLonWithZone extends LatLon {
   /**
    * @param latLon
    * @param zoneId 平面直角座標系（平成十四年国土交通省告示第九号）｜国土地理院 http://www.gsi.go.jp/LAW/heimencho.html
-   *        にzoneId(系番号)と適用区域が書かれている．
+   *     にzoneId(系番号)と適用区域が書かれている．
    */
   public LatLonWithZone(LatLon latLon, ZoneId zoneId) {
-    super(latLon.getLat(), latLon.getLon(),
+    super(
+        latLon.getLat(),
+        latLon.getLon(),
         BasisWithZone.of(latLon.getUnit(), latLon.getDetum(), zoneId));
   }
 
   public LatLonWithZone(double lat, double lon, Unit unit, Detum detum, ZoneId zoneId) {
     super(lat, lon, BasisWithZone.of(unit, detum, zoneId));
-
   }
 
   public LatLonWithZone(double lat, double lon, BasisWithZone basis) {
@@ -42,7 +42,6 @@ public class LatLonWithZone extends LatLon {
 
   public LatLonWithZone(LatLonPair latLon, Unit unit, Detum detum, ZoneId zoneId) {
     super(latLon, BasisWithZone.of(unit, detum, zoneId));
-
   }
 
   public LatLonWithZone(LatLonPair latLon, BasisWithZone basis) {
@@ -74,9 +73,11 @@ public class LatLonWithZone extends LatLon {
    */
   public double distance(LatLonWithZone toLatLon, DistanceUnit distanceUnit) {
     return DistanceUnitConverter.change(
-        Math.sqrt(Math.pow(getX(DistanceUnit.M) - toLatLon.getX(DistanceUnit.M), 2)
-            + Math.pow(getY(DistanceUnit.M) - toLatLon.getY(DistanceUnit.M), 2)),
-        DistanceUnit.M, distanceUnit);
+        Math.sqrt(
+            Math.pow(getX(DistanceUnit.M) - toLatLon.getX(DistanceUnit.M), 2)
+                + Math.pow(getY(DistanceUnit.M) - toLatLon.getY(DistanceUnit.M), 2)),
+        DistanceUnit.M,
+        distanceUnit);
   }
 
   public XYWithZone toXYWithZone() {
@@ -98,5 +99,4 @@ public class LatLonWithZone extends LatLon {
   public LatLonWithZone copyInto(Basis basis) {
     return new LatLonWithZone(getLat(basis), getLon(basis), BasisWithZone.of(basis, getZoneId()));
   }
-
 }
