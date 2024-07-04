@@ -1,0 +1,3 @@
+ - [製品｜株式会社ジャスミンソフト](https://web.archive.org/web/20161003012815/http://www.jasminesoft.co.jp/product/scalc.html)
+ - [測地系変換にともなうずれ](https://web.archive.org/web/20240704014832/https://museum.bunmori.tokushima.jp/ogawa/map/datumconv/index.html)
+ - [02 DATUM](https://web.archive.org/web/20140710182621/http://homepage3.nifty.com/Nowral/02_DATUM/02_DATUM.html)
