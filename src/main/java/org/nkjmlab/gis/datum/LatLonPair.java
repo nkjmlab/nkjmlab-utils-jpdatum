@@ -40,10 +40,8 @@ public class LatLonPair {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (!(obj instanceof LatLonPair))
-      return false;
+    if (this == obj) return true;
+    if (!(obj instanceof LatLonPair)) return false;
     LatLonPair other = (LatLonPair) obj;
     return Double.doubleToLongBits(lat) == Double.doubleToLongBits(other.lat)
         && Double.doubleToLongBits(lon) == Double.doubleToLongBits(other.lon);
@@ -53,6 +51,4 @@ public class LatLonPair {
   public String toString() {
     return "LatLonPair [lat=" + lat + ", lon=" + lon + "]";
   }
-
-
 }

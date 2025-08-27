@@ -10,5 +10,4 @@ public class AngleUtil {
   public static double toRadian(double ddd_dddd) {
     return ddd_dddd * Math.PI / 180.0;
   }
-
 }

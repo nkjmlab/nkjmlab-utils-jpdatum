@@ -33,10 +33,8 @@ public class XY {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (!(obj instanceof XY))
-      return false;
+    if (this == obj) return true;
+    if (!(obj instanceof XY)) return false;
     XY other = (XY) obj;
     return distanceUnit == other.distanceUnit
         && Double.doubleToLongBits(x) == Double.doubleToLongBits(other.x)
@@ -47,7 +45,4 @@ public class XY {
   public String toString() {
     return "XY [x=" + x + ", y=" + y + ", distanceUnit=" + distanceUnit + "]";
   }
-
-
-
 }

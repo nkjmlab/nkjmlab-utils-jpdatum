@@ -31,7 +31,6 @@ public class Tile {
     return TileUtils.toLatLonBox(this, basis);
   }
 
-
   @Override
   public int hashCode() {
     return Objects.hash(x, y, zoom);
@@ -39,10 +38,8 @@ public class Tile {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (!(obj instanceof Tile))
-      return false;
+    if (this == obj) return true;
+    if (!(obj instanceof Tile)) return false;
     Tile other = (Tile) obj;
     return x == other.x && y == other.y && zoom == other.zoom;
   }

@@ -11,7 +11,6 @@ import org.nkjmlab.gis.datum.LatLon.Unit;
  * WGSとTDの間の変換の誤差が大きいので，XY平面に変換する場合は，インスタンスを作る際にTD座標系の値を入れた方が良い．
  *
  * @author nkjm
- *
  */
 public class BasisWithZone extends Basis {
 
@@ -30,7 +29,6 @@ public class BasisWithZone extends Basis {
     return zoneId;
   }
 
-
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -41,22 +39,17 @@ public class BasisWithZone extends Basis {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (!super.equals(obj))
-      return false;
-    if (!(obj instanceof BasisWithZone))
-      return false;
+    if (this == obj) return true;
+    if (!super.equals(obj)) return false;
+    if (!(obj instanceof BasisWithZone)) return false;
     BasisWithZone other = (BasisWithZone) obj;
     return zoneId == other.zoneId;
   }
-
 
   @Override
   public String toString() {
     return "BasisWithZone [zoneId=" + zoneId + ", Basis=" + super.toString() + "]";
   }
-
 
   private static final Map<ZoneId, Map<Basis, BasisWithZone>> map = new HashMap<>();
 
@@ -80,5 +73,4 @@ public class BasisWithZone extends Basis {
     m.put(of(unit, detum), bz);
     return bz;
   }
-
 }

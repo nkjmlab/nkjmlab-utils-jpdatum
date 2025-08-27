@@ -1,17 +1,19 @@
 nkjmlab-utils-jpdatum
 ======
-[![Maven Central](https://img.shields.io/maven-central/v/org.nkjmlab/nkjmlab-utils-jpdatum.svg)](http://mvnrepository.com/artifact/org.nkjmlab/nkjmlab-utils-jpdatum) [![javadoc](https://javadoc.io/badge2/org.nkjmlab/nkjmlab-utils/javadoc.svg)](https://javadoc.io/doc/org.nkjmlab/nkjmlab-utils-jpdatum) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Maven Central](https://img.shields.io/maven-central/v/org.nkjmlab/nkjmlab-utils-jpdatum.svg)](http://mvnrepository.com/artifact/org.nkjmlab/nkjmlab-utils-jpdatum) 
+[![javadoc](https://javadoc.io/badge2/org.nkjmlab/nkjmlab-utils-jpdatum/javadoc.svg)](https://javadoc.io/doc/org.nkjmlab/nkjmlab-utils-jpdatum) 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-日本測地系(Tokyo Datum)または世界測地系(WGS84)に基づく緯度経度と，日本平面直角座標系(Japan Plane Rectangular) に基づくXY座標を相互に変換するパッケージです．地理に関する用語には間違いがあるかもしれませんので，注意して下さい．Java 11 以降で動作します．
+日本測地系 (Tokyo Datum) または世界測地系 (WGS84) に基づく緯度経度と，日本平面直角座標系 (Japan Plane Rectangular) に基づくXY座標を相互に変換するパッケージです．特に地理に関する用語や計算方法に間違いがあるかもしれませんので，注意してご利用下さい．Java 11 以降で動作します．
 
 ## 使用方法
-最新版が [Maven Central Repository](https://mvnrepository.com/artifact/org.nkjmlab/nkjmlab-utils-jpdatum)に公開されています．pom.xmlに以下を加えることで利用できます．
+[Maven Central Repository](https://mvnrepository.com/artifact/org.nkjmlab/nkjmlab-utils-jpdatum)に公開しています．pom.xmlに以下を加えることで利用できます．
 
 ```xml
  <dependency>
    <groupId>org.nkjmlab</groupId>
    <artifactId>nkjmlab-utils-jpdatum</artifactId>
-   <version>0.9.3</version>
+   <version>1.0.0</version>
  </dependency>
 ```
 

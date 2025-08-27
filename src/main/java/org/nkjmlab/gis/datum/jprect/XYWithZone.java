@@ -27,7 +27,6 @@ public class XYWithZone extends XY {
     this(xy.getX(), xy.getY(), basis);
   }
 
-
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -38,12 +37,9 @@ public class XYWithZone extends XY {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (!super.equals(obj))
-      return false;
-    if (!(obj instanceof XYWithZone))
-      return false;
+    if (this == obj) return true;
+    if (!super.equals(obj)) return false;
+    if (!(obj instanceof XYWithZone)) return false;
     XYWithZone other = (XYWithZone) obj;
     return Objects.equals(basis, other.basis);
   }
@@ -87,5 +83,4 @@ public class XYWithZone extends XY {
   private XY toRelativeCoord(XYWithZone origin) {
     return new XY(getX() - origin.getX(), getY() - origin.getY());
   }
-
 }

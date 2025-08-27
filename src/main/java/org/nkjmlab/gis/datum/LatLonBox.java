@@ -60,19 +60,26 @@ public class LatLonBox {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (!(obj instanceof LatLonBox))
-      return false;
+    if (this == obj) return true;
+    if (!(obj instanceof LatLonBox)) return false;
     LatLonBox other = (LatLonBox) obj;
-    return Objects.equals(northEast, other.northEast) && Objects.equals(northWest, other.northWest)
-        && Objects.equals(southEast, other.southEast) && Objects.equals(southWest, other.southWest);
+    return Objects.equals(northEast, other.northEast)
+        && Objects.equals(northWest, other.northWest)
+        && Objects.equals(southEast, other.southEast)
+        && Objects.equals(southWest, other.southWest);
   }
 
   @Override
   public String toString() {
-    return "LatLonBox [northWest=" + northWest + ", southEast=" + southEast + ", southWest="
-        + southWest + ", northEast=" + northEast + "]";
+    return "LatLonBox [northWest="
+        + northWest
+        + ", southEast="
+        + southEast
+        + ", southWest="
+        + southWest
+        + ", northEast="
+        + northEast
+        + "]";
   }
 
   public double getLatDistance(Basis basis) {
@@ -99,7 +106,5 @@ public class LatLonBox {
   public double getYDistance(ZoneId zoneId, DistanceUnit distanceUnit) {
     return new LatLonWithZone(getNorthWest(), zoneId)
         .distance(new LatLonWithZone(getNorthEast(), zoneId), distanceUnit);
-
   }
-
 }

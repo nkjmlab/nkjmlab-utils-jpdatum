@@ -12,7 +12,6 @@ public class LatLonUtilsTest {
   private static final org.apache.logging.log4j.Logger log =
       org.apache.logging.log4j.LogManager.getLogger();
 
-
   @Test
   public void test() {
     testDmsDeg(1321210, 132.202777777777778);
@@ -26,6 +25,5 @@ public class LatLonUtilsTest {
 
     assertEquals(dms, LatLonUnitConverter.change(deg, Unit.DEGREE, Unit.DMS), 0.01);
     assertEquals(deg, LatLonUnitConverter.change(dms, Unit.DMS, Unit.DEGREE), 0.01);
-
   }
 }

@@ -9,9 +9,8 @@ import org.nkjmlab.gis.datum.Tile;
 
 /**
  * http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
- * 
- * @author nkjm
  *
+ * @author nkjm
  */
 public final class TileUtils {
 
@@ -41,5 +40,4 @@ public final class TileUtils {
     LatLonBox bb = new LatLonBox(northWest.copyInto(basis), southEast.copyInto(basis));
     return bb;
   }
-
 }
