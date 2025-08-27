@@ -208,6 +208,28 @@
 				<artifactId>coveralls-maven-plugin</artifactId>
 				<version>4.5.0-M3</version>
 			</plugin>
+			<!--
+			https://mvnrepository.com/artifact/io.github.git-commit-id/git-commit-id-maven-plugin -->
+			<plugin>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<version>8.0.2</version>
+				<executions>
+					<execution>
+						<id>get-the-git-infos</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>initialize</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<generateGitPropertiesFilename>
+						${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+					<commitIdGenerationMode>full</commitIdGenerationMode>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
